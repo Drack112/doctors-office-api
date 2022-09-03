@@ -1,3 +1,4 @@
+import { RequestError } from '@/errors'
 import { PatientsRepository } from '@/repositories'
 import { CreatePatientsService } from '@/services/patients'
 
@@ -28,6 +29,17 @@ describe('CreatePatientsService', () => {
         ...patientModel,
         updated_at: null
       })
+    })
+
+    it('should be able to create new patient with existing email', async () => {
+      patientsRepository.findByEmail = jest.fn().mockResolvedValue(patientModel)
+      const error = new RequestError('Paciente já existe.')
+
+      const promise = patiensService.execute(mockPatient)
+
+      await expect(promise).rejects.toThrow(error)
+      expect(patientsRepository.findByEmail).toHaveBeenNthCalledWith(1, patientModel.email)
+      expect(patientsRepository.create).not.toHaveBeenCalled()
     })
   })
 })
