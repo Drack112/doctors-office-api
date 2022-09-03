@@ -1,4 +1,4 @@
-import { GetDoctorsService } from '@/services'
+import { GetDoctorsService } from '@/services/doctors'
 
 import { Request, Response } from 'express'
 

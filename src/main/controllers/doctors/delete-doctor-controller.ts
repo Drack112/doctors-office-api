@@ -1,5 +1,5 @@
 import { RequestError } from '@/errors'
-import { DeleteDoctorService } from '@/services'
+import { DeleteDoctorService } from '@/services/doctors'
 
 import { Request, Response } from 'express'
 

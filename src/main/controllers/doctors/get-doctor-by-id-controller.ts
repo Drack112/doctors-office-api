@@ -1,5 +1,5 @@
 import { RequestError } from '@/errors'
-import { GetDoctorsByIdService } from '@/services'
+import { GetDoctorsByIdService } from '@/services/doctors'
 
 import { Request, Response } from 'express'
 
