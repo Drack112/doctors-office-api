@@ -1,3 +1,4 @@
+import { RequestError } from '@/errors'
 import { PatientsRepository } from '@/repositories'
 import { GetPatientsByIdService } from '@/services/patients'
 
@@ -17,6 +18,15 @@ describe('GetPatientsByIdService', () => {
 
       await patientsService.execute(patientModel.id!)
 
+      expect(patientsRepository.findById).toHaveBeenCalledTimes(1)
+    })
+
+    it('should not be able to get a non-existing patient', async () => {
+      const error = new RequestError('Paciente não existe.')
+
+      const promise = patientsService.execute(patientModel.id!)
+
+      await expect(promise).rejects.toThrow(error)
       expect(patientsRepository.findById).toHaveBeenCalledTimes(1)
     })
   })
