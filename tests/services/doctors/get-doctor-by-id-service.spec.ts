@@ -1,6 +1,7 @@
 import { RequestError } from '@/errors'
 import { DoctorsRepository } from '@/repositories'
-import { GetDoctorsByIdService } from '@/services'
+import { GetDoctorsByIdService } from '@/services/doctors'
+
 import { doctorModel } from '@/tests/mocks'
 
 describe('GetDoctorByIdService', () => {

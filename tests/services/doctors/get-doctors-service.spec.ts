@@ -1,5 +1,6 @@
 import { DoctorsRepository } from '@/repositories'
-import { GetDoctorsService } from '@/services'
+import { GetDoctorsService } from '@/services/doctors'
+
 import { doctorModel } from '@/tests/mocks'
 
 describe('GetDoctorsService', () => {

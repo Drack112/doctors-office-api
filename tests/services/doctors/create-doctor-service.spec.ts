@@ -1,6 +1,6 @@
 import { RequestError } from '@/errors'
 import { DoctorsRepository } from '@/repositories'
-import { CreateDoctorService } from '@/services'
+import { CreateDoctorService } from '@/services/doctors'
 
 import { mockDoctor, doctorModel } from '@/tests/mocks'
 

@@ -1,6 +1,6 @@
 import { RequestError } from '@/errors'
 import { DoctorsRepository } from '@/repositories'
-import { DeleteDoctorService } from '@/services'
+import { DeleteDoctorService } from '@/services/doctors'
 
 import { doctorModel } from '@/tests/mocks'
 
