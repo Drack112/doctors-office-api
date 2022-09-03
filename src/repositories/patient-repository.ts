@@ -15,6 +15,14 @@ export class PatientsRepository {
     await this.patients.save(params)
   }
 
+  async update (patient: PatientEntity): Promise<void> {
+    await this.patients.update({ id: patient.id }, patient)
+  }
+
+  async findById (id: string): Promise<PatientEntity | null> {
+    return await this.patients.findOneBy({ id })
+  }
+
   async findByEmail (email: string): Promise<PatientEntity | null> {
     return await this.patients.findOneBy({ email })
   }

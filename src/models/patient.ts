@@ -6,7 +6,7 @@ export class PatientModel {
   id?: string
   name: string
   email: string
-  cpf?: string
+  cpf: string
   gender?: string
   phone!: string
   cep!: string
