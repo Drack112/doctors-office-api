@@ -19,6 +19,10 @@ export class SecretariesRepository {
     await this.secretaries.update({ id: secretary.id }, secretary)
   }
 
+  async delete (id: string): Promise<void> {
+    await this.secretaries.delete(id)
+  }
+
   async findById (id: string): Promise<SecretaryEntity | null> {
     return await this.secretaries.findOneBy({ id })
   }
