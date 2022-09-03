@@ -1,7 +1,8 @@
+import { RequestError } from '@/errors'
 import { SecretariesRepository } from '@/repositories'
 import { UpdateSecretariesService } from '@/services/secretaries'
 
-import { mockDoctor, doctorModel, secretaryModel } from '@/tests/mocks'
+import { secretaryModel, mockSecretary } from '@/tests/mocks'
 
 jest.mock('bcryptjs', () => ({
   hashSync: jest.fn().mockImplementation(() => 'any-hashed-password')
@@ -26,15 +27,25 @@ describe('UpdateSecretariesService', () => {
     })
 
     it('should be able to update a secretary successfully', async () => {
-      secretariesRepository.findById = jest.fn().mockResolvedValue(doctorModel)
+      secretariesRepository.findById = jest.fn().mockResolvedValue(secretaryModel)
 
-      await secretariesService.execute('any-id', mockDoctor)
+      await secretariesService.execute('any-id', mockSecretary)
 
       expect(secretariesRepository.update).toHaveBeenNthCalledWith(1, {
         ...secretaryModel,
         id: 'any-id',
         updated_at: new Date('2022-09-01T00:00:00.000Z')
       })
+    })
+
+    it('should not be able to update a non-existing secretary', async () => {
+      const error = new RequestError('Secretária não existe.')
+
+      const promise = secretariesService.execute('any-id', mockSecretary)
+
+      await expect(promise).rejects.toThrow(error)
+      expect(secretariesRepository.findById).toHaveBeenNthCalledWith(1, secretaryModel.id)
+      expect(secretariesRepository.update).not.toHaveBeenCalled()
     })
   })
 })
