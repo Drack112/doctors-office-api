@@ -11,6 +11,10 @@ export class SecretariesRepository {
     this.secretaries = mysqlSource.getRepository(SecretaryEntity)
   }
 
+  async get (): Promise<SecretaryEntity[]> {
+    return await this.secretaries.find()
+  }
+
   async create (params: SecretaryDTO): Promise<void> {
     await this.secretaries.save(params)
   }
