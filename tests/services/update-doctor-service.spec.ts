@@ -1,3 +1,4 @@
+import { RequestError } from '@/errors'
 import { DoctorsRepository } from '@/repositories'
 import { UpdateDoctorService } from '@/services'
 
@@ -20,7 +21,7 @@ describe('UpdateDoctorService', () => {
   const doctorsService = new UpdateDoctorService(doctorsRepository)
 
   describe('execute', () => {
-    beforeAll(() => {
+    beforeEach(() => {
       doctorsRepository.update = jest.fn()
       doctorsRepository.findById = jest.fn()
     })
@@ -35,6 +36,16 @@ describe('UpdateDoctorService', () => {
         id: 'any-id',
         updated_at: new Date('2022-09-01T00:00:00.000Z')
       })
+    })
+
+    it('should not be able to update non-existing doctor', async () => {
+      const error = new RequestError('Médico não existe.')
+
+      const promise = doctorsService.execute('any-id', mockDoctor)
+
+      await expect(promise).rejects.toThrow(error)
+      expect(doctorsRepository.findById).toHaveBeenNthCalledWith(1, doctorModel.id)
+      expect(doctorsRepository.update).not.toHaveBeenCalled()
     })
   })
 })
