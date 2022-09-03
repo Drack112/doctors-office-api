@@ -6,7 +6,7 @@ export class DeletePatientsService {
 
   async execute (id: string): Promise<void> {
     const PatientExists = await this.patientsRepository.findById(id)
-    if (!PatientExists) throw new RequestError('Médico não existe.')
+    if (!PatientExists) throw new RequestError('Paciente não existe.')
     await this.patientsRepository.delete(id)
   }
 }

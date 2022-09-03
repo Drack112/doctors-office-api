@@ -1,3 +1,4 @@
+import { RequestError } from '@/errors'
 import { PatientsRepository } from '@/repositories'
 import { DeletePatientsService } from '@/services/patients/delete-patients-service'
 
@@ -20,6 +21,16 @@ describe('DeletePatientService', () => {
 
       expect(patientsRepository.findById).toHaveBeenNthCalledWith(1, patientModel.id)
       expect(patientsRepository.delete).toHaveBeenNthCalledWith(1, patientModel.id)
+    })
+
+    it('should not be able to delete a non-existing patient', async () => {
+      const error = new RequestError('Paciente não existe.')
+
+      const promise = patiensService.execute(patientModel.id!)
+
+      await expect(promise).rejects.toThrow(error)
+      expect(patientsRepository.findById).toHaveBeenNthCalledWith(1, patientModel.id)
+      expect(patientsRepository.delete).not.toHaveBeenCalled()
     })
   })
 })
