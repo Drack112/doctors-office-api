@@ -14,4 +14,12 @@ export class SecretariesRepository {
   async create (params: SecretaryDTO): Promise<void> {
     await this.secretaries.save(params)
   }
+
+  async findByEmail (email: string): Promise<SecretaryEntity | null> {
+    return await this.secretaries.findOneBy({ email })
+  }
+
+  async findByCPF (cpf: string): Promise<SecretaryEntity | null> {
+    return await this.secretaries.findOneBy({ cpf })
+  }
 }
