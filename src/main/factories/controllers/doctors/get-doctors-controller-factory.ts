@@ -1,6 +1,6 @@
 import { GetDoctorsController } from '@/main/controllers'
 import { DoctorsRepository } from '@/repositories'
-import { GetDoctorsService } from '@/services'
+import { GetDoctorsService } from '@/services/doctors'
 
 export const GetDoctorsControllerFactory = (): GetDoctorsController => {
   const repository = new DoctorsRepository()

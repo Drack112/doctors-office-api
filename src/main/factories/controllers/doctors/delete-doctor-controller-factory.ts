@@ -1,6 +1,6 @@
 import { DeleteDoctorController } from '@/main/controllers'
 import { DoctorsRepository } from '@/repositories'
-import { DeleteDoctorService } from '@/services'
+import { DeleteDoctorService } from '@/services/doctors'
 
 export const DeleteDoctorControllerFactory = (): DeleteDoctorController => {
   const repository = new DoctorsRepository()
