@@ -1,3 +1,4 @@
+import { RequestError } from '@/errors'
 import { SecretariesRepository } from '@/repositories'
 import { CreateSecretariesService } from '@/services/secretaries'
 
@@ -22,6 +23,8 @@ describe('CreateSecretariesService', () => {
   describe('execute', () => {
     beforeAll(() => {
       secretariesRepository.create = jest.fn()
+      secretariesRepository.findByCPF = jest.fn()
+      secretariesRepository.findByEmail = jest.fn()
     })
 
     it('should be able to create new secretary successfully', async () => {
@@ -31,6 +34,17 @@ describe('CreateSecretariesService', () => {
         ...secretaryModel,
         updated_at: null
       })
+    })
+
+    it('should not be able to create new secretary with existing email/cpf', async () => {
+      secretariesRepository.findByCPF = jest.fn().mockResolvedValue(secretaryModel)
+      const error = new RequestError('Secretária já existe.')
+
+      const promise = secretariesService.execute(mockSecretary)
+
+      await expect(promise).rejects.toThrow(error)
+      expect(secretariesRepository.create).not.toHaveBeenCalled()
+      expect(secretariesRepository.findByCPF).toHaveBeenNthCalledWith(1, mockSecretary.cpf)
     })
   })
 })
