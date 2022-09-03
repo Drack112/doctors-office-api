@@ -11,6 +11,10 @@ export class PatientsRepository {
     this.patients = mysqlSource.getRepository(PatientEntity)
   }
 
+  async get (): Promise<PatientEntity[]> {
+    return await this.patients.find()
+  }
+
   async create (params: PatientDTO): Promise<void> {
     await this.patients.save(params)
   }
