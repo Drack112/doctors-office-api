@@ -15,6 +15,14 @@ export class SecretariesRepository {
     await this.secretaries.save(params)
   }
 
+  async update (secretary: SecretaryEntity): Promise<void> {
+    await this.secretaries.update({ id: secretary.id }, secretary)
+  }
+
+  async findById (id: string): Promise<SecretaryEntity | null> {
+    return await this.secretaries.findOneBy({ id })
+  }
+
   async findByEmail (email: string): Promise<SecretaryEntity | null> {
     return await this.secretaries.findOneBy({ email })
   }
