@@ -18,6 +18,12 @@ export class PatientEntity {
   gender?: string
 
   @Column()
+  phone!: string
+
+  @Column()
+  cep!: string
+
+  @Column()
   address?: string
 
   @Column()
