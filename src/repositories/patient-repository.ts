@@ -23,6 +23,10 @@ export class PatientsRepository {
     await this.patients.update({ id: patient.id }, patient)
   }
 
+  async delete (id: string): Promise<void> {
+    await this.patients.delete(id)
+  }
+
   async findById (id: string): Promise<PatientEntity | null> {
     return await this.patients.findOneBy({ id })
   }
