@@ -3,6 +3,7 @@ import cors from 'cors'
 
 import { CreateDoctorControllerFactory, UpdateDoctorControllerFactory, DeleteDoctorControllerFactory, GetDoctorsControllerFactory, GetDoctorByIdControllerFactory } from '@/main/factories/controllers/doctors'
 import { CreateSecretariesControllerFactory, UpdateSecretariesControllerFactory, DeleteSecretariesControllerFactory, GetSecretariesControllerFactory, GetSecretariesByIdControllerFactory } from '@/main/factories/controllers/secretaries'
+import { CreatePatientsControllerFactory, UpdatePatientsControllerFactory, DeletePatientsControllerFactory, GetPatientsControllerFactory, GetPatientsByIdControllerFactory } from '@/main/factories/controllers/patients'
 
 export const app = express()
 const router = Router()
@@ -19,6 +20,12 @@ const deleteSecretariesController = DeleteSecretariesControllerFactory()
 const getSecretariesController = GetSecretariesControllerFactory()
 const getSecretariesByIdontroller = GetSecretariesByIdControllerFactory()
 
+const createPatientsController = CreatePatientsControllerFactory()
+const updatePatientsController = UpdatePatientsControllerFactory()
+const deletePatientsController = DeletePatientsControllerFactory()
+const getPatientsController = GetPatientsControllerFactory()
+const getPatientsByIdontroller = GetPatientsByIdControllerFactory()
+
 app.use(cors())
 app.use(json())
 
@@ -33,5 +40,11 @@ router.get('/secretaries/:id', async (req, res) => getSecretariesByIdontroller.h
 router.post('/secretaries', async (req, res) => createSecretariesController.handle(req, res))
 router.patch('/secretaries/:id', async (req, res) => updateSecretariesController.handle(req, res))
 router.delete('/secretaries/:id', async (req, res) => deleteSecretariesController.handle(req, res))
+
+router.get('/patients', async (req, res) => getPatientsByIdontroller.handle(req, res))
+router.get('/patients/:id', async (req, res) => getPatientsController.handle(req, res))
+router.post('/patients', async (req, res) => createPatientsController.handle(req, res))
+router.patch('/patients/:id', async (req, res) => updatePatientsController.handle(req, res))
+router.delete('/patients/:id', async (req, res) => deletePatientsController.handle(req, res))
 
 app.use(router)
