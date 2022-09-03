@@ -49,16 +49,5 @@ describe('UpdateSecretariesService', () => {
       expect(secretariesRepository.findById).toHaveBeenNthCalledWith(1, secretaryModel.id)
       expect(secretariesRepository.update).not.toHaveBeenCalled()
     })
-
-    it('should not be able to update a secretary with existing email/cpf', async () => {
-      secretariesRepository.findByCPF = jest.fn().mockResolvedValue(secretaryModel)
-      const error = new RequestError('Secretária já existe.')
-
-      const promise = secretariesService.execute('any-id', mockSecretary)
-
-      await expect(promise).rejects.toThrow(error)
-      expect(secretariesRepository.findById).not.toHaveBeenCalled()
-      expect(secretariesRepository.update).not.toHaveBeenCalled()
-    })
   })
 })

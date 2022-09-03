@@ -2,7 +2,7 @@ import express, { Router, json } from 'express'
 import cors from 'cors'
 
 import { CreateDoctorControllerFactory, UpdateDoctorControllerFactory, DeleteDoctorControllerFactory, GetDoctorsControllerFactory, GetDoctorByIdControllerFactory } from '@/main/factories/controllers/doctors'
-import { CreateSecretariesControllerFactory } from '@/main/factories/controllers/secretaries'
+import { CreateSecretariesControllerFactory, UpdateSecretariesControllerFactory } from '@/main/factories/controllers/secretaries'
 
 export const app = express()
 const router = Router()
@@ -14,6 +14,7 @@ const getDoctorsController = GetDoctorsControllerFactory()
 const getDoctorByIdontroller = GetDoctorByIdControllerFactory()
 
 const createSecretariesController = CreateSecretariesControllerFactory()
+const updateSecretariesController = UpdateSecretariesControllerFactory()
 
 app.use(cors())
 app.use(json())
@@ -25,5 +26,6 @@ router.patch('/doctors/:id', async (req, res) => updateDoctorController.handle(r
 router.delete('/doctors/:id', async (req, res) => deleteDoctorController.handle(req, res))
 
 router.post('/secretaries', async (req, res) => createSecretariesController.handle(req, res))
+router.patch('/secretaries/:id', async (req, res) => updateSecretariesController.handle(req, res))
 
 app.use(router)
