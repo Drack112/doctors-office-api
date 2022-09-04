@@ -1,10 +1,8 @@
-import { Column, Entity, PrimaryColumn } from 'typeorm'
+import { BaseModel } from '@/models/base-model'
+import { Column, Entity } from 'typeorm'
 
 @Entity('doctors')
-export class DoctorEntity {
-  @PrimaryColumn()
-  id!: string
-
+export class DoctorEntity extends BaseModel {
   @Column()
   name!: string
 
@@ -22,10 +20,4 @@ export class DoctorEntity {
 
   @Column()
   speciality!: string
-
-  @Column()
-  created_at!: Date
-
-  @Column({ nullable: true })
-  updated_at!: Date
 }
