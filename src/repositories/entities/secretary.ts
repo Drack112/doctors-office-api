@@ -1,10 +1,8 @@
-import { Column, Entity, PrimaryColumn } from 'typeorm'
+import { BaseModel } from '@/models'
+import { Column, Entity } from 'typeorm'
 
 @Entity('secretaries')
-export class SecretaryEntity {
-  @PrimaryColumn()
-  id!: string
-
+export class SecretaryEntity extends BaseModel {
   @Column()
   name!: string
 
@@ -16,10 +14,4 @@ export class SecretaryEntity {
 
   @Column()
   cpf!: string
-
-  @Column()
-  created_at!: Date
-
-  @Column({ nullable: true })
-  updated_at!: Date
 }
