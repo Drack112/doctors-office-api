@@ -1,37 +1,4 @@
-import { PatientDTO } from '@/dtos'
+import { BaseRepository } from '@/repositories/base-repository'
 import { PatientEntity } from '@/repositories/entities'
-import { mysqlSource } from '@/repositories/mysql-connection'
 
-import { Repository } from 'typeorm'
-
-export class PatientsRepository {
-  private readonly patients: Repository<PatientEntity>
-
-  constructor () {
-    this.patients = mysqlSource.getRepository(PatientEntity)
-  }
-
-  async get (): Promise<PatientEntity[]> {
-    return await this.patients.find()
-  }
-
-  async create (params: PatientDTO): Promise<void> {
-    await this.patients.save(params)
-  }
-
-  async update (patient: PatientEntity): Promise<void> {
-    await this.patients.update({ id: patient.id }, patient)
-  }
-
-  async delete (id: string): Promise<void> {
-    await this.patients.delete(id)
-  }
-
-  async findById (id: string): Promise<PatientEntity | null> {
-    return await this.patients.findOneBy({ id })
-  }
-
-  async findByEmail (email: string): Promise<PatientEntity | null> {
-    return await this.patients.findOneBy({ email })
-  }
-}
+export class PatientsRepository extends BaseRepository<PatientEntity> {}

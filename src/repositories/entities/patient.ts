@@ -1,10 +1,8 @@
-import { Column, Entity, PrimaryColumn } from 'typeorm'
+import { BaseModel } from '@/models'
+import { Column, Entity } from 'typeorm'
 
 @Entity('patients')
-export class PatientEntity {
-  @PrimaryColumn()
-  id!: string
-
+export class PatientEntity extends BaseModel {
   @Column()
   name!: string
 
@@ -34,10 +32,4 @@ export class PatientEntity {
 
   @Column()
   responsibleCpf?: string
-
-  @Column()
-  created_at!: Date
-
-  @Column({ nullable: true })
-  updated_at!: Date
 }
