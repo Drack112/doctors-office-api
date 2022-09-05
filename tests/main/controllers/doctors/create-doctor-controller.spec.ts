@@ -1,5 +1,5 @@
 import { RequestError } from '@/errors'
-import { CreateDoctorController } from '@/main/controllers'
+import { CreateDoctorController } from '@/main/controllers/doctors'
 import { CreateDoctorService } from '@/services/doctors'
 import { mockDoctor } from '@/tests/mocks'
 
