@@ -1,4 +1,4 @@
-import { BaseModel } from '@/repositories/entities'
+import { BaseModel } from './base-model'
 import { Column, Entity } from 'typeorm'
 
 @Entity('doctors')
