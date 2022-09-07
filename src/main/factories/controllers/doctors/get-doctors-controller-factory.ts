@@ -1,4 +1,4 @@
-import { GetDoctorsController } from '@/main/controllers'
+import { GetDoctorsController } from '@/main/controllers/doctors'
 import { DoctorsRepository } from '@/repositories'
 import { GetDoctorsService } from '@/services/doctors'
 import { DoctorEntity } from '@/repositories/entities'

@@ -1,4 +1,4 @@
-import { GetSecretariesController } from '@/main/controllers'
+import { GetSecretariesController } from '@/main/controllers/secretaries'
 import { SecretariesRepository } from '@/repositories'
 import { GetSecretariesService } from '@/services/secretaries'
 import { SecretaryEntity } from '@/repositories/entities'

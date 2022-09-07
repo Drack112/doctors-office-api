@@ -1,4 +1,4 @@
-import { UpdateDoctorController } from '@/main/controllers'
+import { UpdateDoctorController } from '@/main/controllers/doctors'
 import { DoctorsRepository } from '@/repositories'
 import { UpdateDoctorService } from '@/services/doctors'
 import { DoctorEntity } from '@/repositories/entities'

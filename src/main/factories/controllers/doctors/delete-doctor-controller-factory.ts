@@ -1,4 +1,4 @@
-import { DeleteDoctorController } from '@/main/controllers'
+import { DeleteDoctorController } from '@/main/controllers/doctors'
 import { DoctorsRepository } from '@/repositories'
 import { DeleteDoctorService } from '@/services/doctors'
 import { DoctorEntity } from '@/repositories/entities'
