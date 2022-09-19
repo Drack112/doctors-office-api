@@ -5,6 +5,7 @@ import { CreateDoctorControllerFactory, UpdateDoctorControllerFactory, DeleteDoc
 import { CreateSecretariesControllerFactory, UpdateSecretariesControllerFactory, DeleteSecretariesControllerFactory, GetSecretariesControllerFactory, GetSecretariesByIdControllerFactory } from '@/main/factories/controllers/secretaries'
 import { CreatePatientsControllerFactory, UpdatePatientsControllerFactory, DeletePatientsControllerFactory, GetPatientsControllerFactory, GetPatientsByIdControllerFactory } from '@/main/factories/controllers/patients'
 import { CreateAdminsControllerFactory, UpdateAdminsControllerFactory, DeleteAdminsControllerFactory, GetAdminsControllerFactory, GetAdminsByIdControllerFactory } from '@/main/factories/controllers/admins'
+import { CreateClinicsControllerFactory, UpdateClinicsControllerFactory, DeleteClinicsControllerFactory, GetClinicsControllerFactory, GetClinicsByIdControllerFactory } from '@/main/factories/controllers/clinics'
 
 export const app = express()
 const router = Router()
@@ -33,6 +34,12 @@ const deleteAdminsController = DeleteAdminsControllerFactory()
 const getAdminsController = GetAdminsControllerFactory()
 const getAdminsByIdController = GetAdminsByIdControllerFactory()
 
+const createClinicsController = CreateClinicsControllerFactory()
+const updateClinicsController = UpdateClinicsControllerFactory()
+const deleteClinicsController = DeleteClinicsControllerFactory()
+const getClinicsController = GetClinicsControllerFactory()
+const getClinicsByIdController = GetClinicsByIdControllerFactory()
+
 app.use(cors())
 app.use(json())
 
@@ -59,5 +66,11 @@ router.get('/admins/:id', async (req, res) => getAdminsByIdController.handle(req
 router.post('/admins', async (req, res) => createAdminsController.handle(req, res))
 router.patch('/admins/:id', async (req, res) => updateAdminsController.handle(req, res))
 router.delete('/admins/:id', async (req, res) => deleteAdminsController.handle(req, res))
+
+router.get('/clinics', async (req, res) => getClinicsController.handle(req, res))
+router.get('/clinics/:id', async (req, res) => getClinicsByIdController.handle(req, res))
+router.post('/clinics', async (req, res) => createClinicsController.handle(req, res))
+router.patch('/clinics/:id', async (req, res) => updateClinicsController.handle(req, res))
+router.delete('/clinics/:id', async (req, res) => deleteClinicsController.handle(req, res))
 
 app.use(router)
