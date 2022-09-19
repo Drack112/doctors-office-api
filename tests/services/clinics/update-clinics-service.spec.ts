@@ -1,3 +1,4 @@
+import { RequestError } from '@/errors'
 import { ClinicsRepository } from '@/repositories'
 import { UpdateClinicsService } from '@/services/clinics'
 
@@ -27,6 +28,16 @@ describe('UpdateClinicsService', () => {
         id: 'any-id',
         updated_at: new Date('2022-09-01T00:00:00.000Z')
       })
+    })
+
+    it('should not be able to update non-existing clinic', async () => {
+      const error = new RequestError('Clínica não existe.')
+
+      const promise = clinicsService.execute('any-id', mockClinic)
+
+      await expect(promise).rejects.toThrow(error)
+      expect(clinicsRepository.findById).toHaveBeenNthCalledWith(1, clinicModel.id)
+      expect(clinicsRepository.update).not.toHaveBeenCalled()
     })
   })
 })
