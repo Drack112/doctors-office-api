@@ -1,3 +1,4 @@
+import { DoctorScheduleDTO } from '@/dtos'
 import { ObjectLiteral, Repository } from 'typeorm'
 
 export class BaseRepository<Entity extends ObjectLiteral> {
@@ -33,5 +34,17 @@ export class BaseRepository<Entity extends ObjectLiteral> {
 
   async findByCRM (crm: string): Promise<Entity | null> {
     return await this.repository.findOneBy({ crm } as any)
+  }
+
+  async findExistantSchedule (params: DoctorScheduleDTO): Promise<Entity | null> {
+    const { doctorId, date, time } = params
+    const schedule = await this.repository.findOne({
+      where: {
+        doctor_id: doctorId,
+        date,
+        time
+      }
+    } as any)
+    return schedule
   }
 }
