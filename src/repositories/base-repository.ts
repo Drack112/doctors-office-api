@@ -36,15 +36,15 @@ export class BaseRepository<Entity extends ObjectLiteral> {
     return await this.repository.findOneBy({ crm } as any)
   }
 
-  async findExistantSchedule (params: DoctorScheduleDTO): Promise<Entity | null> {
-    const { doctorId, date, time } = params
-    const schedule = await this.repository.findOne({
-      where: {
-        doctor_id: doctorId,
-        date,
-        time
+  async findExistantSchedules (params: DoctorScheduleDTO): Promise<boolean> {
+    const { doctor_id, schedules } = params
+    const foundSchedules = await this.repository.find({ where: { doctor_id } } as any)
+    let hasScheduled: boolean = false
+    if (foundSchedules?.length) {
+      for (const schedule of schedules) {
+        hasScheduled = foundSchedules.some(found => found.date === schedule.date && found.time === schedule.time)
       }
-    } as any)
-    return schedule
+    }
+    return hasScheduled
   }
 }

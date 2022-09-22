@@ -1,25 +1,22 @@
 import { randomUUID } from 'node:crypto'
 
-import { DoctorScheduleDTO } from '@/dtos'
+import { DoctorScheduleDTO, StatusEnum } from '@/dtos'
 
 export class DoctorScheduleModel {
-  id?: string
-  doctorId: string
-  date: string
-  time: string
-  status: string
-  created_at: Date
-  updated_at: Date | null
-
-  constructor (doctorSchedule: DoctorScheduleDTO) {
-    if (!this.id) {
-      this.id = randomUUID()
+  public setObject (doctorSchedule: DoctorScheduleDTO) {
+    const schedulesToCreate = []
+    const { schedules, doctor_id } = doctorSchedule
+    for (const { date, time } of schedules) {
+      schedulesToCreate.push({
+        id: randomUUID(),
+        doctor_id,
+        date,
+        time,
+        status: StatusEnum.available,
+        created_at: new Date(),
+        updated_at: null
+      })
     }
-    this.doctorId = doctorSchedule.doctorId
-    this.date = doctorSchedule.date
-    this.time = doctorSchedule.time
-    this.status = doctorSchedule.status
-    this.created_at = new Date()
-    this.updated_at = null
+    return schedulesToCreate
   }
 }

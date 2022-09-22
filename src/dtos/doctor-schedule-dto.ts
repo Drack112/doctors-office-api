@@ -3,9 +3,13 @@ export enum StatusEnum {
   unavailable = 'unavailable'
 }
 
-export type DoctorScheduleDTO = {
-  doctorId: string
+export type ScheduleDTO = {
   date: string
   time: string
+}
+
+export type DoctorScheduleDTO = {
+  doctor_id: string
+  schedules: ScheduleDTO[]
   status: StatusEnum
 }
