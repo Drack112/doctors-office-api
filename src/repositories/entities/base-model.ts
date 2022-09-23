@@ -2,7 +2,7 @@ import { Column, PrimaryColumn } from 'typeorm'
 
 export abstract class BaseModel {
   @PrimaryColumn()
-  id?: string
+  id!: string
 
   @Column()
   created_at!: Date
