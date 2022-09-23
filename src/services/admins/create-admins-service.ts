@@ -11,7 +11,7 @@ export class CreateAdminsService {
     const adminByEmail = await this.adminsRepository.findByEmail(email)
     const adminByCPF = await this.adminsRepository.findByCPF(cpf)
     if (adminByEmail ?? adminByCPF) throw new RequestError('Administrador já existe.')
-    const doctor = new AdminModel(params)
-    await this.adminsRepository.create(doctor)
+    const admin = new AdminModel(params)
+    await this.adminsRepository.create(admin)
   }
 }

@@ -13,6 +13,7 @@ export class UpdateAdminsService {
     const adminToUpdate = {
       ...admin,
       id: adminExists.id,
+      created_at: adminExists.created_at,
       updated_at: new Date()
     }
     await this.adminsRepository.update(adminToUpdate)
