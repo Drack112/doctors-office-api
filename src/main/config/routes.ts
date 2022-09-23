@@ -6,8 +6,7 @@ import { CreateSecretariesControllerFactory, UpdateSecretariesControllerFactory,
 import { CreatePatientsControllerFactory, UpdatePatientsControllerFactory, DeletePatientsControllerFactory, GetPatientsControllerFactory, GetPatientsByIdControllerFactory } from '@/main/factories/controllers/patients'
 import { CreateAdminsControllerFactory, UpdateAdminsControllerFactory, DeleteAdminsControllerFactory, GetAdminsControllerFactory, GetAdminsByIdControllerFactory } from '@/main/factories/controllers/admins'
 import { CreateClinicsControllerFactory, UpdateClinicsControllerFactory, DeleteClinicsControllerFactory, GetClinicsControllerFactory, GetClinicsByIdControllerFactory } from '@/main/factories/controllers/clinics'
-
-import { CreateDoctorsSchedulesControllerFactory } from '@/main/factories/controllers/doctors-schedules/create-doctors-schedules-controller-factory'
+import { CreateDoctorsSchedulesControllerFactory } from '@/main/factories/controllers/doctors-schedules'
 
 export const app = express()
 const router = Router()

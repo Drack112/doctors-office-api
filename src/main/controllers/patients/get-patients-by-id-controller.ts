@@ -8,8 +8,8 @@ export class GetPatientsByIdController {
 
   async handle (req: Request, res: Response): Promise<void> {
     try {
-      const Patients = await this.getPatientsByIdService.execute(req.params.id)
-      res.status(200).json(Patients)
+      const patient = await this.getPatientsByIdService.execute(req.params.id)
+      res.status(200).json(patient)
     } catch (error) {
       if (error instanceof RequestError) {
         res.status(400).json({ message: error.message })

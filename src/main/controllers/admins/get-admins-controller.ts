@@ -7,8 +7,8 @@ export class GetAdminsController {
 
   async handle (_: Request, res: Response): Promise<void> {
     try {
-      const doctors = await this.getAdminsService.execute()
-      res.status(200).json(doctors)
+      const admins = await this.getAdminsService.execute()
+      res.status(200).json(admins)
     } catch (error) {
       res.status(500).json({ error })
     }
