@@ -7,6 +7,7 @@ import { CreatePatientsControllerFactory, UpdatePatientsControllerFactory, Delet
 import { CreateAdminsControllerFactory, UpdateAdminsControllerFactory, DeleteAdminsControllerFactory, GetAdminsControllerFactory, GetAdminsByIdControllerFactory } from '@/main/factories/controllers/admins'
 import { CreateClinicsControllerFactory, UpdateClinicsControllerFactory, DeleteClinicsControllerFactory, GetClinicsControllerFactory, GetClinicsByIdControllerFactory } from '@/main/factories/controllers/clinics'
 import { CreateDoctorsSchedulesControllerFactory, DeleteDoctorsSchedulesControllerFactory } from '@/main/factories/controllers/doctors-schedules'
+import { CreateSchedulesControllerFactory } from '@/main/factories/controllers/schedules'
 
 export const app = express()
 const router = Router()
@@ -44,6 +45,8 @@ const getClinicsByIdController = GetClinicsByIdControllerFactory()
 const createDoctorsSchedulesControllerFactory = CreateDoctorsSchedulesControllerFactory()
 const deleteDoctorsSchedulesControllerFactory = DeleteDoctorsSchedulesControllerFactory()
 
+const createSchedulesControllerFactory = CreateSchedulesControllerFactory()
+
 app.use(cors())
 app.use(json())
 
@@ -79,5 +82,7 @@ router.delete('/clinics/:id', async (req, res) => deleteClinicsController.handle
 
 router.post('/doctors-schedules', async (req, res) => createDoctorsSchedulesControllerFactory.handle(req, res))
 router.delete('/doctors-schedules/:id', async (req, res) => deleteDoctorsSchedulesControllerFactory.handle(req, res))
+
+router.post('/schedules', async (req, res) => createSchedulesControllerFactory.handle(req, res))
 
 app.use(router)

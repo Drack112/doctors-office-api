@@ -1,8 +1,10 @@
-import { BaseModel } from './base-model'
-import { Column, Entity } from 'typeorm'
+import { Column, Entity, PrimaryColumn } from 'typeorm'
 
 @Entity('schedules')
-export class ScheduleEntity extends BaseModel {
+export class ScheduleEntity {
+  @PrimaryColumn()
+  id!: string
+
   @Column({ name: 'doctor_id' })
   doctorId!: string
 
@@ -14,4 +16,7 @@ export class ScheduleEntity extends BaseModel {
 
   @Column({ name: 'created_by' })
   createdBy!: string
+
+  @Column()
+  created_at!: Date
 }
