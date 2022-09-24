@@ -21,6 +21,7 @@ describe('CreateSchedulesService', () => {
   describe('execute', () => {
     beforeAll(() => {
       schedulesRepository.create = jest.fn()
+      schedulesRepository.findById = jest.fn()
       patientsRepository.findById = jest.fn()
       doctorsRepository.findById = jest.fn()
     })
@@ -28,6 +29,7 @@ describe('CreateSchedulesService', () => {
     it('should be able to create new schedule', async () => {
       patientsRepository.findById = jest.fn().mockResolvedValue(patientModel)
       doctorsRepository.findById = jest.fn().mockResolvedValue(doctorModel)
+      schedulesRepository.findById = jest.fn().mockResolvedValue(scheduleModel)
 
       await schedulesService.execute(mockSchedule)
 
@@ -48,6 +50,18 @@ describe('CreateSchedulesService', () => {
       patientsRepository.findById = jest.fn().mockResolvedValue(patientModel)
       doctorsRepository.findById = jest.fn()
       const error = new RequestError('Médico não cadastrado.')
+
+      const promise = schedulesService.execute(mockSchedule)
+
+      await expect(promise).rejects.toThrow(error)
+      expect(schedulesRepository.create).not.toHaveBeenCalled()
+    })
+
+    it('should not be able to create new schedule for an non-existing schedule date', async () => {
+      patientsRepository.findById = jest.fn().mockResolvedValue(patientModel)
+      doctorsRepository.findById = jest.fn().mockResolvedValue(doctorModel)
+      schedulesRepository.findById = jest.fn()
+      const error = new RequestError('Data de consulta não cadastrada.')
 
       const promise = schedulesService.execute(mockSchedule)
 
