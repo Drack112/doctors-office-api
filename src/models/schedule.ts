@@ -8,6 +8,7 @@ export class ScheduleModel {
   patientId: string
   doctorScheduleId: string
   created_at: Date
+  createdBy?: string
 
   constructor (schedule: SchedulesDTO) {
     if (!this.id) {
