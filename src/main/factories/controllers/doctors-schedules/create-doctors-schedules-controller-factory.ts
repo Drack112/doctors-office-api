@@ -1,4 +1,4 @@
-import { CreateDoctorsSchedulesController } from '@/main/controllers/doctors-schedules/create-doctors-schedules-controller'
+import { CreateDoctorsSchedulesController } from '@/main/controllers/doctors-schedules'
 import { DoctorsSchedulesRepository } from '@/repositories'
 import { DoctorScheduleEntity } from '@/repositories/entities'
 import { mysqlSource } from '@/repositories/mysql-connection'

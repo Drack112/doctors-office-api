@@ -36,6 +36,10 @@ export class BaseRepository<Entity extends ObjectLiteral> {
     return await this.repository.findOneBy({ crm } as any)
   }
 
+  async findSchedule (id: string): Promise<Entity | null> {
+    return await this.repository.findOneBy({ id } as any)
+  }
+
   async findExistantSchedules (params: DoctorScheduleDTO): Promise<boolean> {
     const { doctor_id, schedules } = params
     const foundSchedules = await this.repository.find({ where: { doctor_id } } as any)
