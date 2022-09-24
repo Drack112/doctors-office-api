@@ -11,11 +11,13 @@ export class CreateSchedulesService {
   ) {}
 
   async execute (params: SchedulesDTO): Promise<void> {
-    const { patientId, doctorScheduleId } = params
+    const { patientId, doctorId, doctorScheduleId } = params
     const patient = await this.patientsRepository.findById(patientId)
     if (!patient) throw new RequestError('Paciente não cadastrado.')
-    const doctor = await this.doctorsRepository.findById(doctorScheduleId)
+    const doctor = await this.doctorsRepository.findById(doctorId)
     if (!doctor) throw new RequestError('Médico não cadastrado.')
+    const scheduleDate = await this.schedulesRepository.findById(doctorScheduleId)
+    if (!scheduleDate) throw new RequestError('Data de consulta não cadastrada.')
     const schedule = new ScheduleModel(params)
     await this.schedulesRepository.create(schedule)
   }
