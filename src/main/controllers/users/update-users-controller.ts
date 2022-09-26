@@ -11,7 +11,6 @@ export class UpdateUsersController {
       await this.updateUsersService.execute(req.params.id, req.body)
       res.sendStatus(200)
     } catch (error) {
-      console.log('controller error', error)
       if (error instanceof RequestError) {
         res.status(404).json({ message: error.message })
       } else {
