@@ -2,9 +2,7 @@ import { SecretaryModel } from '@/models'
 import { SecretaryDTO } from '@/dtos'
 
 export const mockSecretary: SecretaryDTO = {
-  name: 'any-name',
-  email: 'any-email',
-  password: 'any-hashed-password',
+  userId: 'any-user-id',
   cpf: 'any-cpf'
 }
 

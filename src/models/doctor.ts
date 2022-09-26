@@ -1,28 +1,15 @@
-import { randomUUID } from 'node:crypto'
-
 import { DoctorDTO } from '@/dtos'
-import { environment } from '@/main/config'
+import { BaseModel } from '@/models'
 
-import { hashSync } from 'bcryptjs'
-
-export class DoctorModel {
-  id?: string
-  name: string
-  email: string
-  password: string
+export class DoctorModel extends BaseModel {
+  userId: string
   cpf: string
   crm: string
   speciality: string
-  created_at: Date
-  updated_at: Date | null
 
   constructor (doctor: DoctorDTO) {
-    if (!this.id) {
-      this.id = randomUUID()
-    }
-    this.name = doctor.name
-    this.email = doctor.email
-    this.password = hashSync(doctor.password, environment.encrypt.salt)
+    super()
+    this.userId = doctor.userId
     this.cpf = doctor.cpf
     this.crm = doctor.crm
     this.speciality = doctor.speciality

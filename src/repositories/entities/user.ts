@@ -12,6 +12,6 @@ export class UserEntity extends BaseModel {
   @Column()
   password!: string
 
-  @Column()
-  type!: string
+  @Column({ name: 'type' })
+  userType!: string
 }

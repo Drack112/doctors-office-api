@@ -6,7 +6,10 @@ export const mockUser: UserDTO = {
   name: 'any-name',
   email: 'any-email',
   password: 'any-hashed-password',
-  type: UserTypeEnum.admin
+  cpf: 'any-cpf',
+  crm: 'any-crm',
+  speciality: 'any-speciality',
+  userType: UserTypeEnum.admin
 }
 
 export const userModel: UserModel = {

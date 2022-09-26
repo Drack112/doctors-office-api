@@ -1,6 +1,6 @@
 import { ObjectLiteral, Repository } from 'typeorm'
 
-export abstract class BaseRepository<T extends ObjectLiteral> {
+export class BaseRepository<T extends ObjectLiteral> {
   constructor (public readonly repository: Repository<T>) {
     this.repository = repository
   }
@@ -9,8 +9,8 @@ export abstract class BaseRepository<T extends ObjectLiteral> {
     return await this.repository.find()
   }
 
-  async create (params: any): Promise<void> {
-    await this.repository.save(params)
+  async create (params: any): Promise<T> {
+    return await this.repository.save(params)
   }
 
   async update (params: T): Promise<void> {
@@ -23,6 +23,10 @@ export abstract class BaseRepository<T extends ObjectLiteral> {
 
   async findById (id: string): Promise<T | null> {
     return await this.repository.findOneBy({ id } as any)
+  }
+
+  async findByUserId (userId: string): Promise<T | null> {
+    return await this.repository.findOneBy({ userId } as any)
   }
 
   async findByEmail (email: string): Promise<T | null> {

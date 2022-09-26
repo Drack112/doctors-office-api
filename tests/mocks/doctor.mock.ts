@@ -6,9 +6,7 @@ import { DoctorDTO } from '@/dtos'
 export const mockUUID = randomUUID()
 
 export const mockDoctor: DoctorDTO = {
-  name: 'any-name',
-  email: 'any-email',
-  password: 'any-hashed-password',
+  userId: 'any-user-id',
   crm: 'any-crm',
   cpf: 'any-cpf',
   speciality: 'any-speciality'

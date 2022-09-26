@@ -14,21 +14,13 @@ export class createAdminsTable1662570044151 implements MigrationInterface {
             generationStrategy: 'uuid'
           },
           {
-            name: 'name',
-            type: 'varchar'
-          },
-          {
-            name: 'email',
-            type: 'varchar',
-            isUnique: true
-          },
-          {
-            name: 'password',
+            name: 'user_id',
             type: 'varchar'
           },
           {
             name: 'cpf',
-            type: 'varchar'
+            type: 'varchar',
+            isUnique: true
           },
           {
             name: 'created_at',

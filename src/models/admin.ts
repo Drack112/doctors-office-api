@@ -1,28 +1,13 @@
-import { randomUUID } from 'node:crypto'
-
 import { AdminDTO } from '@/dtos'
-import { environment } from '@/main/config'
+import { BaseModel } from '@/models'
 
-import { hashSync } from 'bcryptjs'
-
-export class AdminModel {
-  id?: string
-  name: string
-  email: string
-  password: string
+export class AdminModel extends BaseModel {
+  userId: string
   cpf: string
-  created_at: Date
-  updated_at: Date | null
 
   constructor (admin: AdminDTO) {
-    if (!this.id) {
-      this.id = randomUUID()
-    }
-    this.name = admin.name
-    this.email = admin.email
-    this.password = hashSync(admin.password, environment.encrypt.salt)
+    super()
+    this.userId = admin.userId
     this.cpf = admin.cpf
-    this.created_at = new Date()
-    this.updated_at = null
   }
 }

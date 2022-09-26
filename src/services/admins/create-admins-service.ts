@@ -7,10 +7,9 @@ export class CreateAdminsService {
   constructor (private readonly adminsRepository: AdminsRepository) {}
 
   async execute (params: AdminDTO): Promise<void> {
-    const { email, cpf } = params
-    const adminByEmail = await this.adminsRepository.findByEmail(email)
-    const adminByCPF = await this.adminsRepository.findByCPF(cpf)
-    if (adminByEmail ?? adminByCPF) throw new RequestError('Administrador já existe.')
+    const { cpf } = params
+    const adminExists = await this.adminsRepository.findByCPF(cpf)
+    if (adminExists) throw new RequestError('Administrador já existe.')
     const admin = new AdminModel(params)
     await this.adminsRepository.create(admin)
   }

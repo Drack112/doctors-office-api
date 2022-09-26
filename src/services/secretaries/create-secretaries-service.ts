@@ -7,15 +7,14 @@ export class CreateSecretariesService {
   constructor (private readonly secretariesRepository: SecretariesRepository) {}
 
   async execute (params: SecretaryDTO): Promise<void> {
-    const { email, cpf } = params
-    await this.validateData(email, cpf)
+    const { cpf } = params
+    await this.validateData(cpf)
     const secretary = new SecretaryModel(params)
     await this.secretariesRepository.create(secretary)
   }
 
-  private async validateData (email: string, cpf: string): Promise<void> {
-    const secretaryByEmail = await this.secretariesRepository.findByEmail(email)
+  private async validateData (cpf: string): Promise<void> {
     const secretaryByCPF = await this.secretariesRepository.findByCPF(cpf)
-    if (secretaryByEmail ?? secretaryByCPF) throw new RequestError('Secretária já existe.')
+    if (secretaryByCPF) throw new RequestError('Secretária já existe.')
   }
 }

@@ -4,6 +4,18 @@ import { CreateUsersService } from '@/services/users'
 
 import { mockUser, userModel } from '@/tests/mocks'
 
+jest.mock('typeorm', () => ({
+  decorator: jest.fn(),
+  PrimaryColumn: jest.fn(),
+  Column: jest.fn(),
+  Entity: jest.fn(),
+  DataSource: jest.fn().mockImplementation(() => ({
+    getRepository: jest.fn().mockImplementation(() => ({
+      save: jest.fn()
+    }))
+  }))
+}))
+
 jest.mock('bcryptjs', () => ({
   hashSync: jest.fn().mockImplementation(() => 'any-hashed-password')
 }))
@@ -27,6 +39,8 @@ describe('CreateUsersService', () => {
     })
 
     it('should be able to create new user (admin) successfully', async () => {
+      usersRepository.create = jest.fn().mockResolvedValue(userModel)
+
       await usersService.execute(mockUser)
 
       expect(usersRepository.create).toHaveBeenNthCalledWith(1, {

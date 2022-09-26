@@ -3,9 +3,7 @@ import { AdminModel } from '@/models'
 import { AdminDTO } from '@/dtos'
 
 export const mockAdmin: AdminDTO = {
-  name: 'any-name',
-  email: 'any-email',
-  password: 'any-hashed-password',
+  userId: 'any-user-id',
   cpf: 'any-cpf'
 }
 

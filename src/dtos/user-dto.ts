@@ -1,3 +1,17 @@
+import { AdminEntity, SecretaryEntity } from '@/repositories/entities'
+
+import { Repository } from 'typeorm'
+
+export type GenericObject = {
+  [key: string]: any
+}
+
+export type MountObject = {
+  admin: Repository<AdminEntity>
+  doctor: any
+  secretary: Repository<SecretaryEntity>
+}
+
 export enum UserTypeEnum {
   admin = 'admin',
   secretary = 'secretary',
@@ -8,5 +22,8 @@ export type UserDTO = {
   name: string
   email: string
   password: string
-  type: UserTypeEnum
+  cpf: string
+  userType: UserTypeEnum
+  crm: string
+  speciality: string
 }

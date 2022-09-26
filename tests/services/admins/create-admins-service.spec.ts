@@ -23,7 +23,6 @@ describe('CreateAdminsService', () => {
   describe('execute', () => {
     beforeAll(() => {
       adminsRepository.create = jest.fn()
-      adminsRepository.findByEmail = jest.fn()
       adminsRepository.findByCPF = jest.fn()
     })
 
@@ -36,7 +35,7 @@ describe('CreateAdminsService', () => {
       })
     })
 
-    it('should not be able to create new admin with existing cpf/email', async () => {
+    it('should not be able to create new admin with existing cpf', async () => {
       adminsRepository.findByCPF = jest.fn().mockResolvedValue(adminModel)
       const error = new RequestError('Administrador já existe.')
 

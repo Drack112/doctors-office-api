@@ -1,6 +1,4 @@
 export type AdminDTO = {
-  name: string
-  email: string
-  password: string
+  userId: string
   cpf: string
 }
