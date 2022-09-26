@@ -23,6 +23,10 @@ export class createAdminsTable1662570044151 implements MigrationInterface {
             isUnique: true
           },
           {
+            name: 'situation',
+            type: 'varchar'
+          },
+          {
             name: 'created_at',
             type: 'timestamp',
             default: 'now()'

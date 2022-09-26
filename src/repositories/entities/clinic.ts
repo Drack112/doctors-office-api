@@ -12,6 +12,9 @@ export class ClinicEntity extends BaseModel {
   @Column()
   cep!: string
 
+  @Column({ name: 'type' })
+  typeOfClinic!: string
+
   @Column()
   description?: string
 

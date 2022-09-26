@@ -1,6 +1,6 @@
 
 import { UserModel } from '@/models'
-import { UserDTO, UserTypeEnum } from '@/dtos'
+import { SituationStatusEnum, UserDTO, UserTypeEnum } from '@/dtos'
 
 export const mockUser: UserDTO = {
   name: 'any-name',
@@ -9,7 +9,8 @@ export const mockUser: UserDTO = {
   cpf: 'any-cpf',
   crm: 'any-crm',
   speciality: 'any-speciality',
-  userType: UserTypeEnum.admin
+  userType: UserTypeEnum.admin,
+  situation: SituationStatusEnum.active
 }
 
 export const userModel: UserModel = {

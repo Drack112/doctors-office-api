@@ -1,1 +1,5 @@
 export * from './create-users-service'
+export * from './update-users-service'
+export * from './delete-users-service'
+export * from './get-users-by-id-service'
+export * from './get-users-service'

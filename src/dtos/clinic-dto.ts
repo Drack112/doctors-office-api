@@ -4,4 +4,5 @@ export type ClinicDTO = {
   cep: string
   description?: string
   phone?: string
+  typeOfClinic: string
 }

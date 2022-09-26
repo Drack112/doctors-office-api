@@ -23,26 +23,11 @@ export class CreateUsersService {
   private mountObject (userId: string, params: UserDTO): GenericObject {
     const { userType } = params
     const usersObjects = {
-      admin: this.generateAdminObject(userId, params),
-      doctor: this.generateDoctorObject(userId, params),
-      secretary: this.generateSecretaryObject(userId, params)
+      admin: new AdminModel({ ...params, userId }),
+      doctor: new DoctorModel({ ...params, userId }),
+      secretary: new SecretaryModel({ ...params, userId })
     }
     return usersObjects[userType as keyof typeof usersObjects]
-  }
-
-  private generateAdminObject (userId: string, params: UserDTO): AdminModel {
-    const admin = new AdminModel({ ...params, userId })
-    return admin
-  }
-
-  private generateDoctorObject (userId: string, params: UserDTO): DoctorModel {
-    const doctor = new DoctorModel({ ...params, userId })
-    return doctor
-  }
-
-  private generateSecretaryObject (userId: string, params: UserDTO): SecretaryModel {
-    const secretary = new SecretaryModel({ ...params, userId })
-    return secretary
   }
 
   private setRepository (userType: string): GenericObject {

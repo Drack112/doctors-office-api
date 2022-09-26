@@ -8,4 +8,7 @@ export class AdminEntity extends BaseModel {
 
   @Column()
   cpf!: string
+
+  @Column()
+  situation!: string
 }

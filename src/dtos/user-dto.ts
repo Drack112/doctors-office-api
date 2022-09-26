@@ -1,3 +1,4 @@
+import { SituationStatusEnum } from '@/dtos/admin-dto'
 import { AdminEntity, SecretaryEntity } from '@/repositories/entities'
 
 import { Repository } from 'typeorm'
@@ -24,6 +25,7 @@ export type UserDTO = {
   password: string
   cpf: string
   userType: UserTypeEnum
+  situation: SituationStatusEnum
   crm: string
   speciality: string
 }

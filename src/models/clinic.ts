@@ -8,6 +8,7 @@ export class ClinicModel {
   address: string
   description?: string
   cep: string
+  typeOfClinic: string
   phone?: string
   created_at: Date
   updated_at: Date | null
@@ -20,6 +21,7 @@ export class ClinicModel {
     this.description = clinic.description
     this.phone = clinic.phone
     this.cep = clinic.cep
+    this.typeOfClinic = clinic.typeOfClinic
     this.address = clinic.address
     this.created_at = new Date()
     this.updated_at = null

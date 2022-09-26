@@ -11,6 +11,7 @@ export class UserModel extends BaseModel {
   cpf: string
   crm: string
   speciality: string
+  situation: string
 
   constructor (user: UserDTO) {
     super()
@@ -19,6 +20,7 @@ export class UserModel extends BaseModel {
     this.cpf = user.cpf
     this.crm = user.crm
     this.speciality = user.speciality
+    this.situation = user.situation
     this.userType = user.userType
     this.password = this.password = hashSync(user.password, environment.encrypt.salt)
   }

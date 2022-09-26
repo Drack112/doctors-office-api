@@ -1,9 +1,10 @@
 
 import { AdminModel } from '@/models'
-import { AdminDTO } from '@/dtos'
+import { AdminDTO, SituationStatusEnum } from '@/dtos'
 
 export const mockAdmin: AdminDTO = {
   userId: 'any-user-id',
+  situation: SituationStatusEnum.active,
   cpf: 'any-cpf'
 }
 
