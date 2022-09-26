@@ -39,7 +39,9 @@ export class createClinicsTable1663609458865 implements MigrationInterface {
           },
           {
             name: 'type',
-            type: 'varchar'
+            type: 'varchar',
+            isNullable: true,
+            default: null
           },
           {
             name: 'created_at',
