@@ -8,7 +8,7 @@ export class ClinicModel {
   address: string
   description?: string
   cep: string
-  typeOfClinic: string
+  typeOfClinic?: string
   phone?: string
   created_at: Date
   updated_at: Date | null

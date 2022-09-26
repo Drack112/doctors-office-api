@@ -1,7 +1,7 @@
 import 'reflect-metadata'
 import './config/module-alias'
 
-import { app } from '@/main/config/routes'
+import { app } from '@/main/config/app'
 import { mysqlSource } from '@/repositories/mysql-connection'
 
 mysqlSource.initialize()

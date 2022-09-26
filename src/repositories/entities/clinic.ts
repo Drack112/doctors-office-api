@@ -13,7 +13,7 @@ export class ClinicEntity extends BaseModel {
   cep!: string
 
   @Column({ name: 'type' })
-  typeOfClinic!: string
+  typeOfClinic?: string
 
   @Column()
   description?: string
