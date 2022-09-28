@@ -9,6 +9,10 @@ jest.mock('typeorm', () => ({
   PrimaryColumn: jest.fn(),
   Column: jest.fn(),
   Entity: jest.fn(),
+  OneToOne: jest.fn(),
+  OneToMany: jest.fn(),
+  ManyToOne: jest.fn(),
+  JoinColumn: jest.fn(),
   DataSource: jest.fn().mockImplementation(() => ({
     getRepository: jest.fn().mockImplementation(() => ({
       save: jest.fn()

@@ -1,6 +1,7 @@
 import { UserDTO } from '@/dtos'
 import { environment } from '@/main/config'
 import { BaseModel } from '@/models'
+
 import { hashSync } from 'bcryptjs'
 
 export class UserModel extends BaseModel {

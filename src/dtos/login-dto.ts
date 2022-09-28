@@ -1,4 +1,4 @@
-import { UserModel } from '@/models'
+import { UserEntity } from '@/repositories/entities'
 
 export type LoginDTO = {
   email: string
@@ -7,5 +7,5 @@ export type LoginDTO = {
 
 export type LoginResponseDTO = {
   access_token: string
-  user: Partial<UserModel>
+  user: Partial<UserEntity>
 }

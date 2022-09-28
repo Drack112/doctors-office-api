@@ -13,7 +13,7 @@ export class BaseRepository<T extends ObjectLiteral> {
     return await this.repository.save(params)
   }
 
-  async update (params: T): Promise<void> {
+  async update (params: any): Promise<void> {
     await this.repository.update({ id: params.id }, params)
   }
 
