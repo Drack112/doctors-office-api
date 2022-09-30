@@ -1,9 +1,12 @@
-import { CreateSchedulesControllerFactory } from '@/main/factories/controllers/schedules'
+import { BookSchedulesControllerFactory, UnbookSchedulesControllerFactory } from '@/main/factories/controllers/schedules'
+import { accessProfilePermission, ensuredAuthenticated } from '@/middleware'
 
 import { Router } from 'express'
 
-const createSchedulesControllerFactory = CreateSchedulesControllerFactory()
+const bookSchedulesControllerFactory = BookSchedulesControllerFactory()
+const unbookSchedulesControllerFactory = UnbookSchedulesControllerFactory()
 
 export default (router: Router): void => {
-  router.post('/schedules', async (req, res) => createSchedulesControllerFactory.handle(req, res))
+  router.post('/schedules', ensuredAuthenticated(), accessProfilePermission(), async (req, res) => bookSchedulesControllerFactory.handle(req, res))
+  router.patch('/schedules/:scheduleId', ensuredAuthenticated(), accessProfilePermission(), async (req, res) => unbookSchedulesControllerFactory.handle(req, res))
 }
