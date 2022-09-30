@@ -7,7 +7,7 @@ export class CreateDoctorsSchedulesService {
   constructor (private readonly doctorsSchedulesRepository: DoctorsSchedulesRepository) {}
 
   async execute (params: DoctorScheduleDTO): Promise<void> {
-    const doctorScheduleExists = await this.doctorsSchedulesRepository.findExistantSchedules(params)
+    const doctorScheduleExists = await this.doctorsSchedulesRepository.findExistingSchedules(params)
     if (doctorScheduleExists) throw new RequestError('Horário de atendimento já cadastrado.')
     const doctorSchedule = new DoctorScheduleModel().setObject(params)
     await this.doctorsSchedulesRepository.create(doctorSchedule)
