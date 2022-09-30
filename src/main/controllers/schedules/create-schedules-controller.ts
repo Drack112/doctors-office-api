@@ -8,7 +8,7 @@ export class CreateSchedulesController {
 
   async handle (req: Request, res: Response): Promise<void> {
     try {
-      await this.createSchedulesService.execute(req.body)
+      await this.createSchedulesService.execute(req.body, req.userId)
       res.sendStatus(201)
     } catch (error) {
       if (error instanceof RequestError) {

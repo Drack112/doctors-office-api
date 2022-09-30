@@ -12,7 +12,7 @@ export class CreateSchedulesService {
     private readonly doctorsRepository: BaseRepository<DoctorEntity>
   ) {}
 
-  async execute (params: SchedulesDTO): Promise<void> {
+  async execute (params: SchedulesDTO, sessionUserId: string): Promise<void> {
     const { patientId, doctorId, doctorScheduleId } = params
     const patient = await this.patientsRepository.findById(patientId)
     if (!patient) throw new RequestError('Paciente não existe.')
@@ -24,9 +24,7 @@ export class CreateSchedulesService {
     scheduleDate.status = StatusEnum.unavailable
     scheduleDate.updated_at = new Date()
     await this.doctorsSchedulesRepository.update(scheduleDate)
-    const schedule = new ScheduleModel(params)
-    // TODO pegar nome do usuário da sessao
-    schedule.createdBy = 'yan'
+    const schedule = new ScheduleModel(params, sessionUserId)
     await this.schedulesRepository.create(schedule)
   }
 }

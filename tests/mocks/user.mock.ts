@@ -2,6 +2,8 @@
 import { UserModel } from '@/models'
 import { SituationStatusEnum, UserDTO, UserTypeEnum } from '@/dtos'
 
+export const sessionUserId = 'any-session-user-id'
+
 export const mockUser: UserDTO = {
   name: 'any-name',
   email: 'any-email',

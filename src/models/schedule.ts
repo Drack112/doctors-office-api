@@ -10,13 +10,14 @@ export class ScheduleModel {
   created_at: Date
   createdBy?: string
 
-  constructor (schedule: SchedulesDTO) {
+  constructor (schedule: SchedulesDTO, userId: string) {
     if (!this.id) {
       this.id = randomUUID()
     }
     this.doctorId = schedule.doctorId
     this.patientId = schedule.patientId
     this.doctorScheduleId = schedule.doctorScheduleId
+    this.createdBy = userId
     this.created_at = new Date()
   }
 }

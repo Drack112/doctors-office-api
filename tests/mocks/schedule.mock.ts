@@ -1,12 +1,13 @@
 
 import { ScheduleModel } from '@/models'
 import { SchedulesDTO } from '@/dtos'
+import { sessionUserId } from '@/tests/mocks'
 
 export const mockSchedule: SchedulesDTO = {
   doctorId: 'any-doctorId',
   doctorScheduleId: 'any-doctorScheduleId',
   patientId: 'any-patientId',
-  createdBy: 'yan'
+  createdBy: sessionUserId
 }
 
 export const scheduleModel: ScheduleModel = {
