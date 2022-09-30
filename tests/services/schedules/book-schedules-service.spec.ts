@@ -13,7 +13,7 @@ jest
   .useFakeTimers('modern')
   .setSystemTime(new Date('2022-09-01T00:00:00.000Z'))
 
-describe('CreateSchedulesService', () => {
+describe('BookSchedulesService', () => {
   const schedulesRepository = {} as SchedulesRepository
   const patientsRepository = {} as PatientsRepository
   const doctorsRepository = {} as DoctorsRepository
