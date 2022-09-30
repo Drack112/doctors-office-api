@@ -1,3 +1,5 @@
+import { randomUUID } from 'node:crypto'
+
 import { UserDTO, GenericObject } from '@/dtos'
 import { RequestError } from '@/errors'
 import { AdminModel, DoctorModel, SecretaryModel, UserModel } from '@/models'
@@ -14,10 +16,19 @@ export class CreateUsersService {
     if (userExists) throw new RequestError('Usuário já existe.')
     const model = this.setRepository(userType)
     const baseRepository = this.setBaseRepository(model)
-    const userToCreate = new UserModel(params)
+    const userToCreate = this.userWithRandomPassword(params)
     const user = await this.usersRepository.create(userToCreate)
     const objectToCreate = this.mountObject(user.id, params)
     await baseRepository.create(objectToCreate)
+  }
+
+  private userWithRandomPassword (params: UserDTO) {
+    const passwordWithoutHyphen = randomUUID().replace(/-/g, '')
+    const userWithRandomPassword = {
+      ...params,
+      password: passwordWithoutHyphen
+    }
+    return new UserModel(userWithRandomPassword)
   }
 
   private mountObject (userId: string, params: UserDTO): GenericObject {
