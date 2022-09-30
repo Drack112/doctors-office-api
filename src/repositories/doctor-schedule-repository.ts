@@ -3,7 +3,13 @@ import { BaseRepository } from '@/repositories'
 import { DoctorScheduleEntity } from '@/repositories/entities'
 
 export class DoctorsSchedulesRepository extends BaseRepository<DoctorScheduleEntity> {
-  async findExistantSchedules (params: DoctorScheduleDTO): Promise<boolean> {
+  async findSchedulesByDoctorId (doctorId: string): Promise<DoctorScheduleEntity[]> {
+    return await this.repository.find({
+      where: { doctor_id: doctorId }
+    })
+  }
+
+  async findExistingSchedules (params: DoctorScheduleDTO): Promise<boolean> {
     const { doctor_id, schedules } = params
     const foundSchedules = await this.repository.find({ where: { doctor_id } } as any)
     let hasScheduled: boolean = false
