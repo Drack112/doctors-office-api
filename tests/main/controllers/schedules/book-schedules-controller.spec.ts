@@ -1,12 +1,12 @@
 import { RequestError } from '@/errors'
-import { CreateSchedulesController } from '@/main/controllers/schedules'
-import { CreateSchedulesService } from '@/services/schedules'
+import { BookSchedulesController } from '@/main/controllers/schedules'
+import { BookSchedulesService } from '@/services/schedules'
 
 import { mockSchedule, sessionUserId } from '@/tests/mocks'
 
-describe('CreateSchedulesController', () => {
-  const schedulesService = {} as CreateSchedulesService
-  const schedulesController = new CreateSchedulesController(schedulesService)
+describe('BookSchedulesController', () => {
+  const schedulesService = {} as BookSchedulesService
+  const schedulesController = new BookSchedulesController(schedulesService)
   const req: any = { body: jest.fn(), userId: sessionUserId }
   const res: any = { status: jest.fn().mockReturnThis(), sendStatus: jest.fn().mockReturnThis(), json: jest.fn().mockReturnThis() }
 

@@ -1,1 +1,1 @@
-export * from './create-schedules-controller'
+export * from './book-schedules-controller'

@@ -1,7 +1,7 @@
 import { StatusEnum } from '@/dtos'
 import { RequestError } from '@/errors'
 import { DoctorsRepository, DoctorsSchedulesRepository, PatientsRepository, SchedulesRepository } from '@/repositories'
-import { CreateSchedulesService } from '@/services/schedules'
+import { BookSchedulesService } from '@/services/schedules'
 
 import { doctorModel, doctorScheduleModel, mockSchedule, patientModel, scheduleModel, sessionUserId } from '@/tests/mocks'
 
@@ -18,7 +18,7 @@ describe('CreateSchedulesService', () => {
   const patientsRepository = {} as PatientsRepository
   const doctorsRepository = {} as DoctorsRepository
   const doctorsSchedulesRepository = {} as DoctorsSchedulesRepository
-  const schedulesService = new CreateSchedulesService(schedulesRepository, doctorsSchedulesRepository, patientsRepository, doctorsRepository)
+  const schedulesService = new BookSchedulesService(schedulesRepository, doctorsSchedulesRepository, patientsRepository, doctorsRepository)
 
   describe('execute', () => {
     beforeAll(() => {

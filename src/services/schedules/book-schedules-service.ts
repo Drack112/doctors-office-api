@@ -4,7 +4,7 @@ import { ScheduleModel } from '@/models'
 import { BaseRepository } from '@/repositories'
 import { DoctorEntity, DoctorScheduleEntity, PatientEntity, ScheduleEntity } from '@/repositories/entities'
 
-export class CreateSchedulesService {
+export class BookSchedulesService {
   constructor (
     private readonly schedulesRepository: BaseRepository<ScheduleEntity>,
     private readonly doctorsSchedulesRepository: BaseRepository<DoctorScheduleEntity>,

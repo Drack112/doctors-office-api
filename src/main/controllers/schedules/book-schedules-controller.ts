@@ -1,14 +1,14 @@
 import { RequestError } from '@/errors'
-import { CreateSchedulesService } from '@/services/schedules'
+import { BookSchedulesService } from '@/services/schedules'
 
 import { Request, Response } from 'express'
 
-export class CreateSchedulesController {
-  constructor (private readonly createSchedulesService: CreateSchedulesService) {}
+export class BookSchedulesController {
+  constructor (private readonly bookSchedulesService: BookSchedulesService) {}
 
   async handle (req: Request, res: Response): Promise<void> {
     try {
-      await this.createSchedulesService.execute(req.body, req.userId)
+      await this.bookSchedulesService.execute(req.body, req.userId)
       res.sendStatus(201)
     } catch (error) {
       if (error instanceof RequestError) {

@@ -1,1 +1,1 @@
-export * from './create-schedules-service'
+export * from './book-schedules-service'
