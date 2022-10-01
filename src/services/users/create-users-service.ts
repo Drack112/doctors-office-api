@@ -22,7 +22,7 @@ export class CreateUsersService {
     await baseRepository.create(objectToCreate)
   }
 
-  private userWithRandomPassword (params: UserDTO) {
+  private userWithRandomPassword (params: UserDTO): UserModel {
     const passwordWithoutHyphen = randomUUID().replace(/-/g, '')
     const userWithRandomPassword = {
       ...params,
