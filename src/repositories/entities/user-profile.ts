@@ -1,5 +1,6 @@
 import { BaseModel } from './base-model'
-import { ProfilePermissionEntity, UserEntity } from '@/repositories/entities'
+import { UserEntity } from './user'
+import { ProfilePermissionEntity } from './profile-permission'
 
 import { Column, Entity, OneToMany, OneToOne } from 'typeorm'
 

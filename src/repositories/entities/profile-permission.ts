@@ -1,4 +1,4 @@
-import { UserProfileEntity } from '@/repositories/entities'
+import { UserProfileEntity } from './user-profile'
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm'
 
 @Entity('profiles_permissions')

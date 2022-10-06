@@ -1,5 +1,5 @@
 import { BaseModel } from './base-model'
-import { UserProfileEntity } from '@/repositories/entities'
+import { UserProfileEntity } from './user-profile'
 
 import { Column, Entity, JoinColumn, OneToOne } from 'typeorm'
 
