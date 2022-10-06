@@ -3,3 +3,9 @@ dist
 coverage
 .DS_Store
 .env
+
+tmp/*
+/tmp/uploads/*
+!/tmp/uploads
+!/tmp/uploads/.gitkeep
+!tmp/.gitkeep
