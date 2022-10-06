@@ -25,6 +25,7 @@ export const ensuredAuthenticated = () => {
       }
       return next()
     } catch (err) {
+      console.log('err', err)
       return response.status(401).end()
     }
   }
