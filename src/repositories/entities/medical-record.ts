@@ -13,4 +13,7 @@ export class MedicalRecordEntity {
 
   @Column({ name: 'patient_id' })
   patientId!: string
+
+  @Column()
+  created_at!: Date
 }
