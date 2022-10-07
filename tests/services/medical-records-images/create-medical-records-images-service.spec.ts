@@ -1,4 +1,4 @@
-import { MedicalRecordsImagesRepository } from '@/repositories'
+import { MedicalRecordsImagesRepository } from '@/infra/repositories'
 import { CreateMedicalRecordsImagesService } from '@/services/medical-records-images'
 
 import { medicalRecordImageModel, mockMedicalRecordImage } from '@/tests/mocks'

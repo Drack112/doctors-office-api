@@ -1,8 +1,8 @@
 import { GetClinicsController } from '@/main/controllers/clinics'
-import { ClinicsRepository } from '@/repositories'
+import { ClinicsRepository } from '@/infra/repositories'
 import { GetClinicsService } from '@/services/clinics'
-import { ClinicEntity } from '@/repositories/entities'
-import { mysqlSource } from '@/repositories/mysql-connection'
+import { ClinicEntity } from '@/infra/entities'
+import { mysqlSource } from '@/infra/mysql-connection'
 
 export const GetClinicsControllerFactory = (): GetClinicsController => {
   const model = mysqlSource.getRepository(ClinicEntity)

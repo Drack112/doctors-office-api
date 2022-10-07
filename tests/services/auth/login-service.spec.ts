@@ -1,5 +1,5 @@
 import { RequestError } from '@/errors'
-import { UsersRepository } from '@/repositories'
+import { UsersRepository } from '@/infra/repositories'
 import { LoginService } from '@/services/auth'
 
 import { mockLogin, userModel } from '@/tests/mocks'

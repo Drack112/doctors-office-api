@@ -1,7 +1,7 @@
 import { UpdatePatientsController } from '@/main/controllers/patients'
-import { PatientsRepository } from '@/repositories'
-import { PatientEntity } from '@/repositories/entities'
-import { mysqlSource } from '@/repositories/mysql-connection'
+import { PatientsRepository } from '@/infra/repositories'
+import { PatientEntity } from '@/infra/entities'
+import { mysqlSource } from '@/infra/mysql-connection'
 import { UpdatePatientsService } from '@/services/patients'
 
 export const UpdatePatientsControllerFactory = (): UpdatePatientsController => {

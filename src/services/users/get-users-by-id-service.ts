@@ -1,6 +1,6 @@
 import { RequestError } from '@/errors'
-import { UsersRepository } from '@/repositories'
-import { UserEntity } from '@/repositories/entities'
+import { UsersRepository } from '@/infra/repositories'
+import { UserEntity } from '@/infra/entities'
 
 export class GetUsersByIdService {
   constructor (private readonly usersRepository: UsersRepository) {}

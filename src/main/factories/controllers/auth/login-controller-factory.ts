@@ -1,7 +1,7 @@
 import { LoginController } from '@/main/controllers/auth'
-import { UsersRepository } from '@/repositories'
-import { UserEntity } from '@/repositories/entities'
-import { mysqlSource } from '@/repositories/mysql-connection'
+import { UsersRepository } from '@/infra/repositories'
+import { UserEntity } from '@/infra/entities'
+import { mysqlSource } from '@/infra/mysql-connection'
 import { LoginService } from '@/services/auth'
 
 export const LoginControllerFactory = (): LoginController => {

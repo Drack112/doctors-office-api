@@ -1,7 +1,7 @@
 import { CreateMedicalRecordsImagesController } from '@/main/controllers/medical-records-images'
-import { MedicalRecordsImagesRepository } from '@/repositories'
-import { MedicalRecordImageEntity } from '@/repositories/entities'
-import { mysqlSource } from '@/repositories/mysql-connection'
+import { MedicalRecordsImagesRepository } from '@/infra/repositories'
+import { MedicalRecordImageEntity } from '@/infra/entities'
+import { mysqlSource } from '@/infra/mysql-connection'
 import { CreateMedicalRecordsImagesService } from '@/services/medical-records-images'
 
 export const CreateMedicalRecordsImagesControllerFactory = (): CreateMedicalRecordsImagesController => {

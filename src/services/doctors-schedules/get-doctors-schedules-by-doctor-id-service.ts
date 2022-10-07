@@ -1,5 +1,5 @@
-import { DoctorsRepository, DoctorsSchedulesRepository } from '@/repositories'
-import { DoctorScheduleEntity } from '@/repositories/entities'
+import { DoctorsRepository, DoctorsSchedulesRepository } from '@/infra/repositories'
+import { DoctorScheduleEntity } from '@/infra/entities'
 
 export class GetDoctorsSchedulesByDoctorIdService {
   constructor (

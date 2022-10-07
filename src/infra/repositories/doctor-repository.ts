@@ -1,5 +1,5 @@
-import { BaseRepository } from '@/repositories'
-import { DoctorEntity } from '@/repositories/entities'
+import { BaseRepository } from './base-repository'
+import { DoctorEntity } from '@/infra/entities'
 
 export class DoctorsRepository extends BaseRepository<DoctorEntity> {
   async findById (id: string): Promise<DoctorEntity | null> {

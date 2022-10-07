@@ -1,7 +1,7 @@
 import { UnbookSchedulesController } from '@/main/controllers/schedules'
-import { DoctorsSchedulesRepository, SchedulesRepository } from '@/repositories'
-import { DoctorScheduleEntity, ScheduleEntity } from '@/repositories/entities'
-import { mysqlSource } from '@/repositories/mysql-connection'
+import { DoctorsSchedulesRepository, SchedulesRepository } from '@/infra/repositories'
+import { DoctorScheduleEntity, ScheduleEntity } from '@/infra/entities'
+import { mysqlSource } from '@/infra/mysql-connection'
 import { UnbookSchedulesService } from '@/services/schedules'
 
 export const UnbookSchedulesControllerFactory = (): UnbookSchedulesController => {

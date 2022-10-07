@@ -3,9 +3,9 @@ import { randomUUID } from 'node:crypto'
 import { UserDTO, GenericObject } from '@/dtos'
 import { RequestError } from '@/errors'
 import { AdminModel, DoctorModel, SecretaryModel, UserModel } from '@/models'
-import { BaseRepository, UsersRepository } from '@/repositories'
-import { AdminEntity, DoctorEntity, SecretaryEntity } from '@/repositories/entities'
-import { mysqlSource } from '@/repositories/mysql-connection'
+import { BaseRepository, UsersRepository } from '@/infra/repositories'
+import { AdminEntity, DoctorEntity, SecretaryEntity } from '@/infra/entities'
+import { mysqlSource } from '@/infra/mysql-connection'
 
 export class CreateUsersService {
   constructor (private readonly usersRepository: UsersRepository) {}

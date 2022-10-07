@@ -1,6 +1,6 @@
 import { MedicalRecordDTO } from '@/dtos'
 import { MedicalRecordModel } from '@/models'
-import { MedicalRecordsRepository } from '@/repositories'
+import { MedicalRecordsRepository } from '@/infra/repositories'
 
 export class CreateMedicalRecordsService {
   constructor (private readonly medicalRecordsRepository: MedicalRecordsRepository) {}

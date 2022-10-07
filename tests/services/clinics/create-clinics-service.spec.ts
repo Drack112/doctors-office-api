@@ -1,4 +1,4 @@
-import { ClinicsRepository } from '@/repositories'
+import { ClinicsRepository } from '@/infra/repositories'
 import { CreateClinicsService } from '@/services/clinics'
 
 import { mockClinic, clinicModel } from '@/tests/mocks'

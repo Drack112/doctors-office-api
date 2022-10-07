@@ -1,8 +1,8 @@
 import { GetUsersByIdController } from '@/main/controllers/users'
-import { UsersRepository } from '@/repositories'
+import { UsersRepository } from '@/infra/repositories'
 import { GetUsersByIdService } from '@/services/users'
-import { UserEntity } from '@/repositories/entities'
-import { mysqlSource } from '@/repositories/mysql-connection'
+import { UserEntity } from '@/infra/entities'
+import { mysqlSource } from '@/infra/mysql-connection'
 
 export const GetUsersByIdControllerFactory = (): GetUsersByIdController => {
   const model = mysqlSource.getRepository(UserEntity)

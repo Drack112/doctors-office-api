@@ -1,4 +1,4 @@
-import { UserEntity } from '@/repositories/entities'
+import { UserEntity } from '@/infra/entities'
 
 export type LoginDTO = {
   email: string

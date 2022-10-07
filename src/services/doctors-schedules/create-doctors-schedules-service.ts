@@ -1,7 +1,7 @@
 import { DoctorScheduleDTO } from '@/dtos'
 import { RequestError } from '@/errors'
 import { DoctorScheduleModel } from '@/models'
-import { DoctorsSchedulesRepository } from '@/repositories'
+import { DoctorsSchedulesRepository } from '@/infra/repositories'
 
 export class CreateDoctorsSchedulesService {
   constructor (private readonly doctorsSchedulesRepository: DoctorsSchedulesRepository) {}

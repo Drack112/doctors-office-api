@@ -1,7 +1,7 @@
-import { UsersRepository } from '@/repositories'
+import { UsersRepository } from '@/infra/repositories'
 import { LoginDTO, LoginResponseDTO } from '@/dtos'
 import { RequestError } from '@/errors'
-import { UserEntity } from '@/repositories/entities'
+import { UserEntity } from '@/infra/entities'
 import { environment } from '@/main/config'
 
 import { compare } from 'bcryptjs'

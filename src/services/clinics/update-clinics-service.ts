@@ -1,7 +1,7 @@
 import { ClinicDTO } from '@/dtos'
 import { RequestError } from '@/errors'
 import { ClinicModel } from '@/models'
-import { ClinicsRepository } from '@/repositories'
+import { ClinicsRepository } from '@/infra/repositories'
 
 export class UpdateClinicsService {
   constructor (private readonly clinicsRepository: ClinicsRepository) {}

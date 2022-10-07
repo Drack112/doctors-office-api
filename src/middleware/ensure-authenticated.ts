@@ -1,7 +1,7 @@
 import { environment } from '@/main/config'
-import { UsersRepository } from '@/repositories'
-import { UserEntity } from '@/repositories/entities'
-import { mysqlSource } from '@/repositories/mysql-connection'
+import { UsersRepository } from '@/infra/repositories'
+import { UserEntity } from '@/infra/entities'
+import { mysqlSource } from '@/infra/mysql-connection'
 
 import { NextFunction, Request, Response } from 'express'
 import { verify } from 'jsonwebtoken'

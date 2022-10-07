@@ -1,5 +1,5 @@
 import { RequestError } from '@/errors'
-import { ClinicsRepository } from '@/repositories'
+import { ClinicsRepository } from '@/infra/repositories'
 import { DeleteClinicsService } from '@/services/clinics'
 import { clinicModel } from '@/tests/mocks'
 

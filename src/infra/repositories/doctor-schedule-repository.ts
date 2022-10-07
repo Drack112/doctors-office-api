@@ -1,6 +1,6 @@
+import { BaseRepository } from './base-repository'
 import { DoctorScheduleDTO } from '@/dtos'
-import { BaseRepository } from '@/repositories'
-import { DoctorScheduleEntity } from '@/repositories/entities'
+import { DoctorScheduleEntity } from '@/infra/entities'
 
 export class DoctorsSchedulesRepository extends BaseRepository<DoctorScheduleEntity> {
   async findSchedulesByDoctorId (doctorId: string): Promise<DoctorScheduleEntity[]> {

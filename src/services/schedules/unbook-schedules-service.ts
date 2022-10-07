@@ -1,6 +1,6 @@
 import { StatusEnum } from '@/dtos'
 import { RequestError } from '@/errors'
-import { DoctorsSchedulesRepository, SchedulesRepository } from '@/repositories'
+import { DoctorsSchedulesRepository, SchedulesRepository } from '@/infra/repositories'
 
 export class UnbookSchedulesService {
   constructor (

@@ -1,4 +1,4 @@
-import { DoctorsRepository, DoctorsSchedulesRepository } from '@/repositories'
+import { DoctorsRepository, DoctorsSchedulesRepository } from '@/infra/repositories'
 import { GetDoctorsSchedulesByDoctorIdService } from '@/services/doctors-schedules'
 
 import { doctorModel, mockDoctorSchedulesByDoctorId } from '@/tests/mocks'

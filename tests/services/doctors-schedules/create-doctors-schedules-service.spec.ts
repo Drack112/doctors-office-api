@@ -1,6 +1,6 @@
 import { RequestError } from '@/errors'
 import { DoctorScheduleModel } from '@/models'
-import { DoctorsSchedulesRepository } from '@/repositories'
+import { DoctorsSchedulesRepository } from '@/infra/repositories'
 import { CreateDoctorsSchedulesService } from '@/services/doctors-schedules'
 
 import { mockDoctorSchedule, doctorScheduleModel } from '@/tests/mocks'

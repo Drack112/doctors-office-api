@@ -1,5 +1,5 @@
 import { SituationStatusEnum } from '@/dtos/admin-dto'
-import { AdminEntity, SecretaryEntity } from '@/repositories/entities'
+import { AdminEntity, SecretaryEntity } from '@/infra/entities'
 
 import { Repository } from 'typeorm'
 

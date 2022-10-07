@@ -1,7 +1,7 @@
 import { UserDTO } from '@/dtos'
 import { RequestError } from '@/errors'
 import { UserModel } from '@/models'
-import { UsersRepository } from '@/repositories'
+import { UsersRepository } from '@/infra/repositories'
 
 export class UpdateUsersService {
   constructor (private readonly usersRepository: UsersRepository) {}

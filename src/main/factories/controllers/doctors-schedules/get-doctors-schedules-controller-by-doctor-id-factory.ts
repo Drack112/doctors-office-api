@@ -1,7 +1,7 @@
 import { GetDoctorsSchedulesByDoctorIdController } from '@/main/controllers/doctors-schedules'
-import { DoctorsRepository, DoctorsSchedulesRepository } from '@/repositories'
-import { DoctorEntity, DoctorScheduleEntity } from '@/repositories/entities'
-import { mysqlSource } from '@/repositories/mysql-connection'
+import { DoctorsRepository, DoctorsSchedulesRepository } from '@/infra/repositories'
+import { DoctorEntity, DoctorScheduleEntity } from '@/infra/entities'
+import { mysqlSource } from '@/infra/mysql-connection'
 import { GetDoctorsSchedulesByDoctorIdService } from '@/services/doctors-schedules'
 
 export const GetDoctorsSchedulesByDoctorIdControllerFactory = (): GetDoctorsSchedulesByDoctorIdController => {

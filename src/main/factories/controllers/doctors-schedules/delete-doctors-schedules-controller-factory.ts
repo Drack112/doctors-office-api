@@ -1,7 +1,7 @@
 import { DeleteDoctorsSchedulesController } from '@/main/controllers/doctors-schedules'
-import { DoctorsSchedulesRepository } from '@/repositories'
-import { DoctorScheduleEntity } from '@/repositories/entities'
-import { mysqlSource } from '@/repositories/mysql-connection'
+import { DoctorsSchedulesRepository } from '@/infra/repositories'
+import { DoctorScheduleEntity } from '@/infra/entities'
+import { mysqlSource } from '@/infra/mysql-connection'
 import { DeleteDoctorsSchedulesService } from '@/services/doctors-schedules'
 
 export const DeleteDoctorsSchedulesControllerFactory = (): DeleteDoctorsSchedulesController => {

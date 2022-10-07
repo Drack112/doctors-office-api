@@ -1,8 +1,8 @@
 import { SchedulesDTO, StatusEnum } from '@/dtos'
 import { RequestError } from '@/errors'
 import { ScheduleModel } from '@/models'
-import { BaseRepository } from '@/repositories'
-import { DoctorEntity, DoctorScheduleEntity, PatientEntity, ScheduleEntity } from '@/repositories/entities'
+import { BaseRepository } from '@/infra/repositories'
+import { DoctorEntity, DoctorScheduleEntity, PatientEntity, ScheduleEntity } from '@/infra/entities'
 
 export class BookSchedulesService {
   constructor (

@@ -1,5 +1,5 @@
 import { RequestError } from '@/errors'
-import { ClinicsRepository } from '@/repositories'
+import { ClinicsRepository } from '@/infra/repositories'
 
 export class DeleteClinicsService {
   constructor (private readonly clinicsRepository: ClinicsRepository) {}

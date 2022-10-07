@@ -1,6 +1,6 @@
-import { ModulesRepository, UsersRepository } from '@/repositories'
-import { ModuleEntity, ProfilePermissionEntity, UserEntity } from '@/repositories/entities'
-import { mysqlSource } from '@/repositories/mysql-connection'
+import { ModulesRepository, UsersRepository } from '@/infra/repositories'
+import { ModuleEntity, ProfilePermissionEntity, UserEntity } from '@/infra/entities'
+import { mysqlSource } from '@/infra/mysql-connection'
 
 import { NextFunction, Request, Response } from 'express'
 

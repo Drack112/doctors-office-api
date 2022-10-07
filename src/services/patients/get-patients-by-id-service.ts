@@ -1,6 +1,6 @@
 import { RequestError } from '@/errors'
-import { PatientsRepository } from '@/repositories'
-import { PatientEntity } from '@/repositories/entities'
+import { PatientsRepository } from '@/infra/repositories'
+import { PatientEntity } from '@/infra/entities'
 
 export class GetPatientsByIdService {
   constructor (private readonly patientsRepository: PatientsRepository) {}

@@ -1,5 +1,5 @@
-import { BaseRepository } from '@/repositories'
-import { ModuleEntity } from '@/repositories/entities'
+import { BaseRepository } from './base-repository'
+import { ModuleEntity } from '@/infra/entities'
 
 import { In } from 'typeorm'
 

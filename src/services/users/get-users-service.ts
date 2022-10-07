@@ -1,5 +1,5 @@
-import { UsersRepository } from '@/repositories'
-import { UserEntity } from '@/repositories/entities'
+import { UsersRepository } from '@/infra/repositories'
+import { UserEntity } from '@/infra/entities'
 
 export class GetUsersService {
   constructor (private readonly usersRepository: UsersRepository) {}

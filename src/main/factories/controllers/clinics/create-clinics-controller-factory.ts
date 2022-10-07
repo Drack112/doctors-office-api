@@ -1,7 +1,7 @@
 import { CreateClinicsController } from '@/main/controllers/clinics'
-import { ClinicsRepository } from '@/repositories'
-import { ClinicEntity } from '@/repositories/entities'
-import { mysqlSource } from '@/repositories/mysql-connection'
+import { ClinicsRepository } from '@/infra/repositories'
+import { ClinicEntity } from '@/infra/entities'
+import { mysqlSource } from '@/infra/mysql-connection'
 import { CreateClinicsService } from '@/services/clinics'
 
 export const CreateClinicsControllerFactory = (): CreateClinicsController => {

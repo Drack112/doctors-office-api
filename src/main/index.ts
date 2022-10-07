@@ -2,7 +2,7 @@ import 'reflect-metadata'
 import './config/module-alias'
 
 import { app } from '@/main/config/app'
-import { mysqlSource } from '@/repositories/mysql-connection'
+import { mysqlSource } from '@/infra/mysql-connection'
 
 mysqlSource.initialize()
   .then(() => app.listen(3333, () => console.log('Server running!')))

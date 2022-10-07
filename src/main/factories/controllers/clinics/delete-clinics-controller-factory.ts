@@ -1,8 +1,8 @@
 import { DeleteClinicsController } from '@/main/controllers/clinics'
-import { ClinicsRepository } from '@/repositories'
+import { ClinicsRepository } from '@/infra/repositories'
 import { DeleteClinicsService } from '@/services/clinics'
-import { ClinicEntity } from '@/repositories/entities'
-import { mysqlSource } from '@/repositories/mysql-connection'
+import { ClinicEntity } from '@/infra/entities'
+import { mysqlSource } from '@/infra/mysql-connection'
 
 export const DeleteClinicsControllerFactory = (): DeleteClinicsController => {
   const model = mysqlSource.getRepository(ClinicEntity)

@@ -1,6 +1,6 @@
 import { StatusEnum } from '@/dtos'
 import { RequestError } from '@/errors'
-import { DoctorsRepository, DoctorsSchedulesRepository, PatientsRepository, SchedulesRepository } from '@/repositories'
+import { DoctorsRepository, DoctorsSchedulesRepository, PatientsRepository, SchedulesRepository } from '@/infra/repositories'
 import { BookSchedulesService } from '@/services/schedules'
 
 import { doctorModel, doctorScheduleModel, mockSchedule, patientModel, scheduleModel, sessionUserId } from '@/tests/mocks'

@@ -1,7 +1,7 @@
 import { CreateUsersController } from '@/main/controllers/users'
-import { UsersRepository } from '@/repositories'
-import { UserEntity } from '@/repositories/entities'
-import { mysqlSource } from '@/repositories/mysql-connection'
+import { UsersRepository } from '@/infra/repositories'
+import { UserEntity } from '@/infra/entities'
+import { mysqlSource } from '@/infra/mysql-connection'
 import { CreateUsersService } from '@/services/users'
 
 export const CreateUsersControllerFactory = (): CreateUsersController => {

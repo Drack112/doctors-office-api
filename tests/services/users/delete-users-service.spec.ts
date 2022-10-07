@@ -1,5 +1,5 @@
 import { RequestError } from '@/errors'
-import { UsersRepository } from '@/repositories'
+import { UsersRepository } from '@/infra/repositories'
 import { DeleteUsersService } from '@/services/users'
 
 import { userModel } from '@/tests/mocks'
