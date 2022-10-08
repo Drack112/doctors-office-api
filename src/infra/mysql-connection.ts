@@ -8,7 +8,7 @@ export const mysqlSource = new DataSource({
   username: environment.mysql.user,
   password: environment.mysql.password,
   database: environment.mysql.database,
-  migrations: [`./${dir}/repositories/migrations/*.{js,ts}`],
-  entities: [`./${dir}/repositories/entities/*.{js,ts}`],
+  migrations: [`./${dir}/infra/migrations/*.{js,ts}`],
+  entities: [`./${dir}/infra/entities/*.{js,ts}`],
   synchronize: false
 })

@@ -8,7 +8,12 @@ export class CreateMedicalRecordsImagesController {
 
   async handle (req: Request, res: Response): Promise<void> {
     try {
-      await this.createMedicalRecordsImagesService.execute(req.body)
+      const { medicalRecordId } = req.body
+      const { filename } = req.file!
+      await this.createMedicalRecordsImagesService.execute({
+        medicalRecordId,
+        filename
+      })
       res.sendStatus(201)
     } catch (error) {
       if (error instanceof RequestError) {

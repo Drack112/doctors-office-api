@@ -7,12 +7,12 @@ import { mockMedicalRecordImage } from '@/tests/mocks'
 describe('CreateMedicalRecordsImagesController', () => {
   const medicalRecordsImagesService = {} as CreateMedicalRecordsImagesService
   const medicalRecordsImagesController = new CreateMedicalRecordsImagesController(medicalRecordsImagesService)
-  const req: any = { body: jest.fn(), params: jest.fn() }
+  const req: any = { body: jest.fn(), file: jest.fn() }
   const res: any = { sendStatus: jest.fn().mockReturnThis(), status: jest.fn().mockReturnThis(), json: jest.fn().mockReturnThis() }
 
   beforeAll(() => {
     req.body = mockMedicalRecordImage
-    req.params = { id: 'any-id' }
+    req.file = { filename: 'any-filename.jpg' }
   })
 
   describe('handle', () => {
@@ -21,7 +21,7 @@ describe('CreateMedicalRecordsImagesController', () => {
 
       await medicalRecordsImagesController.handle(req, res)
 
-      expect(medicalRecordsImagesService.execute).toHaveBeenNthCalledWith(1, req.body)
+      expect(medicalRecordsImagesService.execute).toHaveBeenNthCalledWith(1, mockMedicalRecordImage)
       expect(res.sendStatus).toHaveBeenNthCalledWith(1, 201)
     })
 
@@ -31,7 +31,7 @@ describe('CreateMedicalRecordsImagesController', () => {
 
       await medicalRecordsImagesController.handle(req, res)
 
-      expect(medicalRecordsImagesService.execute).toHaveBeenNthCalledWith(1, req.body)
+      expect(medicalRecordsImagesService.execute).toHaveBeenNthCalledWith(1, mockMedicalRecordImage)
       expect(res.status).toHaveBeenNthCalledWith(1, 400)
       expect(res.json).toHaveBeenNthCalledWith(1, { message: error.message })
     })
@@ -42,7 +42,7 @@ describe('CreateMedicalRecordsImagesController', () => {
 
       await medicalRecordsImagesController.handle(req, res)
 
-      expect(medicalRecordsImagesService.execute).toHaveBeenNthCalledWith(1, req.body)
+      expect(medicalRecordsImagesService.execute).toHaveBeenNthCalledWith(1, mockMedicalRecordImage)
       expect(res.status).toHaveBeenNthCalledWith(1, 500)
       expect(res.json).toHaveBeenNthCalledWith(1, { error })
     })

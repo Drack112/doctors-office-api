@@ -18,5 +18,10 @@ export const environment = {
     user: process.env.MYSQL_USER ?? 'user',
     password: process.env.MYSQL_PASSWORD ?? 'password',
     database: process.env.MYSQL_DATABASE ?? 'some-db'
+  },
+  uploadImage: {
+    local: {
+      url: process.env.STORAGE_LOCAL_URL ?? 'some-url'
+    }
   }
 }

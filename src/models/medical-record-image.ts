@@ -1,11 +1,12 @@
 import { randomUUID } from 'node:crypto'
 
 import { MedicalRecordImageDTO } from '@/dtos'
+import { environment } from '@/main/config'
 
 export class MedicalRecordImageModel {
   id?: string
   medicalRecordId: string
-  medicalRecordUrl: string
+  filename: string
   created_at: Date
 
   constructor (medicalRecord: MedicalRecordImageDTO) {
@@ -13,7 +14,11 @@ export class MedicalRecordImageModel {
       this.id = randomUUID()
     }
     this.medicalRecordId = medicalRecord.medicalRecordId
-    this.medicalRecordUrl = medicalRecord.medicalRecordUrl
+    this.filename = this.generateImagePath(medicalRecord.filename)
     this.created_at = new Date()
+  }
+
+  public generateImagePath (filename: string): string {
+    return `${environment.uploadImage.local.url}/${filename}`
   }
 }
