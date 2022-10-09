@@ -22,6 +22,10 @@ export class createModulesTable1664235038742 implements MigrationInterface {
             type: 'varchar'
           },
           {
+            name: 'endpoint',
+            type: 'varchar'
+          },
+          {
             name: 'created_at',
             type: 'timestamp',
             default: 'now()'

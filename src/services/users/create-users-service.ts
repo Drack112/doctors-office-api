@@ -1,6 +1,6 @@
 import { randomUUID } from 'node:crypto'
 
-import { UserDTO, GenericObject } from '@/dtos'
+import { UserDTO, GenericObject, UserTypeEnum } from '@/dtos'
 import { RequestError } from '@/errors'
 import { AdminModel, DoctorModel, SecretaryModel, UserModel } from '@/models'
 import { BaseRepository, UsersRepository } from '@/infra/repositories'
@@ -23,12 +23,16 @@ export class CreateUsersService {
   }
 
   private userWithRandomPassword (params: UserDTO): UserModel {
-    const passwordWithoutHyphen = randomUUID().replace(/-/g, '')
-    const userWithRandomPassword = {
-      ...params,
-      password: passwordWithoutHyphen
+    const { userType } = params
+    const { doctor, secretary } = UserTypeEnum
+    let generateUser: UserDTO
+    if (userType === doctor || userType === secretary) {
+      const passwordWithoutHyphen = randomUUID().replace(/-/g, '')
+      generateUser = { ...params, password: passwordWithoutHyphen }
+    } else {
+      generateUser = params
     }
-    return new UserModel(userWithRandomPassword)
+    return new UserModel(generateUser ?? params)
   }
 
   private mountObject (userId: string, params: UserDTO): GenericObject {

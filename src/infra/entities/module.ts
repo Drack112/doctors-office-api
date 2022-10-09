@@ -9,4 +9,7 @@ export class ModuleEntity extends BaseModel {
 
   @Column()
   description!: string
+
+  @Column()
+  endpoint!: string
 }
