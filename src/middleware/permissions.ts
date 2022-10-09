@@ -14,12 +14,12 @@ export const httpVerbToPermissionActionMap = {
 
 export const accessProfilePermission = () => {
   return async (request: Request, response: Response, next: NextFunction) => {
-    const { method: httpVerb, originalUrl: endpoint, modulesIds } = request
-    const [, formattedEndpoint] = endpoint.split('/')
+    const { method: httpVerb, route, modulesIds } = request
+    const { path: fullEndpoint } = route
     const relatedAction = setRelatedAction(httpVerb)
     const user = await getUser(request.userId)
     const modules = await getModules(modulesIds)
-    const moduleExists = modules?.find(module => module.name === formattedEndpoint)
+    const moduleExists = modules?.find(module => module.endpoint === fullEndpoint)
     if (!moduleExists) return response.status(401).json({ message: 'Module not found.' })
     if (user) {
       const hasPermission = checkPermission(user.userProfile.profilePermissions, relatedAction, moduleExists)
