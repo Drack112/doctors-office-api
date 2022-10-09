@@ -4,7 +4,7 @@ import { mysqlSource } from '@/infra/mysql-connection'
 
 import { NextFunction, Request, Response } from 'express'
 
-export const httpVerbToPermissionActionMap = {
+const httpVerbToPermissionActionMap = {
   GET: 'read',
   POST: 'create',
   PUT: 'update',
@@ -14,10 +14,10 @@ export const httpVerbToPermissionActionMap = {
 
 export const accessProfilePermission = () => {
   return async (request: Request, response: Response, next: NextFunction) => {
-    const { method: httpVerb, route, modulesIds } = request
+    const { method: httpVerb, route, modulesIds, userId } = request
     const { path: fullEndpoint } = route
     const relatedAction = setRelatedAction(httpVerb)
-    const user = await getUser(request.userId)
+    const user = await getUser(userId)
     const modules = await getModules(modulesIds)
     const moduleExists = modules?.find(module => module.endpoint === fullEndpoint)
     if (!moduleExists) return response.status(401).json({ message: 'Module not found.' })
