@@ -1,3 +1,4 @@
+import { UserTypeEnum } from '@/dtos'
 import { RequestError } from '@/errors'
 import { UsersRepository } from '@/infra/repositories'
 import { CreateUsersService } from '@/services/users'
@@ -49,6 +50,24 @@ describe('CreateUsersService', () => {
 
       expect(usersRepository.create).toHaveBeenNthCalledWith(1, {
         ...userModel,
+        updated_at: null
+      })
+    })
+
+    it('should be able to create new user (secretary) successfully', async () => {
+      const mockSecretary = { ...mockUser, userType: UserTypeEnum.secretary }
+      const secretaryModel = {
+        id: 'any-id',
+        created_at: new Date('2022-09-01'),
+        updated_at: null,
+        ...mockSecretary
+      }
+      usersRepository.create = jest.fn().mockResolvedValue(secretaryModel)
+
+      await usersService.execute(mockSecretary)
+
+      expect(usersRepository.create).toHaveBeenNthCalledWith(1, {
+        ...secretaryModel,
         updated_at: null
       })
     })

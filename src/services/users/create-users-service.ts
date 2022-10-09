@@ -32,7 +32,7 @@ export class CreateUsersService {
     } else {
       generateUser = params
     }
-    return new UserModel(generateUser ?? params)
+    return new UserModel(generateUser)
   }
 
   private mountObject (userId: string, params: UserDTO): GenericObject {
