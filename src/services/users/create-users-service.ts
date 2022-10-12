@@ -6,9 +6,13 @@ import { AdminModel, DoctorModel, SecretaryModel, UserModel } from '@/models'
 import { BaseRepository, UsersRepository } from '@/infra/repositories'
 import { AdminEntity, DoctorEntity, SecretaryEntity } from '@/infra/entities'
 import { mysqlSource } from '@/infra/mysql-connection'
+import { SendMailService } from '@/services/send-mail'
 
 export class CreateUsersService {
-  constructor (private readonly usersRepository: UsersRepository) {}
+  constructor (
+    private readonly usersRepository: UsersRepository,
+    private readonly mailService: SendMailService
+  ) {}
 
   async execute (params: UserDTO): Promise<void> {
     const { email, userType } = params
@@ -17,12 +21,14 @@ export class CreateUsersService {
     const model = this.setRepository(userType)
     const baseRepository = this.setBaseRepository(model)
     const userToCreate = this.userWithRandomPassword(params)
-    const user = await this.usersRepository.create(userToCreate)
-    const objectToCreate = this.mountObject(user.id, params)
+    const user = new UserModel(userToCreate)
+    const userCreated = await this.usersRepository.create(user)
+    const objectToCreate = this.mountObject(userCreated.id, params)
     await baseRepository.create(objectToCreate)
+    await this.mailService.sendMail('new_access', userToCreate, 'Acesso criado no sistema Huron')
   }
 
-  private userWithRandomPassword (params: UserDTO): UserModel {
+  private userWithRandomPassword (params: UserDTO): UserDTO {
     const { userType } = params
     const { doctor, secretary } = UserTypeEnum
     let generateUser: UserDTO
@@ -32,7 +38,7 @@ export class CreateUsersService {
     } else {
       generateUser = params
     }
-    return new UserModel(generateUser)
+    return generateUser
   }
 
   private mountObject (userId: string, params: UserDTO): GenericObject {

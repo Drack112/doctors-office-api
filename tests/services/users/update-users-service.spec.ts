@@ -9,7 +9,7 @@ jest.mock('bcryptjs', () => ({
 }))
 
 jest.mock('node:crypto', () => ({
-  randomUUID: jest.fn().mockImplementation(() => 'any-id')
+  randomUUID: jest.fn().mockImplementation(() => 'anyhash')
 }))
 
 jest
@@ -29,11 +29,11 @@ describe('UpdateUsersService', () => {
     it('should be able to update a user successfully', async () => {
       usersRepository.findById = jest.fn().mockResolvedValue(userModel)
 
-      await usersService.execute('any-id', mockUser)
+      await usersService.execute('anyhash', mockUser)
 
       expect(usersRepository.update).toHaveBeenNthCalledWith(1, {
         ...userModel,
-        id: 'any-id',
+        id: 'anyhash',
         updated_at: new Date('2022-09-01T00:00:00.000Z')
       })
     })
@@ -41,7 +41,7 @@ describe('UpdateUsersService', () => {
     it('should not be able to update non-existing user', async () => {
       const error = new RequestError('Usuário não existe.')
 
-      const promise = usersService.execute('any-id', mockUser)
+      const promise = usersService.execute('anyhash', mockUser)
 
       await expect(promise).rejects.toThrow(error)
       expect(usersRepository.findById).toHaveBeenNthCalledWith(1, userModel.id)

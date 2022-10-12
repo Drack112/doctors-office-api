@@ -23,5 +23,14 @@ export const environment = {
     local: {
       url: process.env.STORAGE_LOCAL_URL ?? 'some-url'
     }
+  },
+  mail: {
+    local: {
+      host: process.env.MAIL_HOST ?? 'some-host',
+      type: process.env.MAIL_TYPE ?? 'some-auth',
+      port: process.env.MAIL_PORT ?? 25,
+      user: process.env.MAIL_USERNAME ?? 'some-user',
+      password: process.env.MAIL_PASSWORD ?? 'some-password'
+    }
   }
 }
