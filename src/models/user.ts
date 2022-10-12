@@ -14,8 +14,8 @@ export class UserModel extends BaseModel {
   speciality: string
   situation: string
 
-  constructor (user: UserDTO) {
-    super()
+  constructor (user: UserDTO, id?: string) {
+    super(user, id)
     this.name = user.name
     this.email = user.email
     this.cpf = user.cpf

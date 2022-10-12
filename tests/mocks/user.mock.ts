@@ -17,7 +17,7 @@ export const mockUser: UserDTO = {
 
 export const userModel: UserModel = {
   id: 'anyhash',
-  created_at: new Date('2022-09-01'),
+  created_at: new Date('2022-09-01T00:00:00.000Z'),
   updated_at: null,
   ...mockUser
 }
