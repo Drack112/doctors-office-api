@@ -43,7 +43,7 @@ describe('CreateUsersService', () => {
     beforeAll(() => {
       usersRepository.create = jest.fn()
       usersRepository.findByEmail = jest.fn()
-      mailService.sendMail = jest.fn()
+      mailService.execute = jest.fn()
     })
 
     it('should be able to create new user (admin) successfully', async () => {
@@ -55,7 +55,7 @@ describe('CreateUsersService', () => {
         ...userModel,
         updated_at: null
       })
-      expect(mailService.sendMail).toHaveBeenNthCalledWith(1, 'new_access', mockUser, 'Acesso criado no sistema Huron')
+      expect(mailService.execute).toHaveBeenNthCalledWith(1, 'new_access', mockUser, 'Acesso criado no sistema Huron')
     })
 
     it('should be able to create new user (secretary) successfully', async () => {
@@ -75,7 +75,7 @@ describe('CreateUsersService', () => {
         ...secretaryModel,
         updated_at: null
       })
-      expect(mailService.sendMail).toHaveBeenNthCalledWith(1, 'new_access', mockSecretary, 'Acesso criado no sistema Huron')
+      expect(mailService.execute).toHaveBeenNthCalledWith(1, 'new_access', mockSecretary, 'Acesso criado no sistema Huron')
     })
 
     it('should not be able to create new user (admin) with existing cpf/email', async () => {
@@ -94,7 +94,7 @@ describe('CreateUsersService', () => {
 
       expect(usersRepository.findByEmail).toHaveBeenNthCalledWith(1, userModel.email)
       expect(usersRepository.create).not.toHaveBeenCalled()
-      expect(mailService.sendMail).not.toHaveBeenCalled()
+      expect(mailService.execute).not.toHaveBeenCalled()
     })
   })
 })

@@ -25,7 +25,7 @@ export class CreateUsersService {
     const userCreated = await this.usersRepository.create(user)
     const objectToCreate = this.mountObject(userCreated.id, params)
     await baseRepository.create(objectToCreate)
-    await this.mailService.sendMail('new_access', userToCreate, 'Acesso criado no sistema Huron')
+    await this.mailService.execute('new_access', userToCreate, 'Acesso criado no sistema Huron')
   }
 
   private userWithRandomPassword (params: UserDTO): UserDTO {
