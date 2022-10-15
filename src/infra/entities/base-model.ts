@@ -4,9 +4,9 @@ export abstract class BaseModel {
   @PrimaryColumn()
   id!: string
 
-  @Column({ name: 'createdAt' })
+  @Column({ name: 'created_at' })
   createdAt!: Date
 
-  @Column({ nullable: true, name: 'updatedAt' })
+  @Column({ nullable: true, name: 'updated_at' })
   updatedAt!: Date
 }
