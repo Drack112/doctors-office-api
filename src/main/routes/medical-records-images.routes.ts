@@ -1,5 +1,5 @@
 import { CreateMedicalRecordsImagesControllerFactory } from '@/main/factories/controllers/medical-records-images'
-// import { accessProfilePermission, ensuredAuthenticated } from '@/middleware'
+import { accessProfilePermission, ensuredAuthenticated } from '@/middleware'
 import uploadConfig from '@/main/config/upload'
 
 import { Router } from 'express'
@@ -11,7 +11,7 @@ const createMedicalRecordsImagesControllerFactory = CreateMedicalRecordsImagesCo
 export default (router: Router): void => {
   router.post('/medical-records-images',
     upload.single('file'),
-    // ensuredAuthenticated(),
-    // accessProfilePermission(),
+    ensuredAuthenticated(),
+    accessProfilePermission(),
     async (req, res) => createMedicalRecordsImagesControllerFactory.handle(req, res))
 }

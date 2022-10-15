@@ -11,8 +11,8 @@ const getPatientsByIdController = GetPatientsByIdControllerFactory()
 
 export default (router: Router): void => {
   router.get('/patients', ensuredAuthenticated(), accessProfilePermission(), async (req, res) => getPatientsController.handle(req, res))
-  router.get('/patients/:id', async (req, res) => getPatientsByIdController.handle(req, res))
-  router.post('/patients', async (req, res) => createPatientsController.handle(req, res))
-  router.patch('/patients/:id', async (req, res) => updatePatientsController.handle(req, res))
-  router.delete('/patients/:id', async (req, res) => deletePatientsController.handle(req, res))
+  router.get('/patients/:id', ensuredAuthenticated(), accessProfilePermission(), async (req, res) => getPatientsByIdController.handle(req, res))
+  router.post('/patients', ensuredAuthenticated(), accessProfilePermission(), async (req, res) => createPatientsController.handle(req, res))
+  router.patch('/patients/:id', ensuredAuthenticated(), accessProfilePermission(), async (req, res) => updatePatientsController.handle(req, res))
+  router.delete('/patients/:id', ensuredAuthenticated(), accessProfilePermission(), async (req, res) => deletePatientsController.handle(req, res))
 }
