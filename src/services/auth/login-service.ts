@@ -1,5 +1,5 @@
-import { UsersRepository } from '@/infra/repositories'
-import { LoginDTO, LoginResponseDTO } from '@/dtos'
+import { AdminsRepository, UsersRepository } from '@/infra/repositories'
+import { LoginDTO, LoginResponseDTO, SituationStatusEnum } from '@/dtos'
 import { RequestError } from '@/errors'
 import { UserEntity } from '@/infra/entities'
 import { environment } from '@/main/config'
@@ -8,13 +8,25 @@ import { compare } from 'bcryptjs'
 import { sign } from 'jsonwebtoken'
 
 export class LoginService {
-  constructor (private readonly usersRepository: UsersRepository) {}
+  constructor (
+    private readonly usersRepository: UsersRepository,
+    private readonly adminsRepository: AdminsRepository
+  ) {}
 
   async execute (params: LoginDTO): Promise<LoginResponseDTO> {
     const { email, password } = params
     const user = await this.usersRepository.findByEmail(email)
     if (!user) throw new RequestError('Usuário/senha inválido.')
+    await this.checkAdminPermission(user)
     return await this.checkPassword(password, user)
+  }
+
+  private async checkAdminPermission (user: UserEntity): Promise<void> {
+    const { id } = user
+    const admin = await this.adminsRepository.findByUserId(id)
+    if (admin?.situation === SituationStatusEnum.disabled) {
+      throw new RequestError('Acesso bloqueado.')
+    }
   }
 
   private async checkPassword (password: string, user: UserEntity): Promise<LoginResponseDTO> {
