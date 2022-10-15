@@ -56,7 +56,7 @@ describe('CreateUsersService', () => {
         updatedAt: null,
         firstAccessAt: undefined
       })
-      expect(mailService.execute).toHaveBeenNthCalledWith(1, 'new_access', mockUser, 'Acesso criado no sistema Huron')
+      expect(mailService.execute).toHaveBeenNthCalledWith(1, 'RESET_PASSWORD', mockUser, 'Acesso criado no sistema Huron')
     })
 
     it('should be able to create new user (secretary) successfully', async () => {
@@ -76,7 +76,7 @@ describe('CreateUsersService', () => {
         ...secretaryModel,
         updatedAt: null
       })
-      expect(mailService.execute).toHaveBeenNthCalledWith(1, 'new_access', mockSecretary, 'Acesso criado no sistema Huron')
+      expect(mailService.execute).toHaveBeenNthCalledWith(1, 'RESET_PASSWORD', mockSecretary, 'Acesso criado no sistema Huron')
     })
 
     it('should not be able to create new user (admin) with existing cpf/email', async () => {

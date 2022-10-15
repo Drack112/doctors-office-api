@@ -1,6 +1,8 @@
 import 'dotenv/config'
 
-export const dir = process.env.NODE_ENV === 'dev' ? 'src' : 'dist'
+const nodeEnv = process.env.NODE_ENV
+export const dir = nodeEnv === 'dev' ? 'src' : 'dist'
+const imagesURL = nodeEnv === 'dev' ? 'http://localhost:3333/images' : 'https://link-prod.com/images'
 
 export const environment = {
   jwt: {
@@ -22,7 +24,8 @@ export const environment = {
   uploadImage: {
     local: {
       url: process.env.STORAGE_LOCAL_URL ?? 'some-url'
-    }
+    },
+    publicURL: imagesURL
   },
   mail: {
     local: {

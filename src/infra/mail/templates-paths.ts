@@ -1,5 +1,5 @@
 import { resolve } from 'node:path'
 
 export const templatesPaths = {
-  NEW_ACCESS: resolve(__dirname, 'views', 'new_access.hbs')
+  RESET_PASSWORD: resolve(__dirname, 'views/reset-password/index.hbs')
 }
