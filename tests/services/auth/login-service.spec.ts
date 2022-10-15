@@ -11,6 +11,10 @@ import jwt from 'jsonwebtoken'
 jest.mock('bcryptjs')
 jest.mock('jsonwebtoken')
 
+jest
+  .useFakeTimers('modern')
+  .setSystemTime(new Date('2022-09-01T00:00:00.000Z'))
+
 describe('LoginService', () => {
   const usersRepository = {} as UsersRepository
   const adminsRepository = {} as AdminsRepository
@@ -68,6 +72,23 @@ describe('LoginService', () => {
       await expect(promise).rejects.toThrow(error)
       expect(usersRepository.findByEmail).toHaveBeenNthCalledWith(1, userModel.email)
       expect(adminsRepository.findByUserId).toHaveBeenNthCalledWith(1, userModelDisabled.id)
+    })
+
+    it('should be able to generate access_token if and populate firstAccessAt field', async () => {
+      const userModelWithFirstAccessNull = { ...userModel, firstAccessAt: null }
+      usersRepository.findByEmail = jest.fn().mockResolvedValue(userModelWithFirstAccessNull)
+      adminsRepository.findByUserId = jest.fn().mockResolvedValue(userModelWithFirstAccessNull)
+      bcrypt.compare = jest.fn().mockResolvedValue(true)
+
+      await loginService.execute(mockLogin)
+
+      expect(usersRepository.findByEmail).toHaveBeenNthCalledWith(1, userModelWithFirstAccessNull.email)
+      expect(adminsRepository.findByUserId).toHaveBeenNthCalledWith(1, userModelWithFirstAccessNull.id)
+      expect(usersRepository.update).toHaveBeenNthCalledWith(1, {
+        ...userModelWithFirstAccessNull,
+        firstAccessAt: new Date('2022-09-01T00:00:00.000Z'),
+        updatedAt: new Date('2022-09-01T00:00:00.000Z')
+      })
     })
   })
 })
