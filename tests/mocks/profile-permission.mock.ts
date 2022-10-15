@@ -13,7 +13,7 @@ export const mockProfilePermission: ProfilePermissionDTO = {
 
 export const profilePermissionModel: ProfilePermissionModel = {
   id: 'any-id',
-  created_at: new Date('2022-10-01'),
-  updated_at: null,
+  createdAt: new Date('2022-10-01'),
+  updatedAt: null,
   ...mockProfilePermission
 }

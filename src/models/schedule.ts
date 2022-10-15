@@ -7,7 +7,7 @@ export class ScheduleModel {
   doctorId: string
   patientId: string
   doctorScheduleId: string
-  created_at: Date
+  createdAt: Date
   createdBy?: string
 
   constructor (schedule: SchedulesDTO, userId: string) {
@@ -18,6 +18,6 @@ export class ScheduleModel {
     this.patientId = schedule.patientId
     this.doctorScheduleId = schedule.doctorScheduleId
     this.createdBy = userId
-    this.created_at = new Date()
+    this.createdAt = new Date()
   }
 }

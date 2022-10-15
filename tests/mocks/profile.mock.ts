@@ -8,7 +8,7 @@ export const mockProfile: ProfileDTO = {
 
 export const profileModel: ProfileModel = {
   id: 'any-id',
-  created_at: new Date('2022-10-01'),
-  updated_at: null,
+  createdAt: new Date('2022-10-01'),
+  updatedAt: null,
   ...mockProfile
 }

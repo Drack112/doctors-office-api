@@ -13,7 +13,7 @@ export class DoctorModel extends BaseModel {
     this.cpf = doctor.cpf
     this.crm = doctor.crm
     this.speciality = doctor.speciality
-    this.created_at = new Date()
-    this.updated_at = null
+    this.createdAt = new Date()
+    this.updatedAt = null
   }
 }

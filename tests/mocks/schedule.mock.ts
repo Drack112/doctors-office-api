@@ -12,6 +12,6 @@ export const mockSchedule: SchedulesDTO = {
 
 export const scheduleModel: ScheduleModel = {
   id: 'any-id',
-  created_at: new Date('2022-09-01'),
+  createdAt: new Date('2022-09-01'),
   ...mockSchedule
 }

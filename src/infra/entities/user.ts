@@ -17,6 +17,9 @@ export class UserEntity extends BaseModel {
   @Column({ name: 'type' })
   userType!: string
 
+  @Column({ name: 'first_access_at' })
+  firstAccessAt?: Date
+
   @OneToOne(() => UserProfileEntity)
   @JoinColumn({
     name: 'id',

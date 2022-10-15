@@ -19,6 +19,7 @@ describe('LoginService', () => {
   describe('execute', () => {
     beforeAll(() => {
       usersRepository.findByEmail = jest.fn()
+      usersRepository.update = jest.fn()
       adminsRepository.findByUserId = jest.fn()
     })
 

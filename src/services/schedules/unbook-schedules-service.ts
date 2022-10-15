@@ -12,7 +12,7 @@ export class UnbookSchedulesService {
     const doctorSchedule = await this.doctorsSchedulesRepository.findById(scheduleId)
     if (!doctorSchedule) throw new RequestError('Data de consulta não existe.')
     doctorSchedule.status = StatusEnum.available
-    doctorSchedule.updated_at = new Date()
+    doctorSchedule.updatedAt = new Date()
     const schedule = await this.schedulesRepository.findScheduleByDoctorScheduleId(scheduleId)
     if (!schedule) throw new RequestError('Agendamento não existe.')
     await this.doctorsSchedulesRepository.update(doctorSchedule)

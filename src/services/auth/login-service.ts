@@ -18,6 +18,7 @@ export class LoginService {
     const user = await this.usersRepository.findByEmail(email)
     if (!user) throw new RequestError('Usuário/senha inválido.')
     await this.checkAdminPermission(user)
+    await this.setFirstAccessDate(user)
     return await this.checkPassword(password, user)
   }
 
@@ -27,6 +28,14 @@ export class LoginService {
     if (admin?.situation === SituationStatusEnum.disabled) {
       throw new RequestError('Acesso bloqueado.')
     }
+  }
+
+  private async setFirstAccessDate (user: UserEntity): Promise<void> {
+    if (user.firstAccessAt === null) {
+      user.firstAccessAt = new Date()
+      user.updatedAt = new Date()
+    }
+    await this.usersRepository.update(user)
   }
 
   private async checkPassword (password: string, user: UserEntity): Promise<LoginResponseDTO> {

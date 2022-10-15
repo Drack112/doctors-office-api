@@ -14,8 +14,8 @@ export class PatientModel {
   birthOfDate!: string
   responsibleName?: string
   responsibleCpf?: string
-  created_at: Date
-  updated_at: Date | null
+  createdAt: Date
+  updatedAt: Date | null
 
   constructor (patient: PatientDTO) {
     if (!this.id) {
@@ -31,7 +31,7 @@ export class PatientModel {
     this.birthOfDate = patient.birthOfDate
     this.responsibleName = patient.responsibleName
     this.responsibleCpf = patient.responsibleCpf
-    this.created_at = new Date()
-    this.updated_at = null
+    this.createdAt = new Date()
+    this.updatedAt = null
   }
 }

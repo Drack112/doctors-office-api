@@ -13,8 +13,8 @@ export class DoctorScheduleModel {
         date,
         time,
         status: StatusEnum.available,
-        created_at: new Date(),
-        updated_at: null
+        createdAt: new Date(),
+        updatedAt: null
       })
     }
     return schedulesToCreate

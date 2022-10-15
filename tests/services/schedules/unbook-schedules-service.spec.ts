@@ -34,7 +34,7 @@ describe('UnbookSchedulesService', () => {
       await unbookSchedulesService.execute(id)
 
       expect(doctorsSchedulesRepository.findById).toHaveBeenNthCalledWith(1, id)
-      expect(doctorsSchedulesRepository.update).toHaveBeenNthCalledWith(1, { status: StatusEnum.available, updated_at: new Date() })
+      expect(doctorsSchedulesRepository.update).toHaveBeenNthCalledWith(1, { status: StatusEnum.available, updatedAt: new Date() })
       expect(schedulesRepository.findScheduleByDoctorScheduleId).toHaveBeenNthCalledWith(1, id)
       expect(schedulesRepository.delete).toHaveBeenNthCalledWith(1, id)
     })

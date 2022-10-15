@@ -34,7 +34,8 @@ describe('UpdateUsersService', () => {
       expect(usersRepository.update).toHaveBeenNthCalledWith(1, {
         ...userModel,
         id: 'anyhash',
-        updated_at: new Date('2022-09-01T00:00:00.000Z')
+        updatedAt: new Date('2022-09-01T00:00:00.000Z'),
+        firstAccessAt: new Date('2022-09-01T00:00:00.000Z')
       })
     })
 

@@ -13,7 +13,7 @@ export class UpdatePatientsService {
     const patientToUpdate = {
       ...patient,
       id: patientExists.id,
-      updated_at: new Date()
+      updatedAt: new Date()
     }
     await this.patientsRepository.update(patientToUpdate)
   }

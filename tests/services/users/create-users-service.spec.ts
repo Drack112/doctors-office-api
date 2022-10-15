@@ -53,7 +53,8 @@ describe('CreateUsersService', () => {
 
       expect(usersRepository.create).toHaveBeenNthCalledWith(1, {
         ...userModel,
-        updated_at: null
+        updatedAt: null,
+        firstAccessAt: undefined
       })
       expect(mailService.execute).toHaveBeenNthCalledWith(1, 'new_access', mockUser, 'Acesso criado no sistema Huron')
     })
@@ -62,8 +63,8 @@ describe('CreateUsersService', () => {
       const mockSecretary = { ...mockUser, userType: UserTypeEnum.secretary, password: 'anyhash' }
       const secretaryModel = {
         id: 'anyhash',
-        created_at: new Date('2022-09-01'),
-        updated_at: null,
+        createdAt: new Date('2022-09-01'),
+        updatedAt: null,
         ...mockSecretary,
         password: 'any-hashed-password'
       }
@@ -73,7 +74,7 @@ describe('CreateUsersService', () => {
 
       expect(usersRepository.create).toHaveBeenNthCalledWith(1, {
         ...secretaryModel,
-        updated_at: null
+        updatedAt: null
       })
       expect(mailService.execute).toHaveBeenNthCalledWith(1, 'new_access', mockSecretary, 'Acesso criado no sistema Huron')
     })
@@ -82,8 +83,8 @@ describe('CreateUsersService', () => {
       const mockAdmin = { ...mockUser, userType: UserTypeEnum.admin }
       const adminModel = {
         id: 'any-id',
-        created_at: new Date('2022-09-01'),
-        updated_at: null,
+        createdAt: new Date('2022-09-01'),
+        updatedAt: null,
         ...mockAdmin
       }
       usersRepository.findByEmail = jest.fn().mockResolvedValue(adminModel)

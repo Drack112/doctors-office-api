@@ -9,7 +9,11 @@ export class UpdateUsersService {
   async execute (id: string, params: UserDTO): Promise<void> {
     const userExists = await this.usersRepository.findById(id)
     if (!userExists) throw new RequestError('Usuário não existe.')
-    const user = new UserModel({ ...params, created_at: userExists.created_at }, id)
+    const user = new UserModel({
+      ...params,
+      createdAt: userExists.createdAt,
+      firstAccessAt: userExists.firstAccessAt
+    }, id)
     await this.usersRepository.update(user)
   }
 }

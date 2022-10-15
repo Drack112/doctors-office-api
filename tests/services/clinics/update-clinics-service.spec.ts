@@ -26,7 +26,7 @@ describe('UpdateClinicsService', () => {
       expect(clinicsRepository.update).toHaveBeenNthCalledWith(1, {
         ...clinicModel,
         id: 'any-id',
-        updated_at: new Date('2022-09-01T00:00:00.000Z')
+        updatedAt: new Date('2022-09-01T00:00:00.000Z')
       })
     })
 

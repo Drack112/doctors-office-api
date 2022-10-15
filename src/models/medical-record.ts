@@ -7,7 +7,7 @@ export class MedicalRecordModel {
   description: string
   date: Date
   patientId: string
-  created_at: Date
+  createdAt: Date
 
   constructor (medicalRecord: MedicalRecordDTO) {
     if (!this.id) {
@@ -16,6 +16,6 @@ export class MedicalRecordModel {
     this.description = medicalRecord.description
     this.date = medicalRecord.date
     this.patientId = medicalRecord.patientId
-    this.created_at = new Date()
+    this.createdAt = new Date()
   }
 }

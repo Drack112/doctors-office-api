@@ -28,5 +28,6 @@ export type UserDTO = {
   situation: SituationStatusEnum
   crm: string
   speciality: string
-  created_at?: Date
+  createdAt?: Date
+  firstAccessAt?: Date
 }

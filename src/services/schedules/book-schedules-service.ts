@@ -22,7 +22,7 @@ export class BookSchedulesService {
     if (!scheduleDate) throw new RequestError('Data de consulta não existe.')
     if (scheduleDate.status === StatusEnum.unavailable) throw new RequestError('Horário não disponível.')
     scheduleDate.status = StatusEnum.unavailable
-    scheduleDate.updated_at = new Date()
+    scheduleDate.updatedAt = new Date()
     await this.doctorsSchedulesRepository.update(scheduleDate)
     const schedule = new ScheduleModel(params, sessionUserId)
     await this.schedulesRepository.create(schedule)

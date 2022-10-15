@@ -18,5 +18,5 @@ export class ScheduleEntity {
   createdBy!: string
 
   @Column()
-  created_at!: Date
+  createdAt!: Date
 }

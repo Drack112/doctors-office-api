@@ -20,8 +20,8 @@ export const mockDoctorSchedulesByDoctorId = [
       { date: '22/10/2022', time: '15:00' }
     ],
     status: StatusEnum.available,
-    created_at: new Date(),
-    updated_at: null
+    createdAt: new Date(),
+    updatedAt: null
   }
 ]
 

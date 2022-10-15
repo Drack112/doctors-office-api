@@ -10,8 +10,8 @@ export class ClinicModel {
   cep: string
   typeOfClinic?: string
   phone?: string
-  created_at: Date
-  updated_at: Date | null
+  createdAt: Date
+  updatedAt: Date | null
 
   constructor (clinic: ClinicDTO) {
     if (!this.id) {
@@ -23,7 +23,7 @@ export class ClinicModel {
     this.cep = clinic.cep
     this.typeOfClinic = clinic.typeOfClinic
     this.address = clinic.address
-    this.created_at = new Date()
-    this.updated_at = null
+    this.createdAt = new Date()
+    this.updatedAt = null
   }
 }

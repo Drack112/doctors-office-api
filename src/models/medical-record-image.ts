@@ -7,7 +7,7 @@ export class MedicalRecordImageModel {
   id?: string
   medicalRecordId: string
   filename: string
-  created_at: Date
+  createdAt: Date
 
   constructor (medicalRecord: MedicalRecordImageDTO) {
     if (!this.id) {
@@ -15,7 +15,7 @@ export class MedicalRecordImageModel {
     }
     this.medicalRecordId = medicalRecord.medicalRecordId
     this.filename = this.generateImagePath(medicalRecord.filename)
-    this.created_at = new Date()
+    this.createdAt = new Date()
   }
 
   public generateImagePath (filename: string): string {

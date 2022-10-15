@@ -13,7 +13,7 @@ export class UpdateClinicsService {
     const clinicToUpdate = {
       ...clinic,
       id: clinicExists.id,
-      updated_at: new Date()
+      updatedAt: new Date()
     }
     await this.clinicsRepository.update(clinicToUpdate)
   }

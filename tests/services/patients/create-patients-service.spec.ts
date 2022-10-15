@@ -27,7 +27,7 @@ describe('CreatePatientsService', () => {
 
       expect(patientsRepository.create).toHaveBeenNthCalledWith(1, {
         ...patientModel,
-        updated_at: null
+        updatedAt: null
       })
     })
 

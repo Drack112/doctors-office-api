@@ -14,7 +14,7 @@ export const mockDoctor: DoctorDTO = {
 
 export const doctorModel: DoctorModel = {
   id: 'any-id',
-  created_at: new Date('2022-09-01'),
-  updated_at: null,
+  createdAt: new Date('2022-09-01'),
+  updatedAt: null,
   ...mockDoctor
 }

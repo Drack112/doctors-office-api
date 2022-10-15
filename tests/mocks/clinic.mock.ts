@@ -13,7 +13,7 @@ export const mockClinic: ClinicDTO = {
 
 export const clinicModel: ClinicModel = {
   id: 'any-id',
-  created_at: new Date('2022-09-01'),
-  updated_at: null,
+  createdAt: new Date('2022-09-01'),
+  updatedAt: null,
   ...mockClinic
 }

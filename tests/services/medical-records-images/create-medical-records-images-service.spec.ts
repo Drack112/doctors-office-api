@@ -31,7 +31,7 @@ describe('CreateMedicalRecordsImagesService', () => {
 
       expect(medicalRecordsImagesRepository.create).toHaveBeenNthCalledWith(1, {
         ...medicalRecordImageModel,
-        created_at: new Date()
+        createdAt: new Date()
       })
     })
   })

@@ -15,5 +15,5 @@ export class MedicalRecordEntity {
   patientId!: string
 
   @Column()
-  created_at!: Date
+  createdAt!: Date
 }

@@ -40,6 +40,12 @@ export class createUsersTable1664130413346 implements MigrationInterface {
             type: 'timestamp',
             isNullable: true,
             default: null
+          },
+          {
+            name: 'first_access_at',
+            type: 'timestamp',
+            isNullable: true,
+            default: null
           }
         ]
       })

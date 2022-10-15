@@ -10,6 +10,6 @@ export const mockMedicalRecord: MedicalRecordDTO = {
 
 export const medicalRecordModel: MedicalRecordModel = {
   id: 'any-id',
-  created_at: new Date('2022-10-01'),
+  createdAt: new Date('2022-10-01'),
   ...mockMedicalRecord
 }

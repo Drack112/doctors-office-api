@@ -8,7 +8,7 @@ export const mockSecretary: SecretaryDTO = {
 
 export const secretaryModel: SecretaryModel = {
   id: 'any-id',
-  created_at: new Date('2022-09-01'),
-  updated_at: null,
+  createdAt: new Date('2022-09-01'),
+  updatedAt: null,
   ...mockSecretary
 }
