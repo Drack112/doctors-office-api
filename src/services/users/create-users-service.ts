@@ -16,16 +16,25 @@ export class CreateUsersService {
 
   async execute (params: UserDTO): Promise<void> {
     const { email, userType } = params
-    const userExists = await this.usersRepository.findByEmail(email)
-    if (userExists) throw new RequestError('Usuário já existe.')
+    await this.checkIfUserExists(email)
     const model = this.setRepository(userType)
     const baseRepository = this.setBaseRepository(model)
+    const { objectToCreate, userToCreate } = await this.createUser(params)
+    await baseRepository.create(objectToCreate)
+    await this.mailService.execute('RESET_PASSWORD', userToCreate, 'Acesso criado no sistema Huron')
+  }
+
+  private async createUser (params: UserDTO): Promise<GenericObject> {
     const userToCreate = this.userWithRandomPassword(params)
     const user = new UserModel(userToCreate)
     const userCreated = await this.usersRepository.create(user)
     const objectToCreate = this.mountObject(userCreated.id, params)
-    await baseRepository.create(objectToCreate)
-    await this.mailService.execute('RESET_PASSWORD', userToCreate, 'Acesso criado no sistema Huron')
+    return { userToCreate, objectToCreate }
+  }
+
+  private async checkIfUserExists (email: string): Promise<void> {
+    const userExists = await this.usersRepository.findByEmail(email)
+    if (userExists) throw new RequestError('Usuário já existe.')
   }
 
   private userWithRandomPassword (params: UserDTO): UserDTO {
