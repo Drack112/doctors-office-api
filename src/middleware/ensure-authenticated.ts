@@ -5,6 +5,7 @@ import { mysqlSource } from '@/infra/mysql-connection'
 
 import { NextFunction, Request, Response } from 'express'
 import { verify } from 'jsonwebtoken'
+import { UserTypeEnum } from '@/dtos'
 
 type Payload = { sub: string }
 
@@ -21,12 +22,17 @@ export const ensuredAuthenticated = () => {
       const user = await userRepository.findById(userId)
       if (user) {
         request.userId = userId
+        const userIsAdmin = checkIfUserIsAdmin(user.userType)
+        if (userIsAdmin) return next()
         request.modulesIds = user.userProfile.profilePermissions.map(permissions => permissions.moduleId)
       }
       return next()
     } catch (err) {
-      console.log('err', err)
       return response.status(401).end()
     }
   }
+}
+
+export function checkIfUserIsAdmin (userType: string): boolean {
+  return userType === UserTypeEnum.admin
 }
