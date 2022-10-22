@@ -3,25 +3,14 @@ import { UpdatePatientsController } from '@/main/controllers/patients'
 import { UpdatePatientsService } from '@/services/patients'
 import { mockPatient } from '@/tests/mocks'
 
-import { Request, Response } from 'express'
-import { mock } from 'jest-mock-extended'
-
 describe('UpdatePatientsController', () => {
   const patientsService = {} as UpdatePatientsService
   const patientsController = new UpdatePatientsController(patientsService)
-  let req: Request
-  let res: Response
+  const req: any = { body: jest.fn(), params: jest.fn() }
+  const res: any = { sendStatus: jest.fn().mockReturnThis(), status: jest.fn().mockReturnThis(), json: jest.fn().mockReturnThis() }
 
   beforeAll(() => {
-    req = mock()
-    res = mock()
-
-    res.status = jest.fn().mockReturnThis()
-    res.sendStatus = jest.fn().mockReturnThis()
-  })
-
-  beforeEach(() => {
-    req.body = { ...mockPatient }
+    req.body = mockPatient
     req.params = { id: 'any-id' }
   })
 

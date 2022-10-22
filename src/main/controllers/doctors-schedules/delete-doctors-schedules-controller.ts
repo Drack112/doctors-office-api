@@ -4,11 +4,11 @@ import { DeleteDoctorsSchedulesService } from '@/services/doctors-schedules'
 import { Request, Response } from 'express'
 
 export class DeleteDoctorsSchedulesController {
-  constructor (private readonly deleteDoctorsSchedulesService: DeleteDoctorsSchedulesService) {}
+  constructor (private readonly service: DeleteDoctorsSchedulesService) {}
 
   async handle (req: Request, res: Response): Promise<void> {
     try {
-      await this.deleteDoctorsSchedulesService.execute(req.params.id)
+      await this.service.execute(req.params.id)
       res.sendStatus(200)
     } catch (error) {
       if (error instanceof RequestError) {

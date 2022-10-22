@@ -4,8 +4,8 @@ import { GetUsersByIdService } from '@/services/users'
 import { userModel } from '@/tests/mocks'
 
 describe('GetUsersByIdController', () => {
-  const usersByIdService = {} as GetUsersByIdService
-  const usersByIdController = new GetUsersByIdController(usersByIdService)
+  const service = {} as GetUsersByIdService
+  const controller = new GetUsersByIdController(service)
   const req: any = { params: jest.fn() }
   const res: any = { status: jest.fn().mockReturnThis(), sendStatus: jest.fn().mockReturnThis(), json: jest.fn().mockReturnThis() }
 
@@ -15,33 +15,33 @@ describe('GetUsersByIdController', () => {
 
   describe('handle', () => {
     it('should be able to get a user', async () => {
-      usersByIdService.execute = jest.fn().mockResolvedValue([userModel])
+      service.execute = jest.fn().mockResolvedValue([userModel])
 
-      await usersByIdController.handle(req, res)
+      await controller.handle(req, res)
 
-      expect(usersByIdService.execute).toHaveBeenCalledTimes(1)
+      expect(service.execute).toHaveBeenCalledTimes(1)
       expect(res.status).toHaveBeenNthCalledWith(1, 200)
       expect(res.json).toHaveBeenNthCalledWith(1, [userModel])
     })
 
     it('should not be able to get a user due some request trouble', async () => {
       const error = new RequestError('some-error')
-      usersByIdService.execute = jest.fn().mockRejectedValue(error)
+      service.execute = jest.fn().mockRejectedValue(error)
 
-      await usersByIdController.handle(req, res)
+      await controller.handle(req, res)
 
-      expect(usersByIdService.execute).toHaveBeenCalledTimes(1)
+      expect(service.execute).toHaveBeenCalledTimes(1)
       expect(res.status).toHaveBeenNthCalledWith(1, 400)
       expect(res.json).toHaveBeenNthCalledWith(1, { message: error.message })
     })
 
     it('should not be able to get a user due server error', async () => {
       const error = new Error('some-error')
-      usersByIdService.execute = jest.fn().mockRejectedValue(error)
+      service.execute = jest.fn().mockRejectedValue(error)
 
-      await usersByIdController.handle(req, res)
+      await controller.handle(req, res)
 
-      expect(usersByIdService.execute).toHaveBeenCalledTimes(1)
+      expect(service.execute).toHaveBeenCalledTimes(1)
       expect(res.status).toHaveBeenNthCalledWith(1, 500)
       expect(res.json).toHaveBeenNthCalledWith(1, { error })
     })

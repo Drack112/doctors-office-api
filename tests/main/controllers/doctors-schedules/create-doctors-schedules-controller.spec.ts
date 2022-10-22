@@ -11,7 +11,7 @@ describe('CreateDoctorSchedulesController', () => {
   const res: any = { sendStatus: jest.fn().mockReturnThis(), status: jest.fn().mockReturnThis(), json: jest.fn().mockReturnThis() }
 
   beforeAll(() => {
-    req.body = { ...mockDoctor }
+    req.body = mockDoctor
     req.params = { id: 'any-id' }
   })
 

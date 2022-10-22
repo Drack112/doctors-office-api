@@ -5,7 +5,7 @@ import { userModel } from '@/tests/mocks'
 
 describe('GetUsersService', () => {
   const usersRepository = {} as UsersRepository
-  const usersService = new GetUsersService(usersRepository)
+  const service = new GetUsersService(usersRepository)
 
   describe('execute', () => {
     beforeEach(() => {
@@ -13,7 +13,7 @@ describe('GetUsersService', () => {
     })
 
     it('should be able to get a list of users', async () => {
-      await usersService.execute()
+      await service.execute()
 
       expect(usersRepository.get).toHaveBeenCalledTimes(1)
     })

@@ -18,7 +18,7 @@ describe('BookSchedulesService', () => {
   const patientsRepository = {} as PatientsRepository
   const doctorsRepository = {} as DoctorsRepository
   const doctorsSchedulesRepository = {} as DoctorsSchedulesRepository
-  const schedulesService = new BookSchedulesService(schedulesRepository, doctorsSchedulesRepository, patientsRepository, doctorsRepository)
+  const service = new BookSchedulesService(schedulesRepository, doctorsSchedulesRepository, patientsRepository, doctorsRepository)
 
   describe('execute', () => {
     beforeAll(() => {
@@ -36,7 +36,7 @@ describe('BookSchedulesService', () => {
       doctorsRepository.findById = jest.fn().mockResolvedValue(doctorModel)
       schedulesRepository.findById = jest.fn().mockResolvedValue(scheduleModel)
 
-      await schedulesService.execute(mockSchedule, sessionUserId)
+      await service.execute(mockSchedule, sessionUserId)
 
       expect(schedulesRepository.create).toHaveBeenNthCalledWith(1, { ...scheduleModel, createdBy: sessionUserId })
     })
@@ -45,7 +45,7 @@ describe('BookSchedulesService', () => {
       patientsRepository.findById = jest.fn()
       const error = new RequestError('Paciente não existe.')
 
-      const promise = schedulesService.execute(mockSchedule, sessionUserId)
+      const promise = service.execute(mockSchedule, sessionUserId)
 
       await expect(promise).rejects.toThrow(error)
       expect(schedulesRepository.create).not.toHaveBeenCalled()
@@ -56,7 +56,7 @@ describe('BookSchedulesService', () => {
       doctorsRepository.findById = jest.fn()
       const error = new RequestError('Médico não existe.')
 
-      const promise = schedulesService.execute(mockSchedule, sessionUserId)
+      const promise = service.execute(mockSchedule, sessionUserId)
 
       await expect(promise).rejects.toThrow(error)
       expect(schedulesRepository.create).not.toHaveBeenCalled()
@@ -68,7 +68,7 @@ describe('BookSchedulesService', () => {
       doctorsSchedulesRepository.findById = jest.fn()
       const error = new RequestError('Data de consulta não existe.')
 
-      const promise = schedulesService.execute(mockSchedule, sessionUserId)
+      const promise = service.execute(mockSchedule, sessionUserId)
 
       await expect(promise).rejects.toThrow(error)
       expect(schedulesRepository.create).not.toHaveBeenCalled()
@@ -82,7 +82,7 @@ describe('BookSchedulesService', () => {
       schedulesRepository.findById = jest.fn().mockResolvedValue(scheduleModel)
       const error = new RequestError('Horário não disponível.')
 
-      const promise = schedulesService.execute(mockSchedule, sessionUserId)
+      const promise = service.execute(mockSchedule, sessionUserId)
 
       await expect(promise).rejects.toThrow(error)
       expect(schedulesRepository.create).not.toHaveBeenCalled()

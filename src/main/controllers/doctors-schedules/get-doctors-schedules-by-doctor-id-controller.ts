@@ -4,13 +4,13 @@ import { GetDoctorsSchedulesByDoctorIdService } from '@/services/doctors-schedul
 import { Request, Response } from 'express'
 
 export class GetDoctorsSchedulesByDoctorIdController {
-  constructor (private readonly getDoctorsSchedulesByDoctorIdService: GetDoctorsSchedulesByDoctorIdService) {}
+  constructor (private readonly service: GetDoctorsSchedulesByDoctorIdService) {}
 
   async handle (req: Request, res: Response): Promise<void> {
     try {
       const { userId: sessionUserId } = req
       const { doctorId } = req.params
-      const schedules = await this.getDoctorsSchedulesByDoctorIdService.execute(sessionUserId, doctorId)
+      const schedules = await this.service.execute(sessionUserId, doctorId)
       res.status(200).json(schedules)
     } catch (error) {
       if (error instanceof RequestError) {

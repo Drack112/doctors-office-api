@@ -13,7 +13,7 @@ jest
 
 describe('CreateProfilesService', () => {
   const profilesRepository = {} as ProfilesRepository
-  const profilesService = new CreateProfilesService(profilesRepository)
+  const service = new CreateProfilesService(profilesRepository)
 
   describe('execute', () => {
     beforeAll(() => {
@@ -21,7 +21,7 @@ describe('CreateProfilesService', () => {
     })
 
     it('should be able to create new profile successfully', async () => {
-      await profilesService.execute(mockProfile)
+      await service.execute(mockProfile)
 
       expect(profilesRepository.create).toHaveBeenNthCalledWith(1, profileModel)
     })

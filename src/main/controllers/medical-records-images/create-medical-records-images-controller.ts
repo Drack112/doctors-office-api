@@ -4,13 +4,13 @@ import { CreateMedicalRecordsImagesService } from '@/services/medical-records-im
 import { Request, Response } from 'express'
 
 export class CreateMedicalRecordsImagesController {
-  constructor (private readonly createMedicalRecordsImagesService: CreateMedicalRecordsImagesService) {}
+  constructor (private readonly service: CreateMedicalRecordsImagesService) {}
 
   async handle (req: Request, res: Response): Promise<void> {
     try {
       const { medicalRecordId } = req.body
       const { filename } = req.file!
-      await this.createMedicalRecordsImagesService.execute({
+      await this.service.execute({
         medicalRecordId,
         filename
       })

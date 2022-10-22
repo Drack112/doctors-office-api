@@ -16,7 +16,7 @@ jest
 describe('UnbookSchedulesService', () => {
   const schedulesRepository = {} as SchedulesRepository
   const doctorsSchedulesRepository = {} as DoctorsSchedulesRepository
-  const unbookSchedulesService = new UnbookSchedulesService(schedulesRepository, doctorsSchedulesRepository)
+  const service = new UnbookSchedulesService(schedulesRepository, doctorsSchedulesRepository)
   const id = 'any-id'
 
   describe('execute', () => {
@@ -31,7 +31,7 @@ describe('UnbookSchedulesService', () => {
       doctorsSchedulesRepository.findById = jest.fn().mockResolvedValue(doctorScheduleModel)
       schedulesRepository.findScheduleByDoctorScheduleId = jest.fn().mockResolvedValue(scheduleModel)
 
-      await unbookSchedulesService.execute(id)
+      await service.execute(id)
 
       expect(doctorsSchedulesRepository.findById).toHaveBeenNthCalledWith(1, id)
       expect(doctorsSchedulesRepository.update).toHaveBeenNthCalledWith(1, { status: StatusEnum.available, updatedAt: new Date() })
@@ -43,7 +43,7 @@ describe('UnbookSchedulesService', () => {
       doctorsSchedulesRepository.findById = jest.fn()
       const error = new RequestError('Data de consulta não existe.')
 
-      const promise = unbookSchedulesService.execute(id)
+      const promise = service.execute(id)
 
       await expect(promise).rejects.toThrow(error)
       expect(doctorsSchedulesRepository.findById).toHaveBeenNthCalledWith(1, id)
@@ -57,7 +57,7 @@ describe('UnbookSchedulesService', () => {
       schedulesRepository.findScheduleByDoctorScheduleId = jest.fn()
       const error = new RequestError('Agendamento não existe.')
 
-      const promise = unbookSchedulesService.execute(id)
+      const promise = service.execute(id)
 
       await expect(promise).rejects.toThrow(error)
       expect(doctorsSchedulesRepository.findById).toHaveBeenNthCalledWith(1, id)

@@ -4,11 +4,11 @@ import { UnbookSchedulesService } from '@/services/schedules'
 import { Request, Response } from 'express'
 
 export class UnbookSchedulesController {
-  constructor (private readonly unbookSchedulesService: UnbookSchedulesService) {}
+  constructor (private readonly service: UnbookSchedulesService) {}
 
   async handle (req: Request, res: Response): Promise<void> {
     try {
-      await this.unbookSchedulesService.execute(req.params.scheduleId)
+      await this.service.execute(req.params.scheduleId)
       res.sendStatus(200)
     } catch (error) {
       if (error instanceof RequestError) {

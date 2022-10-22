@@ -13,7 +13,7 @@ jest
 
 describe('CreateProfilesPermissionsService', () => {
   const profilesPermissionsRepository = {} as ProfilesPermissionsRepository
-  const profilesPermissionsService = new CreateProfilesPermissionsService(profilesPermissionsRepository)
+  const service = new CreateProfilesPermissionsService(profilesPermissionsRepository)
 
   describe('execute', () => {
     beforeAll(() => {
@@ -21,7 +21,7 @@ describe('CreateProfilesPermissionsService', () => {
     })
 
     it('should be able to create new profile-permission successfully', async () => {
-      await profilesPermissionsService.execute(mockProfilePermission)
+      await service.execute(mockProfilePermission)
 
       expect(profilesPermissionsRepository.create).toHaveBeenNthCalledWith(1, profilePermissionModel)
     })

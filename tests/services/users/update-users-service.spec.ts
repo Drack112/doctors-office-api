@@ -18,7 +18,7 @@ jest
 
 describe('UpdateUsersService', () => {
   const usersRepository = {} as UsersRepository
-  const usersService = new UpdateUsersService(usersRepository)
+  const service = new UpdateUsersService(usersRepository)
 
   describe('execute', () => {
     beforeEach(() => {
@@ -29,7 +29,7 @@ describe('UpdateUsersService', () => {
     it('should be able to update a user successfully', async () => {
       usersRepository.findById = jest.fn().mockResolvedValue(userModel)
 
-      await usersService.execute('anyhash', mockUser)
+      await service.execute('anyhash', mockUser)
 
       expect(usersRepository.update).toHaveBeenNthCalledWith(1, {
         ...userModel,
@@ -42,7 +42,7 @@ describe('UpdateUsersService', () => {
     it('should not be able to update non-existing user', async () => {
       const error = new RequestError('Usuário não existe.')
 
-      const promise = usersService.execute('anyhash', mockUser)
+      const promise = service.execute('anyhash', mockUser)
 
       await expect(promise).rejects.toThrow(error)
       expect(usersRepository.findById).toHaveBeenNthCalledWith(1, userModel.id)

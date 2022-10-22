@@ -37,7 +37,7 @@ jest
 describe('CreateUsersService', () => {
   const usersRepository = {} as UsersRepository
   const mailService = {} as SendMailService
-  const usersService = new CreateUsersService(usersRepository, mailService)
+  const service = new CreateUsersService(usersRepository, mailService)
 
   describe('execute', () => {
     beforeAll(() => {
@@ -49,7 +49,7 @@ describe('CreateUsersService', () => {
     it('should be able to create new user (admin) successfully', async () => {
       usersRepository.create = jest.fn().mockResolvedValue(userModel)
 
-      await usersService.execute(mockUser)
+      await service.execute(mockUser)
 
       expect(usersRepository.create).toHaveBeenNthCalledWith(1, {
         ...userModel,
@@ -70,7 +70,7 @@ describe('CreateUsersService', () => {
       }
       usersRepository.create = jest.fn().mockResolvedValue(secretaryModel)
 
-      await usersService.execute(mockSecretary)
+      await service.execute(mockSecretary)
 
       expect(usersRepository.create).toHaveBeenNthCalledWith(1, {
         ...secretaryModel,
@@ -89,7 +89,7 @@ describe('CreateUsersService', () => {
       }
       usersRepository.findByEmail = jest.fn().mockResolvedValue(adminModel)
       const error = new RequestError('Usuário já existe.')
-      const promise = usersService.execute(mockAdmin)
+      const promise = service.execute(mockAdmin)
 
       await expect(promise).rejects.toThrow(error)
 

@@ -4,11 +4,11 @@ import { CreateMedicalRecordsService } from '@/services/medical-records'
 import { Request, Response } from 'express'
 
 export class CreateMedicalRecordsController {
-  constructor (private readonly createMedicalRecordsService: CreateMedicalRecordsService) {}
+  constructor (private readonly service: CreateMedicalRecordsService) {}
 
   async handle (req: Request, res: Response): Promise<void> {
     try {
-      await this.createMedicalRecordsService.execute(req.body)
+      await this.service.execute(req.body)
       res.sendStatus(201)
     } catch (error) {
       if (error instanceof RequestError) {

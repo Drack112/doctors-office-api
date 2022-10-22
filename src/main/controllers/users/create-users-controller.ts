@@ -4,11 +4,11 @@ import { CreateUsersService } from '@/services/users'
 import { Request, Response } from 'express'
 
 export class CreateUsersController {
-  constructor (private readonly createUsersService: CreateUsersService) {}
+  constructor (private readonly service: CreateUsersService) {}
 
   async handle (req: Request, res: Response): Promise<void> {
     try {
-      await this.createUsersService.execute(req.body)
+      await this.service.execute(req.body)
       res.sendStatus(201)
     } catch (error) {
       if (error instanceof RequestError) {

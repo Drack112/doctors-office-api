@@ -4,11 +4,11 @@ import { LoginService } from '@/services/auth'
 import { Request, Response } from 'express'
 
 export class LoginController {
-  constructor (private readonly loginService: LoginService) {}
+  constructor (private readonly service: LoginService) {}
 
   async handle (req: Request, res: Response): Promise<void> {
     try {
-      const { access_token, user } = await this.loginService.execute(req.body)
+      const { access_token, user } = await this.service.execute(req.body)
       res.status(200).json({ access_token, user })
     } catch (error) {
       if (error instanceof RequestError) {

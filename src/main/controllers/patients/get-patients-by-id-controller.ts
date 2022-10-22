@@ -4,11 +4,11 @@ import { GetPatientsByIdService } from '@/services/patients'
 import { Request, Response } from 'express'
 
 export class GetPatientsByIdController {
-  constructor (private readonly getPatientsByIdService: GetPatientsByIdService) {}
+  constructor (private readonly service: GetPatientsByIdService) {}
 
   async handle (req: Request, res: Response): Promise<void> {
     try {
-      const patient = await this.getPatientsByIdService.execute(req.params.id)
+      const patient = await this.service.execute(req.params.id)
       res.status(200).json(patient)
     } catch (error) {
       if (error instanceof RequestError) {

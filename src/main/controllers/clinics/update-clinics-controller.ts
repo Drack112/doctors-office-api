@@ -4,11 +4,11 @@ import { UpdateClinicsService } from '@/services/clinics'
 import { Request, Response } from 'express'
 
 export class UpdateClinicsController {
-  constructor (private readonly updateClinicsService: UpdateClinicsService) {}
+  constructor (private readonly service: UpdateClinicsService) {}
 
   async handle (req: Request, res: Response): Promise<void> {
     try {
-      await this.updateClinicsService.execute(req.params.id, req.body)
+      await this.service.execute(req.params.id, req.body)
       res.sendStatus(200)
     } catch (error) {
       if (error instanceof RequestError) {

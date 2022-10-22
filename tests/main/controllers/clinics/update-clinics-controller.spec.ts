@@ -3,56 +3,45 @@ import { UpdateClinicsController } from '@/main/controllers/clinics'
 import { UpdateClinicsService } from '@/services/clinics'
 import { mockClinic } from '@/tests/mocks'
 
-import { Request, Response } from 'express'
-import { mock } from 'jest-mock-extended'
-
 describe('UpdateClinicsController', () => {
-  const clinicsService = {} as UpdateClinicsService
-  const clinicsController = new UpdateClinicsController(clinicsService)
-  let req: Request
-  let res: Response
+  const service = {} as UpdateClinicsService
+  const controller = new UpdateClinicsController(service)
+  const req: any = { body: jest.fn(), params: jest.fn() }
+  const res: any = { status: jest.fn().mockReturnThis(), sendStatus: jest.fn().mockReturnThis(), json: jest.fn().mockReturnThis() }
 
   beforeAll(() => {
-    req = mock()
-    res = mock()
-
-    res.status = jest.fn().mockReturnThis()
-    res.sendStatus = jest.fn().mockReturnThis()
-  })
-
-  beforeEach(() => {
-    req.body = { ...mockClinic }
+    req.body = mockClinic
     req.params = { id: 'any-id' }
   })
 
   describe('handle', () => {
     it('should be able to update new clinic', async () => {
-      clinicsService.execute = jest.fn()
+      service.execute = jest.fn()
 
-      await clinicsController.handle(req, res)
+      await controller.handle(req, res)
 
-      expect(clinicsService.execute).toHaveBeenNthCalledWith(1, req.params.id, req.body)
+      expect(service.execute).toHaveBeenNthCalledWith(1, req.params.id, req.body)
       expect(res.sendStatus).toHaveBeenNthCalledWith(1, 200)
     })
 
     it('should not be able to update new clinic', async () => {
       const error = new RequestError('some-error')
-      clinicsService.execute = jest.fn().mockRejectedValue(error)
+      service.execute = jest.fn().mockRejectedValue(error)
 
-      await clinicsController.handle(req, res)
+      await controller.handle(req, res)
 
-      expect(clinicsService.execute).toHaveBeenNthCalledWith(1, req.params.id, req.body)
+      expect(service.execute).toHaveBeenNthCalledWith(1, req.params.id, req.body)
       expect(res.status).toHaveBeenNthCalledWith(1, 404)
       expect(res.json).toHaveBeenNthCalledWith(1, { message: error.message })
     })
 
     it('should not be able to update a new clinic and must return some server error ', async () => {
       const error = new Error('some-error')
-      clinicsService.execute = jest.fn().mockRejectedValue(error)
+      service.execute = jest.fn().mockRejectedValue(error)
 
-      await clinicsController.handle(req, res)
+      await controller.handle(req, res)
 
-      expect(clinicsService.execute).toHaveBeenNthCalledWith(1, req.params.id, req.body)
+      expect(service.execute).toHaveBeenNthCalledWith(1, req.params.id, req.body)
       expect(res.status).toHaveBeenNthCalledWith(1, 500)
       expect(res.json).toHaveBeenNthCalledWith(1, { error })
     })
