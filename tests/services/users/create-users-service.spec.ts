@@ -56,7 +56,7 @@ describe('CreateUsersService', () => {
         updatedAt: null,
         firstAccessAt: undefined
       })
-      expect(mailService.execute).toHaveBeenNthCalledWith(1, 'RESET_PASSWORD', mockUser, 'Acesso criado no sistema Huron')
+      expect(mailService.execute).not.toHaveBeenCalled()
     })
 
     it('should be able to create new user (secretary) successfully', async () => {

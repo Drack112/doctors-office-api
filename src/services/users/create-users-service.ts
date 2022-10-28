@@ -21,7 +21,13 @@ export class CreateUsersService {
     const baseRepository = this.setBaseRepository(model)
     const { objectToCreate, userToCreate } = await this.createUser(params)
     await baseRepository.create(objectToCreate)
-    await this.mailService.execute('RESET_PASSWORD', userToCreate, 'Acesso criado no sistema Huron')
+    await this.sendMail(userType, userToCreate)
+  }
+
+  private async sendMail (userType: string, data: any): Promise<void> {
+    if (userType !== UserTypeEnum.admin) {
+      await this.mailService.execute('RESET_PASSWORD', data, 'Acesso criado no sistema Huron')
+    }
   }
 
   private async createUser (params: UserDTO): Promise<GenericObject> {
@@ -39,13 +45,11 @@ export class CreateUsersService {
 
   private userWithRandomPassword (params: UserDTO): UserDTO {
     const { userType } = params
-    const { doctor, secretary } = UserTypeEnum
-    let generateUser: UserDTO
-    if (userType === doctor || userType === secretary) {
+    const { admin } = UserTypeEnum
+    let generateUser: UserDTO = params
+    if (userType !== admin) {
       const passwordWithoutHyphen = randomUUID().replace(/-/g, '')
       generateUser = { ...params, password: passwordWithoutHyphen }
-    } else {
-      generateUser = params
     }
     return generateUser
   }
