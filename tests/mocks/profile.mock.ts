@@ -12,3 +12,7 @@ export const profileModel: ProfileModel = {
   updatedAt: null,
   ...mockProfile
 }
+
+export const profilesResponse: ProfileModel[] = [
+  { ...profileModel }
+]
