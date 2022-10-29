@@ -1,6 +1,6 @@
 export type ProfilePermissionDTO = {
   moduleId: string
-  userProfileId: string
+  profileId: string
   create: boolean
   read: boolean
   update: boolean

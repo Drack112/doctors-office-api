@@ -1,4 +1,5 @@
 import { SituationStatusEnum } from '@/dtos/admin-dto'
+import { ProfileTypeEnum } from '@/dtos/profile-dto'
 import { AdminEntity, SecretaryEntity } from '@/infra/entities'
 
 import { Repository } from 'typeorm'
@@ -13,21 +14,16 @@ export type MountObject = {
   secretary: Repository<SecretaryEntity>
 }
 
-export enum UserTypeEnum {
-  admin = 'admin',
-  secretary = 'secretary',
-  doctor = 'doctor'
-}
-
 export type UserDTO = {
   name: string
   email: string
   password: string
   cpf: string
-  userType: UserTypeEnum
+  userType: ProfileTypeEnum
   situation: SituationStatusEnum
   crm: string
   speciality: string
+  profileId: string
   createdAt?: Date
   firstAccessAt?: Date
 }

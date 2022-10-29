@@ -13,10 +13,10 @@ export class addModuleIdUserProfileIdFksToProfilesPermissions1665886756827 imple
     )
     await queryRunner.createForeignKey('profiles_permissions',
       new TableForeignKey({
-        name: 'profiles_permissions_users_profiles',
-        columnNames: ['user_profile_id'],
+        name: 'profiles_permissions_profiles',
+        columnNames: ['profile_id'],
         referencedColumnNames: ['id'],
-        referencedTableName: 'users_profiles',
+        referencedTableName: 'profiles',
         onDelete: 'CASCADE'
       })
     )
@@ -24,6 +24,6 @@ export class addModuleIdUserProfileIdFksToProfilesPermissions1665886756827 imple
 
   public async down (queryRunner: QueryRunner): Promise<void> {
     await queryRunner.dropForeignKey('profiles_permissions', 'profiles_permissions_modules')
-    await queryRunner.dropForeignKey('profiles_permissions', 'profiles_permissions_users_profiles')
+    await queryRunner.dropForeignKey('profiles_permissions', 'profiles_permissions_profiles')
   }
 }

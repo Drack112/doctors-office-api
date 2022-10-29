@@ -15,6 +15,6 @@ export class UserProfileEntity extends BaseModel {
   @OneToOne(() => UserEntity)
   user!: UserEntity
 
-  @OneToMany(() => ProfilePermissionEntity, (profilePermissions) => profilePermissions.userProfile)
+  @OneToMany(() => ProfilePermissionEntity, (profilePermissions) => profilePermissions.profile)
   profilePermissions!: ProfilePermissionEntity[]
 }

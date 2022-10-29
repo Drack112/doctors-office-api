@@ -13,6 +13,7 @@ export class UserModel extends BaseModel {
   crm: string
   speciality: string
   situation: string
+  profileId: string
   firstAccessAt?: Date | null
 
   constructor (user: UserDTO, id?: string) {
@@ -24,6 +25,7 @@ export class UserModel extends BaseModel {
     this.speciality = user.speciality
     this.situation = user.situation
     this.userType = user.userType
+    this.profileId = user.profileId
     this.firstAccessAt = user.firstAccessAt
     this.password = this.password = hashSync(user.password, environment.encrypt.salt)
   }

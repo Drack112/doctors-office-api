@@ -1,6 +1,6 @@
 import { randomUUID } from 'node:crypto'
 
-import { UserDTO, GenericObject, UserTypeEnum } from '@/dtos'
+import { UserDTO, GenericObject, ProfileTypeEnum } from '@/dtos'
 import { RequestError } from '@/errors'
 import { AdminModel, DoctorModel, SecretaryModel, UserModel } from '@/models'
 import { BaseRepository, UsersRepository } from '@/infra/repositories'
@@ -25,7 +25,7 @@ export class CreateUsersService {
   }
 
   private async sendMail (userType: string, data: any): Promise<void> {
-    if (userType !== UserTypeEnum.admin) {
+    if (userType !== ProfileTypeEnum.admin) {
       await this.mailService.execute('RESET_PASSWORD', data, 'Acesso criado no sistema Huron')
     }
   }
@@ -45,9 +45,9 @@ export class CreateUsersService {
 
   private userWithRandomPassword (params: UserDTO): UserDTO {
     const { userType } = params
-    const { admin } = UserTypeEnum
+    const { doctor, secretary } = ProfileTypeEnum
     let generateUser: UserDTO = params
-    if (userType !== admin) {
+    if (userType === doctor || userType === secretary) {
       const passwordWithoutHyphen = randomUUID().replace(/-/g, '')
       generateUser = { ...params, password: passwordWithoutHyphen }
     }
@@ -55,20 +55,20 @@ export class CreateUsersService {
   }
 
   private mountObject (userId: string, params: UserDTO): GenericObject {
-    const { userType } = params
+    const { userType, ...data } = params
     const usersObjects = {
-      admin: new AdminModel({ ...params, userId }),
-      doctor: new DoctorModel({ ...params, userId }),
-      secretary: new SecretaryModel({ ...params, userId })
+      [ProfileTypeEnum.admin]: new AdminModel({ ...data, userId }),
+      [ProfileTypeEnum.doctor]: new DoctorModel({ ...data, userId }),
+      [ProfileTypeEnum.secretary]: new SecretaryModel({ ...data, userId })
     }
     return usersObjects[userType as keyof typeof usersObjects]
   }
 
   private setRepository (userType: string): GenericObject {
     const userRoles = {
-      admin: mysqlSource.getRepository(AdminEntity),
-      doctor: mysqlSource.getRepository(DoctorEntity),
-      secretary: mysqlSource.getRepository(SecretaryEntity)
+      [ProfileTypeEnum.admin]: mysqlSource.getRepository(AdminEntity),
+      [ProfileTypeEnum.doctor]: mysqlSource.getRepository(DoctorEntity),
+      [ProfileTypeEnum.secretary]: mysqlSource.getRepository(SecretaryEntity)
     }
     return userRoles[userType as keyof typeof userRoles]
   }

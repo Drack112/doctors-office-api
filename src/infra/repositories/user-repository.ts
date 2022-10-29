@@ -5,7 +5,7 @@ export class UsersRepository extends BaseRepository<UserEntity> {
   async findById (id: string): Promise<UserEntity | null> {
     const user = await this.repository.findOne({
       where: { id },
-      relations: ['userProfile', 'userProfile.profilePermissions']
+      relations: ['profile', 'profile.profilePermissions']
     })
     return user
   }
@@ -13,7 +13,7 @@ export class UsersRepository extends BaseRepository<UserEntity> {
   async findByEmail (email: string): Promise<UserEntity | null> {
     const user = await this.repository.findOne({
       where: { email },
-      relations: ['userProfile', 'userProfile.profilePermissions']
+      relations: ['profile', 'profile.profilePermissions']
     })
     return user
   }

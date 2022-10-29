@@ -4,7 +4,7 @@ import { ProfilePermissionDTO } from '@/dtos'
 
 export const mockProfilePermission: ProfilePermissionDTO = {
   moduleId: 'any-moduleId',
-  userProfileId: 'any-userProfileId',
+  profileId: 'any-profileId',
   create: true,
   read: true,
   update: true,

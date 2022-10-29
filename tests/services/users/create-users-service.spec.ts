@@ -1,4 +1,4 @@
-import { UserTypeEnum } from '@/dtos'
+import { ProfileTypeEnum } from '@/dtos'
 import { RequestError } from '@/errors'
 import { UsersRepository } from '@/infra/repositories'
 import { SendMailService } from '@/services/send-mail/send-mail-service'
@@ -47,20 +47,31 @@ describe('CreateUsersService', () => {
     })
 
     it('should be able to create new user (admin) successfully', async () => {
-      usersRepository.create = jest.fn().mockResolvedValue(userModel)
+      const mockAdmin = { ...mockUser, userType: ProfileTypeEnum.admin, password: 'anyhash' }
+      const adminModel = {
+        id: 'anyhash',
+        createdAt: new Date('2022-09-01'),
+        updatedAt: null,
+        ...mockAdmin,
+        password: 'any-hashed-password'
+      }
+      usersRepository.create = jest.fn().mockResolvedValue(mockAdmin)
 
-      await service.execute(mockUser)
+      await service.execute(adminModel)
 
       expect(usersRepository.create).toHaveBeenNthCalledWith(1, {
-        ...userModel,
+        ...mockAdmin,
+        id: 'anyhash',
+        createdAt: new Date('2022-09-01T00:00:00.000Z'),
         updatedAt: null,
+        password: 'any-hashed-password',
         firstAccessAt: undefined
       })
       expect(mailService.execute).not.toHaveBeenCalled()
     })
 
     it('should be able to create new user (secretary) successfully', async () => {
-      const mockSecretary = { ...mockUser, userType: UserTypeEnum.secretary, password: 'anyhash' }
+      const mockSecretary = { ...mockUser, userType: ProfileTypeEnum.secretary, password: 'anyhash' }
       const secretaryModel = {
         id: 'anyhash',
         createdAt: new Date('2022-09-01'),
@@ -80,7 +91,7 @@ describe('CreateUsersService', () => {
     })
 
     it('should not be able to create new user (admin) with existing cpf/email', async () => {
-      const mockAdmin = { ...mockUser, userType: UserTypeEnum.admin }
+      const mockAdmin = { ...mockUser, userType: ProfileTypeEnum.admin }
       const adminModel = {
         id: 'any-id',
         createdAt: new Date('2022-09-01'),

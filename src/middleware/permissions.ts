@@ -3,7 +3,7 @@ import { ModuleEntity, ProfilePermissionEntity, UserEntity } from '@/infra/entit
 import { mysqlSource } from '@/infra/mysql-connection'
 
 import { NextFunction, Request, Response } from 'express'
-import { checkIfUserIsAdmin } from '@/middleware/ensure-authenticated'
+import { isUserAdmin } from '@/middleware'
 
 const httpVerbToPermissionActionMap = {
   GET: 'read',
@@ -19,13 +19,13 @@ export const accessProfilePermission = () => {
     const { path: fullEndpoint } = route
     const relatedAction = setRelatedAction(httpVerb)
     const user = await getUser(userId)
-    const isUserAdmin = checkIfUserIsAdmin(user!.userType)
-    if (isUserAdmin) return next()
+    const isAdmin = await isUserAdmin(user!.id)
+    if (isAdmin) return next()
     const modules = await getModules(modulesIds)
     const moduleExists = modules?.find(module => module.endpoint === fullEndpoint)
     if (!moduleExists) return response.status(401).json({ message: 'Module not found.' })
     if (user) {
-      const hasPermission = checkPermission(user.userProfile.profilePermissions, relatedAction, moduleExists)
+      const hasPermission = checkPermission(user.profile.profilePermissions, relatedAction, moduleExists)
       if (hasPermission) return next()
       response.status(401).json({ message: 'Operation denied (module existe mas nao tem permissao).' })
     }

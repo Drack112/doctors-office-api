@@ -1,5 +1,5 @@
 import { BaseModel } from './base-model'
-import { UserProfileEntity } from './user-profile'
+import { ProfileEntity } from './profile'
 
 import { Column, Entity, JoinColumn, OneToOne } from 'typeorm'
 
@@ -14,16 +14,16 @@ export class UserEntity extends BaseModel {
   @Column()
   password!: string
 
-  @Column({ name: 'type' })
-  userType!: string
+  @Column({ name: 'profile_id' })
+  profileId!: string
 
   @Column({ name: 'first_access_at' })
   firstAccessAt?: Date
 
-  @OneToOne(() => UserProfileEntity)
+  @OneToOne(() => ProfileEntity)
   @JoinColumn({
-    name: 'id',
-    referencedColumnName: 'userId'
+    name: 'profile_id',
+    referencedColumnName: 'id'
   })
-  userProfile!: UserProfileEntity
+  profile!: ProfileEntity
 }

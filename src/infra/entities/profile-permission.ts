@@ -1,4 +1,5 @@
-import { UserProfileEntity } from './user-profile'
+import { ProfileEntity } from './profile'
+
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm'
 
 @Entity('profiles_permissions')
@@ -9,8 +10,8 @@ export class ProfilePermissionEntity {
   @Column({ name: 'module_id' })
   moduleId!: string
 
-  @Column({ name: 'user_profile_id' })
-  userProfileId!: string
+  @Column({ name: 'profile_id' })
+  profileId!: string
 
   @Column()
   create!: boolean
@@ -24,9 +25,9 @@ export class ProfilePermissionEntity {
   @Column()
   delete!: boolean
 
-  @ManyToOne(() => UserProfileEntity, (userProfile) => userProfile.profilePermissions)
+  @ManyToOne(() => ProfileEntity, (profile) => profile.profilePermissions)
   @JoinColumn({
-    name: 'user_profile_id'
+    name: 'profile_id'
   })
-  userProfile!: UserProfileEntity
+  profile!: ProfileEntity
 }

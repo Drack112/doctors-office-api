@@ -18,7 +18,7 @@ export class createProfilesPermissionsTable1664235376810 implements MigrationInt
             type: 'varchar'
           },
           {
-            name: 'user_profile_id',
+            name: 'profile_id',
             type: 'varchar'
           },
           {

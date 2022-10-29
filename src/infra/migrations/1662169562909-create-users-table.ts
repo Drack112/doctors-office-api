@@ -27,7 +27,7 @@ export class createUsersTable1664130413346 implements MigrationInterface {
             type: 'varchar'
           },
           {
-            name: 'type',
+            name: 'profile_id',
             type: 'varchar'
           },
           {
