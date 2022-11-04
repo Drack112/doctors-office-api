@@ -16,7 +16,7 @@ describe('CreateMedicalRecordsImagesService', () => {
   const medicalRecordsImagesRepository = {} as MedicalRecordsImagesRepository
   const storageProvider = {} as LocalStorageUpload
   const medicalRecordsImagesService = new CreateMedicalRecordsImagesService(medicalRecordsImagesRepository, storageProvider)
-  const baseURL = 'http://localhost:3000/uploads'
+  const baseURL = 'http://localhost:3333/uploads'
 
   describe('execute', () => {
     beforeAll(() => {

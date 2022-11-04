@@ -1,4 +1,12 @@
-import { CreateUsersControllerFactory, UpdateUsersControllerFactory, DeleteUsersControllerFactory, GetUsersControllerFactory, GetUsersByIdControllerFactory, UpdateUsersPasswordControllerFactory } from '@/main/factories/controllers/users'
+import {
+  CreateUsersControllerFactory,
+  UpdateUsersControllerFactory,
+  DeleteUsersControllerFactory,
+  GetUsersControllerFactory,
+  GetUsersByIdControllerFactory,
+  UpdateUsersPasswordControllerFactory,
+  PasswordRecoveryTokenControllerFactory
+} from '@/main/factories/controllers/users'
 import { ensuredAuthenticated, accessProfilePermission } from '@/middleware'
 
 import { Router } from 'express'
@@ -9,8 +17,10 @@ const updateUsersPasswordControllerFactory = UpdateUsersPasswordControllerFactor
 const deleteUsersControllerFactory = DeleteUsersControllerFactory()
 const getUsersControllerFactory = GetUsersControllerFactory()
 const getUsersByIdControllerFactory = GetUsersByIdControllerFactory()
+const passwordRecoveryTokenControllerFactory = PasswordRecoveryTokenControllerFactory()
 
 export default (router: Router): void => {
+  router.post('/reset-password', async (req, res) => passwordRecoveryTokenControllerFactory.handle(req, res))
   router.post('/users', async (req, res) => createUsersControllerFactory.handle(req, res))
   router.patch('/users/update-password', async (req, res) => updateUsersPasswordControllerFactory.handle(req, res))
   router.get('/users', ensuredAuthenticated(), accessProfilePermission(), async (req, res) => getUsersControllerFactory.handle(req, res))

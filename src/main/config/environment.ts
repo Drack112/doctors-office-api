@@ -3,6 +3,7 @@ import 'dotenv/config'
 const nodeEnv = process.env.NODE_ENV
 export const dir = nodeEnv === 'dev' ? 'src' : 'dist'
 const imagesURL = nodeEnv === 'dev' ? 'http://localhost:3333/images' : 'https://link-prod.com/images'
+const apiBaseUrl = process.env.API_BASE_URL
 
 export const environment = {
   jwt: {
@@ -23,7 +24,7 @@ export const environment = {
   },
   uploadImage: {
     local: {
-      url: process.env.STORAGE_LOCAL_URL ?? 'some-url'
+      url: `${apiBaseUrl}/uploads` ?? 'some-url'
     },
     publicURL: imagesURL
   },
@@ -33,7 +34,8 @@ export const environment = {
       type: process.env.MAIL_TYPE ?? 'some-auth',
       port: process.env.MAIL_PORT ?? 25,
       user: process.env.MAIL_USERNAME ?? 'some-user',
-      password: process.env.MAIL_PASSWORD ?? 'some-password'
+      password: process.env.MAIL_PASSWORD ?? 'some-password',
+      forgotMailUrl: `${apiBaseUrl}/reset-password` ?? 'some-password'
     }
   }
 }
