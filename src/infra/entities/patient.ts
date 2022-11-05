@@ -24,12 +24,12 @@ export class PatientEntity extends BaseModel {
   @Column()
   address?: string
 
-  @Column()
-  birthOfDate?: string
+  @Column({ name: 'birth_date' })
+  birthDate?: string
 
-  @Column()
+  @Column({ name: 'responsible_name' })
   responsibleName?: string
 
-  @Column()
-  responsibleCpf?: string
+  @Column({ name: 'responsible_document' })
+  responsibleDocument?: string
 }

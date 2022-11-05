@@ -47,17 +47,17 @@ export class createPatientsTable1662234506897 implements MigrationInterface {
             default: null
           },
           {
-            name: 'birthOfDate',
+            name: 'birth_date',
             type: 'varchar'
           },
           {
-            name: 'responsibleName',
+            name: 'responsible_name',
             type: 'varchar',
             isNullable: true,
             default: null
           },
           {
-            name: 'responsibleCpf',
+            name: 'responsible_document',
             type: 'varchar',
             isNullable: true,
             default: null

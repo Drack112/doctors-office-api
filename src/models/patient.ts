@@ -6,14 +6,17 @@ export class PatientModel {
   id?: string
   name: string
   email: string
+  age: number
+  height: number
+  weight: number
   cpf: string
   gender?: string
   phone!: string
   cep!: string
   address?: string
-  birthOfDate!: string
+  birthDate!: string
   responsibleName?: string
-  responsibleCpf?: string
+  responsibleDocument?: string
   createdAt: Date
   updatedAt: Date | null
 
@@ -23,14 +26,17 @@ export class PatientModel {
     }
     this.name = patient.name
     this.email = patient.email
+    this.age = patient.age
+    this.height = patient.height
+    this.weight = patient.weight
     this.cpf = patient.cpf
     this.gender = patient.gender
     this.phone = patient.phone
     this.address = patient.address
     this.cep = patient.cep
-    this.birthOfDate = patient.birthOfDate
+    this.birthDate = patient.birthDate
     this.responsibleName = patient.responsibleName
-    this.responsibleCpf = patient.responsibleCpf
+    this.responsibleDocument = patient.responsibleDocument
     this.createdAt = new Date()
     this.updatedAt = null
   }
