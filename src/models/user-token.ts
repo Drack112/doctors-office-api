@@ -2,7 +2,7 @@ import { randomUUID } from 'node:crypto'
 
 import { UserTokenDTO } from '@/dtos'
 
-export class UserToken {
+export class UserTokenModel {
   id: string
   userId: string
   refreshToken: string

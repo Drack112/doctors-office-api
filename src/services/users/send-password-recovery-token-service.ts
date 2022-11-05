@@ -5,7 +5,7 @@ import { SendMailService } from '@/services/send-mail'
 import { RequestError } from '@/errors'
 import { UserEntity } from '@/infra/entities'
 import { GenericObject, UserTokenDTO } from '@/dtos'
-import { UserToken } from '@/models'
+import { UserTokenModel } from '@/models'
 import { environment } from '@/main/config'
 import { DateFNSProvider } from '@/infra/date'
 
@@ -21,7 +21,7 @@ export class SendPasswordRecoveryTokenService {
     const user = await this.usersRepository.findByEmail(email)
     if (!user) throw new RequestError('Usuário não encontrado.')
     const data = this.generateUserTokenData(user)
-    const userToken = new UserToken(data)
+    const userToken = new UserTokenModel(data)
     const variables = this.generateLink()
     await this.usersTokensRepository.create(userToken)
     await this.mailService.execute('FORGOT_PASSWORD', variables, 'Esqueci minha senha')
