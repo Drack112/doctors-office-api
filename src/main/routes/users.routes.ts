@@ -5,7 +5,8 @@ import {
   GetUsersControllerFactory,
   GetUsersByIdControllerFactory,
   UpdateUsersPasswordControllerFactory,
-  SendPasswordRecoveryTokenControllerFactory
+  SendPasswordRecoveryTokenControllerFactory,
+  ResetUsersPasswordControllerFactory
 } from '@/main/factories/controllers/users'
 import { ensuredAuthenticated, accessProfilePermission } from '@/middleware'
 
@@ -18,9 +19,11 @@ const deleteUsersControllerFactory = DeleteUsersControllerFactory()
 const getUsersControllerFactory = GetUsersControllerFactory()
 const getUsersByIdControllerFactory = GetUsersByIdControllerFactory()
 const sendPasswordRecoveryTokenControllerFactory = SendPasswordRecoveryTokenControllerFactory()
+const resetUsersPasswordControllerFactory = ResetUsersPasswordControllerFactory()
 
 export default (router: Router): void => {
-  router.post('/reset-password', async (req, res) => sendPasswordRecoveryTokenControllerFactory.handle(req, res))
+  router.post('/send-forgot-password', async (req, res) => sendPasswordRecoveryTokenControllerFactory.handle(req, res))
+  router.post('/reset-password', async (req, res) => resetUsersPasswordControllerFactory.handle(req, res))
   router.post('/users', async (req, res) => createUsersControllerFactory.handle(req, res))
   router.patch('/users/update-password', async (req, res) => updateUsersPasswordControllerFactory.handle(req, res))
   router.get('/users', ensuredAuthenticated(), accessProfilePermission(), async (req, res) => getUsersControllerFactory.handle(req, res))

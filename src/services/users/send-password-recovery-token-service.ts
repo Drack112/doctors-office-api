@@ -2,20 +2,19 @@ import { randomUUID } from 'node:crypto'
 
 import { UsersRepository, UsersTokensRepository } from '@/infra/repositories'
 import { SendMailService } from '@/services/send-mail'
-
 import { RequestError } from '@/errors'
 import { UserEntity } from '@/infra/entities'
 import { GenericObject, UserTokenDTO } from '@/dtos'
 import { UserToken } from '@/models'
-
 import { environment } from '@/main/config'
-import { addHours } from 'date-fns'
+import { DateFNSProvider } from '@/infra/date'
 
 export class SendPasswordRecoveryTokenService {
   constructor (
     private readonly usersRepository: UsersRepository,
     private readonly usersTokensRepository: UsersTokensRepository,
-    private readonly mailService: SendMailService
+    private readonly mailService: SendMailService,
+    private readonly dateProvider: DateFNSProvider
   ) {}
 
   async execute (email: string): Promise<void> {
@@ -29,8 +28,7 @@ export class SendPasswordRecoveryTokenService {
   }
 
   private generateRefreshToken (): GenericObject {
-    const today = new Date()
-    const expiresDate = addHours(today, 2)
+    const expiresDate = this.dateProvider.addHours(2)
     const refreshToken = randomUUID()
     return {
       refreshToken,
