@@ -6,7 +6,7 @@ import { mysqlSource } from '@/infra/mysql-connection'
 import { SendMailService } from '@/services/send-mail'
 import { NodemailerProvider } from '@/infra/mail/mail-provider'
 import { HandlebarsMailTemplateProvider } from '@/infra/mail/template-provider'
-import { DateFNSProvider } from '@/infra/date'
+import { DateFNSProviderFactory } from '@/main/factories/infra/date/date-fns-factory'
 
 export const SendPasswordRecoveryTokenControllerFactory = (): SendPasswordRecoveryTokenController => {
   const userModel = mysqlSource.getRepository(UserEntity)
@@ -16,12 +16,11 @@ export const SendPasswordRecoveryTokenControllerFactory = (): SendPasswordRecove
   const mailTemplateProvider = new HandlebarsMailTemplateProvider()
   const mailProvider = new NodemailerProvider(mailTemplateProvider)
   const mailService = new SendMailService(mailProvider)
-  const dateProvider = new DateFNSProvider()
   const service = new SendPasswordRecoveryTokenService(
     usersRepository,
     usersTokensRepository,
     mailService,
-    dateProvider
+    DateFNSProviderFactory()
   )
   const controller = new SendPasswordRecoveryTokenController(service)
   return controller
