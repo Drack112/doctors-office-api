@@ -1,10 +1,10 @@
 import { RequestError } from '@/errors'
-import { PasswordRecoveryTokenService } from '@/services/users'
+import { SendPasswordRecoveryTokenService } from '@/services/users'
 
 import { Request, Response } from 'express'
 
-export class PasswordRecoveryTokenController {
-  constructor (private readonly service: PasswordRecoveryTokenService) {}
+export class SendPasswordRecoveryTokenController {
+  constructor (private readonly service: SendPasswordRecoveryTokenService) {}
 
   async handle (req: Request, res: Response): Promise<void> {
     try {

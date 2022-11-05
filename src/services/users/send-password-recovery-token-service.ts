@@ -11,7 +11,7 @@ import { UserToken } from '@/models'
 import { environment } from '@/main/config'
 import { addHours } from 'date-fns'
 
-export class PasswordRecoveryTokenService {
+export class SendPasswordRecoveryTokenService {
   constructor (
     private readonly usersRepository: UsersRepository,
     private readonly usersTokensRepository: UsersTokensRepository,
