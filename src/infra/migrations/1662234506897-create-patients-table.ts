@@ -23,6 +23,10 @@ export class createPatientsTable1662234506897 implements MigrationInterface {
             isUnique: true
           },
           {
+            name: 'age',
+            type: 'integer'
+          },
+          {
             name: 'cpf',
             type: 'varchar'
           },
