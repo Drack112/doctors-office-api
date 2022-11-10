@@ -3,7 +3,6 @@ import { ModuleEntity, ProfilePermissionEntity, UserEntity } from '@/infra/entit
 import { mysqlSource } from '@/infra/mysql-connection'
 
 import { NextFunction, Request, Response } from 'express'
-import { isUserAdmin } from '@/middleware'
 
 const httpVerbToPermissionActionMap = {
   GET: 'read',
@@ -19,8 +18,6 @@ export const accessProfilePermission = () => {
     const { path: fullEndpoint } = route
     const relatedAction = setRelatedAction(httpVerb)
     const user = await getUser(userId)
-    const isAdmin = await isUserAdmin(user!.id)
-    if (isAdmin) return next()
     const modules = await getModules(modulesIds)
     const moduleExists = modules?.find(module => module.endpoint === fullEndpoint)
     if (!moduleExists) return response.status(401).json({ message: 'Module not found.' })
