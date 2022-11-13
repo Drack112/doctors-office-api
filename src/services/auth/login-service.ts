@@ -33,7 +33,6 @@ export class LoginService {
   private async setFirstAccessDate (user: UserEntity): Promise<void> {
     if (user.firstAccessAt === null) {
       user.firstAccessAt = new Date()
-      user.updatedAt = new Date()
     }
     await this.usersRepository.update(user)
   }

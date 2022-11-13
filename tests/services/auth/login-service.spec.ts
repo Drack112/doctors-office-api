@@ -87,7 +87,7 @@ describe('LoginService', () => {
       expect(usersRepository.update).toHaveBeenNthCalledWith(1, {
         ...userModelWithFirstAccessNull,
         firstAccessAt: new Date('2022-09-01T00:00:00.000Z'),
-        updatedAt: new Date('2022-09-01T00:00:00.000Z')
+        updatedAt: null
       })
     })
   })
