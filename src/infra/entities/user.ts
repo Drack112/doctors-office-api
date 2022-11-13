@@ -20,9 +20,6 @@ export class UserEntity extends BaseModel {
   @Column({ name: 'first_access_at' })
   firstAccessAt?: Date
 
-  @Column({ name: 'password_recovery_token' })
-  passwordRecoveryToken?: string
-
   @OneToOne(() => ProfileEntity)
   @JoinColumn({
     name: 'profile_id',
