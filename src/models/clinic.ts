@@ -6,8 +6,9 @@ export class ClinicModel {
   id?: string
   name: string
   address: string
-  description?: string
   cep: string
+  administratorId: string
+  description?: string
   typeOfClinic?: string
   phone?: string
   createdAt: Date
@@ -22,6 +23,7 @@ export class ClinicModel {
     this.phone = clinic.phone
     this.cep = clinic.cep
     this.typeOfClinic = clinic.typeOfClinic
+    this.administratorId = clinic.administratorId
     this.address = clinic.address
     this.createdAt = new Date()
     this.updatedAt = null
