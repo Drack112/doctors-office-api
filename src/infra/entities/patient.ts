@@ -22,6 +22,9 @@ export class PatientEntity extends BaseModel {
   cep!: string
 
   @Column()
+  age!: number
+
+  @Column()
   address?: string
 
   @Column({ name: 'birth_date' })

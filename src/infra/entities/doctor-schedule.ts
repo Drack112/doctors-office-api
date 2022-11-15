@@ -4,7 +4,7 @@ import { Column, Entity } from 'typeorm'
 @Entity('doctors_schedules')
 export class DoctorScheduleEntity extends BaseModel {
   @Column({ name: 'doctor_id' })
-  doctor_id!: string
+  doctorId!: string
 
   @Column()
   date!: string

@@ -8,5 +8,5 @@ const unbookSchedulesControllerFactory = UnbookSchedulesControllerFactory()
 
 export default (router: Router): void => {
   router.post('/schedules', ensuredAuthenticated(), accessProfilePermission(), async (req, res) => bookSchedulesControllerFactory.handle(req, res))
-  router.patch('/schedules/:scheduleId', ensuredAuthenticated(), accessProfilePermission(), async (req, res) => unbookSchedulesControllerFactory.handle(req, res))
+  router.patch('/schedules/:id', ensuredAuthenticated(), accessProfilePermission(), async (req, res) => unbookSchedulesControllerFactory.handle(req, res))
 }

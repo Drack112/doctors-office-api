@@ -5,11 +5,11 @@ import { DoctorScheduleDTO, StatusEnum } from '@/dtos'
 export class DoctorScheduleModel {
   public setObject (doctorSchedule: DoctorScheduleDTO) {
     const schedulesToCreate = []
-    const { schedules, doctor_id } = doctorSchedule
+    const { schedules, doctorId } = doctorSchedule
     for (const { date, time } of schedules) {
       schedulesToCreate.push({
         id: randomUUID(),
-        doctor_id,
+        doctorId,
         date,
         time,
         status: StatusEnum.available,

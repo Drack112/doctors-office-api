@@ -9,7 +9,7 @@ export type ScheduleDTO = {
 }
 
 export type DoctorScheduleDTO = {
-  doctor_id: string
+  doctorId: string
   schedules: ScheduleDTO[]
   status: StatusEnum
 }

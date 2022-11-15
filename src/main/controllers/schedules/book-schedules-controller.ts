@@ -11,6 +11,7 @@ export class BookSchedulesController {
       await this.service.execute(req.body, req.userId)
       res.sendStatus(201)
     } catch (error) {
+      console.log('ERROR', error)
       if (error instanceof RequestError) {
         res.status(400).json({ message: error.message })
       } else {

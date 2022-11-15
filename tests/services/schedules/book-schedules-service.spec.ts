@@ -1,9 +1,9 @@
 import { StatusEnum } from '@/dtos'
 import { RequestError } from '@/errors'
-import { DoctorsRepository, DoctorsSchedulesRepository, PatientsRepository, SchedulesRepository } from '@/infra/repositories'
+import { DoctorsPatientsRepository, DoctorsRepository, DoctorsSchedulesRepository, PatientsRepository, SchedulesRepository } from '@/infra/repositories'
 import { BookSchedulesService } from '@/services/schedules'
 
-import { doctorModel, doctorScheduleModel, mockSchedule, patientModel, scheduleModel, sessionUserId } from '@/tests/mocks'
+import { doctorModel, doctorPatientModel, doctorScheduleModel, mockSchedule, patientModel, scheduleModel, sessionUserId } from '@/tests/mocks'
 
 jest.mock('node:crypto', () => ({
   randomUUID: jest.fn().mockImplementation(() => 'any-id')
@@ -18,7 +18,8 @@ describe('BookSchedulesService', () => {
   const patientsRepository = {} as PatientsRepository
   const doctorsRepository = {} as DoctorsRepository
   const doctorsSchedulesRepository = {} as DoctorsSchedulesRepository
-  const service = new BookSchedulesService(schedulesRepository, doctorsSchedulesRepository, patientsRepository, doctorsRepository)
+  const doctorsPatientsRepository = {} as DoctorsPatientsRepository
+  const service = new BookSchedulesService(schedulesRepository, doctorsSchedulesRepository, patientsRepository, doctorsRepository, doctorsPatientsRepository)
 
   describe('execute', () => {
     beforeAll(() => {
@@ -28,6 +29,12 @@ describe('BookSchedulesService', () => {
       doctorsRepository.findById = jest.fn()
       doctorsSchedulesRepository.findById = jest.fn()
       doctorsSchedulesRepository.update = jest.fn()
+      doctorsPatientsRepository.create = jest.fn()
+      doctorsPatientsRepository.findByPacientAndDoctor = jest.fn()
+    })
+
+    afterEach(() => {
+      jest.clearAllMocks()
     })
 
     it('should be able to create new schedule', async () => {
@@ -87,6 +94,20 @@ describe('BookSchedulesService', () => {
       await expect(promise).rejects.toThrow(error)
       expect(schedulesRepository.create).not.toHaveBeenCalled()
       expect(doctorsSchedulesRepository.update).not.toHaveBeenCalled()
+    })
+
+    it('should not be able to duplicate schedule', async () => {
+      patientsRepository.findById = jest.fn().mockResolvedValue(patientModel)
+      doctorsRepository.findById = jest.fn().mockResolvedValue(doctorModel)
+      doctorsSchedulesRepository.findById = jest.fn().mockResolvedValue({ ...doctorScheduleModel, status: StatusEnum.available })
+      schedulesRepository.findById = jest.fn().mockResolvedValue(scheduleModel)
+      doctorsPatientsRepository.findByPacientAndDoctor = jest.fn().mockResolvedValue(doctorPatientModel)
+      const error = new RequestError('Paciente já agendado.')
+
+      const promise = service.execute(mockSchedule, sessionUserId)
+
+      await expect(promise).rejects.toThrow(error)
+      expect(schedulesRepository.create).not.toHaveBeenCalled()
     })
   })
 })

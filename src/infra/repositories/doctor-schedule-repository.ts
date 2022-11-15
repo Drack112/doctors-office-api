@@ -5,13 +5,13 @@ import { DoctorScheduleEntity } from '@/infra/entities'
 export class DoctorsSchedulesRepository extends BaseRepository<DoctorScheduleEntity> {
   async findSchedulesByDoctorId (doctorId: string): Promise<DoctorScheduleEntity[]> {
     return await this.repository.find({
-      where: { doctor_id: doctorId }
+      where: { doctorId }
     })
   }
 
   async findExistingSchedules (params: DoctorScheduleDTO): Promise<boolean> {
-    const { doctor_id, schedules } = params
-    const foundSchedules = await this.repository.find({ where: { doctor_id } } as any)
+    const { doctorId, schedules } = params
+    const foundSchedules = await this.repository.find({ where: { doctorId } } as any)
     let hasScheduled: boolean = false
     if (foundSchedules?.length) {
       for (const schedule of schedules) {
