@@ -6,6 +6,5 @@ import { Router } from 'express'
 const createModulesControllerFactory = CreateModulesControllerFactory()
 
 export default (router: Router): void => {
-  router.post('/modules', ensuredAuthenticated(), ensuredAuthenticated(), async (req, res) => createModulesControllerFactory.handle(req, res))
-  router.put('/modules/:id', ensuredAuthenticated(), accessProfilePermission(), async (req, res) => createModulesControllerFactory.handle(req, res))
+  router.post('/modules', ensuredAuthenticated(), accessProfilePermission(), async (req, res) => createModulesControllerFactory.handle(req, res))
 }
