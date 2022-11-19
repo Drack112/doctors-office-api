@@ -20,7 +20,4 @@ export class ClinicEntity extends BaseModel {
 
   @Column()
   phone?: string
-
-  @Column({ name: 'administrator_id' })
-  administratorId!: string
 }

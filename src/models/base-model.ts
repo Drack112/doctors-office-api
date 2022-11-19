@@ -1,7 +1,7 @@
 import { randomUUID } from 'node:crypto'
 
 export abstract class BaseModel {
-  id?: string
+  id: string
   createdAt!: Date
   updatedAt: Date | null
 
