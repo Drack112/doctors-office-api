@@ -24,6 +24,7 @@ export type UserDTO = {
   crm: string
   speciality: string
   profileId: string
+  clinicsIds?: string[]
   createdAt?: Date
   firstAccessAt?: Date
 }

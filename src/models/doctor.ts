@@ -7,8 +7,8 @@ export class DoctorModel extends BaseModel {
   crm: string
   speciality: string
 
-  constructor (doctor: DoctorDTO) {
-    super()
+  constructor (doctor: DoctorDTO, id?: string) {
+    super(doctor, id)
     this.userId = doctor.userId
     this.cpf = doctor.cpf
     this.crm = doctor.crm

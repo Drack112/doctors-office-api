@@ -3,25 +3,49 @@ import { randomUUID } from 'node:crypto'
 import { UserDTO, GenericObject, ProfileTypeEnum } from '@/dtos'
 import { RequestError } from '@/errors'
 import { AdminModel, DoctorModel, SecretaryModel, UserModel } from '@/models'
-import { BaseRepository, UsersRepository } from '@/infra/repositories'
+import { BaseRepository, UsersClinicsRepository, UsersRepository } from '@/infra/repositories'
 import { AdminEntity, DoctorEntity, SecretaryEntity } from '@/infra/entities'
 import { mysqlSource } from '@/infra/mysql-connection'
 import { SendMailService } from '@/services/send-mail'
+import { environment } from '@/main/config'
+
+import { hashSync } from 'bcryptjs'
 
 export class CreateUsersService {
   constructor (
     private readonly usersRepository: UsersRepository,
+    private readonly usersClinicsRepository: UsersClinicsRepository,
     private readonly mailService: SendMailService
   ) {}
 
   async execute (params: UserDTO): Promise<void> {
-    const { email, userType } = params
+    const { email, userType, clinicsIds } = params
     await this.checkIfUserExists(email)
     const model = this.setRepository(userType)
     const baseRepository = this.setBaseRepository(model)
-    const { objectToCreate, userToCreate } = await this.createUser(params)
-    await baseRepository.create(objectToCreate)
-    await this.sendMail(userType, userToCreate)
+    const user = this.buildUser(params)
+    const specificUser = this.buildSpecificUser(user.id, params)
+    await this.usersRepository.create({ ...user, password: hashSync(user.password, environment.encrypt.salt) })
+    await baseRepository.create(specificUser)
+    await this.associateUserWithClinic(user.id, clinicsIds!)
+    await this.sendMail(userType, user)
+  }
+
+  private async associateUserWithClinic (userId: string, clinicsIds: string[]): Promise<void> {
+    const usersClinics = []
+    for (const clinicId of clinicsIds) {
+      usersClinics.push({
+        id: randomUUID(),
+        userId,
+        clinicId
+      })
+    }
+    await this.usersClinicsRepository.create(usersClinics)
+  }
+
+  private async checkIfUserExists (email: string): Promise<void> {
+    const userExists = await this.usersRepository.findByEmail(email)
+    if (userExists) throw new RequestError('Usuário já existe.')
   }
 
   private async sendMail (userType: string, data: any): Promise<void> {
@@ -30,31 +54,21 @@ export class CreateUsersService {
     }
   }
 
-  private async createUser (params: UserDTO): Promise<GenericObject> {
-    const userToCreate = this.userWithRandomPassword(params)
-    const user = new UserModel(userToCreate)
-    const userCreated = await this.usersRepository.create(user)
-    const objectToCreate = this.mountObject(userCreated.id, params)
-    return { userToCreate, objectToCreate }
+  private generateRandomPassword (): string {
+    return randomUUID().replace(/-/g, '')
   }
 
-  private async checkIfUserExists (email: string): Promise<void> {
-    const userExists = await this.usersRepository.findByEmail(email)
-    if (userExists) throw new RequestError('Usuário já existe.')
-  }
-
-  private userWithRandomPassword (params: UserDTO): UserDTO {
-    const { userType } = params
-    const { doctor, secretary } = ProfileTypeEnum
-    let generateUser: UserDTO = params
-    if (userType === doctor || userType === secretary) {
-      const passwordWithoutHyphen = randomUUID().replace(/-/g, '')
-      generateUser = { ...params, password: passwordWithoutHyphen }
+  private buildUser (params: UserDTO): GenericObject {
+    const randomPassword = this.generateRandomPassword()
+    const usersObjects = {
+      [ProfileTypeEnum.admin]: new UserModel({ ...params, clinicsIds: [] }),
+      [ProfileTypeEnum.doctor]: new UserModel({ ...params, password: randomPassword }),
+      [ProfileTypeEnum.secretary]: new UserModel({ ...params, password: randomPassword })
     }
-    return generateUser
+    return usersObjects[params.userType as keyof typeof usersObjects]
   }
 
-  private mountObject (userId: string, params: UserDTO): GenericObject {
+  private buildSpecificUser (userId: string, params: UserDTO): GenericObject {
     const { userType, ...data } = params
     const usersObjects = {
       [ProfileTypeEnum.admin]: new AdminModel({ ...data, userId }),

@@ -13,13 +13,21 @@ export const mockUser: UserDTO = {
   speciality: 'any-speciality',
   userType: ProfileTypeEnum.admin,
   profileId: 'any-profileId',
-  situation: SituationStatusEnum.active
+  situation: SituationStatusEnum.active,
+  clinicsIds: ['any-clinic-1', 'any-clinic-2']
 }
 
-export const userModel: UserModel = {
-  id: 'anyhash',
-  createdAt: new Date('2022-09-01T00:00:00.000Z'),
-  updatedAt: null,
-  firstAccessAt: new Date('2022-09-01T00:00:00.000Z'),
-  ...mockUser
-}
+export const userModel = new UserModel({
+  ...mockUser,
+  firstAccessAt: undefined,
+  createdAt: new Date('2022-09-01T00:00:00.000Z')
+})
+userModel.buildUserWithClinics(mockUser.clinicsIds!)
+
+// export const userModel: UserModel = {
+//   id: 'anyhash',
+//   createdAt: new Date('2022-09-01T00:00:00.000Z'),
+//   updatedAt: null,
+//   firstAccessAt: new Date('2022-09-01T00:00:00.000Z'),
+//   ...mockUser
+// }

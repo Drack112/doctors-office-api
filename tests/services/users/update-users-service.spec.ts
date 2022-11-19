@@ -27,7 +27,8 @@ describe('UpdateUsersService', () => {
     })
 
     it('should be able to update a user successfully', async () => {
-      usersRepository.findById = jest.fn().mockResolvedValue(userModel)
+      const updateUser = { ...userModel, firstAccessAt: new Date('2022-09-01T00:00:00.000Z') }
+      usersRepository.findById = jest.fn().mockResolvedValue(updateUser)
 
       await service.execute('anyhash', mockUser)
 
