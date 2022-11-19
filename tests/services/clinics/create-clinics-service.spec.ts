@@ -1,4 +1,4 @@
-import { ClinicsRepository } from '@/infra/repositories'
+import { ClinicsRepository, UsersClinicsRepository } from '@/infra/repositories'
 import { CreateClinicsService } from '@/services/clinics'
 
 import { mockClinic, clinicModel } from '@/tests/mocks'
@@ -13,15 +13,17 @@ jest
 
 describe('CreateClinicsService', () => {
   const clinicsRepository = {} as ClinicsRepository
-  const clinicsService = new CreateClinicsService(clinicsRepository)
+  const usersClinicsRepository = {} as UsersClinicsRepository
+  const service = new CreateClinicsService(clinicsRepository, usersClinicsRepository)
 
   describe('execute', () => {
     beforeAll(() => {
       clinicsRepository.create = jest.fn()
+      usersClinicsRepository.create = jest.fn()
     })
 
     it('should be able to create new clinic successfully', async () => {
-      await clinicsService.execute(mockClinic, mockClinic.administratorId)
+      await service.execute(mockClinic, mockClinic.administratorId)
 
       expect(clinicsRepository.create).toHaveBeenNthCalledWith(1, {
         ...clinicModel,
