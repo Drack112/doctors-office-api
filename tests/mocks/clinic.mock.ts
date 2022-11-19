@@ -8,7 +8,8 @@ export const mockClinic: ClinicDTO = {
   cep: 'any-cep',
   description: 'any-description',
   phone: 'any-phone',
-  typeOfClinic: 'any-typeOfClinic'
+  typeOfClinic: 'any-typeOfClinic',
+  administratorId: 'any-administratorId'
 }
 
 export const clinicModel: ClinicModel = {

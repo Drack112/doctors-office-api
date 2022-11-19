@@ -44,6 +44,10 @@ export class createClinicsTable1663609458865 implements MigrationInterface {
             default: null
           },
           {
+            name: 'administrator_id',
+            type: 'varchar'
+          },
+          {
             name: 'created_at',
             type: 'timestamp',
             default: 'now()'

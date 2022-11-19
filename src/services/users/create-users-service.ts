@@ -33,12 +33,14 @@ export class CreateUsersService {
 
   private async associateUserWithClinic (userId: string, clinicsIds: string[]): Promise<void> {
     const usersClinics = []
-    for (const clinicId of clinicsIds) {
-      usersClinics.push({
-        id: randomUUID(),
-        userId,
-        clinicId
-      })
+    if (clinicsIds?.length) {
+      for (const clinicId of clinicsIds) {
+        usersClinics.push({
+          id: randomUUID(),
+          userId,
+          clinicId
+        })
+      }
     }
     await this.usersClinicsRepository.create(usersClinics)
   }
@@ -61,7 +63,7 @@ export class CreateUsersService {
   private buildUser (params: UserDTO): GenericObject {
     const randomPassword = this.generateRandomPassword()
     const usersObjects = {
-      [ProfileTypeEnum.admin]: new UserModel({ ...params, clinicsIds: [] }),
+      [ProfileTypeEnum.admin]: new UserModel(params),
       [ProfileTypeEnum.doctor]: new UserModel({ ...params, password: randomPassword }),
       [ProfileTypeEnum.secretary]: new UserModel({ ...params, password: randomPassword })
     }

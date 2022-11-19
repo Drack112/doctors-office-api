@@ -8,7 +8,7 @@ export class CreateClinicsController {
 
   async handle (req: Request, res: Response): Promise<void> {
     try {
-      await this.service.execute(req.body)
+      await this.service.execute(req.body, req.userId)
       res.sendStatus(201)
     } catch (error) {
       if (error instanceof RequestError) {

@@ -11,6 +11,7 @@ describe('CreateClinicsController', () => {
 
   beforeAll(() => {
     req.body = mockClinic
+    req.userId = 'any-user-id'
   })
 
   describe('handle', () => {
@@ -19,7 +20,7 @@ describe('CreateClinicsController', () => {
 
       await controller.handle(req, res)
 
-      expect(service.execute).toHaveBeenNthCalledWith(1, req.body)
+      expect(service.execute).toHaveBeenNthCalledWith(1, req.body, req.userId)
       expect(res.sendStatus).toHaveBeenNthCalledWith(1, 201)
     })
 
@@ -29,7 +30,7 @@ describe('CreateClinicsController', () => {
 
       await controller.handle(req, res)
 
-      expect(service.execute).toHaveBeenNthCalledWith(1, req.body)
+      expect(service.execute).toHaveBeenNthCalledWith(1, req.body, req.userId)
       expect(res.status).toHaveBeenNthCalledWith(1, 400)
       expect(res.json).toHaveBeenNthCalledWith(1, { message: error.message })
     })
@@ -40,7 +41,7 @@ describe('CreateClinicsController', () => {
 
       await controller.handle(req, res)
 
-      expect(service.execute).toHaveBeenNthCalledWith(1, req.body)
+      expect(service.execute).toHaveBeenNthCalledWith(1, req.body, req.userId)
       expect(res.status).toHaveBeenNthCalledWith(1, 500)
       expect(res.json).toHaveBeenNthCalledWith(1, { error })
     })

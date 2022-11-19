@@ -21,7 +21,7 @@ describe('CreateClinicsService', () => {
     })
 
     it('should be able to create new clinic successfully', async () => {
-      await clinicsService.execute(mockClinic)
+      await clinicsService.execute(mockClinic, mockClinic.administratorId)
 
       expect(clinicsRepository.create).toHaveBeenNthCalledWith(1, {
         ...clinicModel,

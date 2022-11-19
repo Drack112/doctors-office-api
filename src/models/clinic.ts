@@ -5,6 +5,7 @@ export class ClinicModel extends BaseModel {
   name: string
   address: string
   cep: string
+  administratorId: string
   description?: string
   typeOfClinic?: string
   phone?: string
@@ -16,6 +17,7 @@ export class ClinicModel extends BaseModel {
     this.phone = clinic.phone
     this.cep = clinic.cep
     this.typeOfClinic = clinic.typeOfClinic
+    this.administratorId = clinic.administratorId
     this.address = clinic.address
     this.createdAt = new Date()
     this.updatedAt = null
