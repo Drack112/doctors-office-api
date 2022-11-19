@@ -9,8 +9,8 @@ export class ProfilePermissionModel extends BaseModel {
   update: boolean
   delete: boolean
 
-  constructor (profilePermission: ProfilePermissionDTO) {
-    super()
+  constructor (profilePermission: ProfilePermissionDTO, id?: string) {
+    super(profilePermission, id)
     this.moduleId = profilePermission.moduleId
     this.profileId = profilePermission.profileId
     this.create = profilePermission.create

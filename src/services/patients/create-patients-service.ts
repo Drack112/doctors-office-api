@@ -8,8 +8,8 @@ export class CreatePatientsService {
 
   async execute (params: PatientDTO): Promise<void> {
     const { email } = params
-    const patientByEmail = await this.patientsRepository.findByEmail(email)
-    if (patientByEmail) throw new RequestError('Paciente já existe.')
+    const patientExists = await this.patientsRepository.findByEmail(email)
+    if (patientExists) throw new RequestError('Paciente já existe.')
     const patient = new PatientModel(params)
     await this.patientsRepository.create(patient)
   }

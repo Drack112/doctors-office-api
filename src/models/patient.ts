@@ -1,9 +1,7 @@
-import { randomUUID } from 'node:crypto'
-
 import { PatientDTO } from '@/dtos'
+import { BaseModel } from '@/models'
 
-export class PatientModel {
-  id?: string
+export class PatientModel extends BaseModel {
   name: string
   email: string
   age: number
@@ -17,13 +15,9 @@ export class PatientModel {
   birthDate!: string
   responsibleName?: string
   responsibleDocument?: string
-  createdAt: Date
-  updatedAt: Date | null
 
-  constructor (patient: PatientDTO) {
-    if (!this.id) {
-      this.id = randomUUID()
-    }
+  constructor (patient: PatientDTO, id?: string) {
+    super(patient, id)
     this.name = patient.name
     this.email = patient.email
     this.age = patient.age
@@ -37,7 +31,5 @@ export class PatientModel {
     this.birthDate = patient.birthDate
     this.responsibleName = patient.responsibleName
     this.responsibleDocument = patient.responsibleDocument
-    this.createdAt = new Date()
-    this.updatedAt = null
   }
 }
