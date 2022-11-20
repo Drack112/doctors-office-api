@@ -6,9 +6,9 @@ import { Request, Response } from 'express'
 export class GeneratePatientsPDFController {
   constructor (private readonly service: GeneratePatientsPDFService) {}
 
-  async handle (_: Request, res: Response): Promise<void> {
+  async handle (req: Request, res: Response): Promise<void> {
     try {
-      const pdf = await this.service.execute()
+      const pdf = await this.service.execute(req.body.patientId, req.userId)
       res.setHeader('Content-Type', 'application/pdf')
       res.send(pdf)
     } catch (error) {

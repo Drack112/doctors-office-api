@@ -16,7 +16,6 @@ describe('CreateMedicalRecordsImagesService', () => {
   const medicalRecordsImagesRepository = {} as MedicalRecordsImagesRepository
   const storageProvider = {} as LocalStorageUpload
   const medicalRecordsImagesService = new CreateMedicalRecordsImagesService(medicalRecordsImagesRepository, storageProvider)
-  const baseURL = 'http://localhost:3333/uploads'
 
   describe('execute', () => {
     beforeAll(() => {
@@ -25,7 +24,7 @@ describe('CreateMedicalRecordsImagesService', () => {
     })
 
     it('should be able to create new medical-record successfully', async () => {
-      storageProvider.saveFile = jest.fn().mockResolvedValue(`${baseURL}/any-filename.jpg`)
+      storageProvider.saveFile = jest.fn().mockResolvedValue('any-filename.jpg')
 
       await medicalRecordsImagesService.execute(mockMedicalRecordImage)
 

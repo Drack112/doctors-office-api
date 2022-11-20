@@ -11,6 +11,6 @@ export class MedicalRecordImageEntity {
   @Column({ name: 'medical_record_url' })
   medicalRecordUrl!: string
 
-  @Column()
+  @Column({ name: 'created_at' })
   createdAt!: Date
 }

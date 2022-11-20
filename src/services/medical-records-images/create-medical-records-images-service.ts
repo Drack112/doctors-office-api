@@ -11,10 +11,7 @@ export class CreateMedicalRecordsImagesService {
 
   async execute (params: MedicalRecordImageDTO): Promise<void> {
     const file = await this.fileStorage.saveFile(params.filename)
-    const medicalRecordImage = new MedicalRecordImageModel(params)
-    await this.medicalRecordsImagesRepository.create({
-      ...medicalRecordImage,
-      filename: file
-    })
+    const medicalRecordImage = new MedicalRecordImageModel({ ...params, filename: file })
+    await this.medicalRecordsImagesRepository.create(medicalRecordImage)
   }
 }
