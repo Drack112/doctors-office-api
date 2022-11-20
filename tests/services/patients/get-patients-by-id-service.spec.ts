@@ -6,7 +6,7 @@ import { patientModel } from '@/tests/mocks'
 
 describe('GetPatientsByIdService', () => {
   const patientsRepository = {} as PatientsRepository
-  const patientsService = new GetPatientsByIdService(patientsRepository)
+  const service = new GetPatientsByIdService(patientsRepository)
 
   describe('execute', () => {
     beforeEach(() => {
@@ -16,7 +16,7 @@ describe('GetPatientsByIdService', () => {
     it('should be able to get a patient', async () => {
       patientsRepository.findById = jest.fn().mockResolvedValue(patientModel)
 
-      await patientsService.execute(patientModel.id!)
+      await service.execute(patientModel.id)
 
       expect(patientsRepository.findById).toHaveBeenCalledTimes(1)
     })
@@ -24,7 +24,7 @@ describe('GetPatientsByIdService', () => {
     it('should not be able to get a non-existing patient', async () => {
       const error = new RequestError('Paciente não existe.')
 
-      const promise = patientsService.execute(patientModel.id!)
+      const promise = service.execute(patientModel.id)
 
       await expect(promise).rejects.toThrow(error)
       expect(patientsRepository.findById).toHaveBeenCalledTimes(1)
