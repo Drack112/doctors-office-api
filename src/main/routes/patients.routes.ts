@@ -18,7 +18,7 @@ const getPatientsByIdController = GetPatientsByIdControllerFactory()
 const generatePatientsPDFControllerFactory = GeneratePatientsPDFControllerFactory()
 
 export default (router: Router): void => {
-  router.get('/patients/generate-pdf', async (req, res) => generatePatientsPDFControllerFactory.handle(req, res))
+  router.post('/patients/generate-pdf', ensuredAuthenticated(), accessProfilePermission(), async (req, res) => generatePatientsPDFControllerFactory.handle(req, res))
   router.get('/patients', ensuredAuthenticated(), accessProfilePermission(), async (req, res) => getPatientsController.handle(req, res))
   router.get('/patients/:id', ensuredAuthenticated(), accessProfilePermission(), async (req, res) => getPatientsByIdController.handle(req, res))
   router.post('/patients', ensuredAuthenticated(), accessProfilePermission(), async (req, res) => createPatientsController.handle(req, res))

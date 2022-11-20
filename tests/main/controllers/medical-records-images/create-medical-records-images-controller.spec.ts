@@ -11,14 +11,14 @@ describe('CreateMedicalRecordsImagesController', () => {
   const res: any = { sendStatus: jest.fn().mockReturnThis(), status: jest.fn().mockReturnThis(), json: jest.fn().mockReturnThis() }
 
   beforeAll(() => {
+    medicalRecordsImagesService.execute = jest.fn()
+
     req.body = mockMedicalRecordImage
     req.file = { filename: 'any-filename.jpg' }
   })
 
   describe('handle', () => {
     it('should be able to create new medical-records-image', async () => {
-      medicalRecordsImagesService.execute = jest.fn()
-
       await medicalRecordsImagesController.handle(req, res)
 
       expect(medicalRecordsImagesService.execute).toHaveBeenNthCalledWith(1, mockMedicalRecordImage)

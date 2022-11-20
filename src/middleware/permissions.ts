@@ -24,7 +24,7 @@ export const accessProfilePermission = () => {
     if (user) {
       const hasPermission = checkPermission(user.profile.profilePermissions, relatedAction, moduleExists)
       if (hasPermission) return next()
-      response.status(401).json({ message: 'Operation denied (module existe mas nao tem permissao).' })
+      response.status(401).json({ message: 'Access denied.' })
     }
   }
 }

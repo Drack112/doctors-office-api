@@ -1,5 +1,6 @@
 import { BaseModel } from './base-model'
-import { Column, Entity } from 'typeorm'
+import { Column, Entity, JoinColumn, OneToOne } from 'typeorm'
+import { MedicalRecordEntity } from '@/infra/entities/medical-record'
 
 @Entity('patients')
 export class PatientEntity extends BaseModel {
@@ -35,4 +36,11 @@ export class PatientEntity extends BaseModel {
 
   @Column({ name: 'responsible_document' })
   responsibleDocument?: string
+
+  @OneToOne(() => MedicalRecordEntity)
+  @JoinColumn({
+    name: 'id',
+    referencedColumnName: 'patientId'
+  })
+  medicalRecord!: MedicalRecordEntity
 }

@@ -6,7 +6,7 @@ import { environment } from '@/main/config'
 export class MedicalRecordImageModel {
   id?: string
   medicalRecordId: string
-  filename: string
+  medicalRecordUrl: string
   createdAt: Date
 
   constructor (medicalRecord: MedicalRecordImageDTO) {
@@ -14,7 +14,7 @@ export class MedicalRecordImageModel {
       this.id = randomUUID()
     }
     this.medicalRecordId = medicalRecord.medicalRecordId
-    this.filename = this.generateImagePath(medicalRecord.filename)
+    this.medicalRecordUrl = this.generateImagePath(medicalRecord.filename)
     this.createdAt = new Date()
   }
 
