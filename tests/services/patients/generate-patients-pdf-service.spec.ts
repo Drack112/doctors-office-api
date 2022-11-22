@@ -2,7 +2,7 @@ import { RequestError } from '@/errors'
 import { PDFProvider } from '@/infra/pdf'
 import { DoctorsPatientsRepository, DoctorsRepository, PatientsRepository } from '@/infra/repositories'
 import { GeneratePatientsPDFService } from '@/services/patients'
-import { doctorModel, doctorPatientModel, patientModel } from '@/tests/mocks'
+import { doctorModel, doctorPatientModel, patientMedicalRecordModel, patientModel } from '@/tests/mocks'
 
 describe('GeneratePatientsPDFService', () => {
   const patientsRepository = {} as PatientsRepository
@@ -26,7 +26,7 @@ describe('GeneratePatientsPDFService', () => {
     it('should be able to generate pdf successfully', async () => {
       doctorsRepository.findByUserId = jest.fn().mockResolvedValue(doctorModel)
       doctorsPatientsRepository.findByPacientAndDoctor = jest.fn().mockResolvedValue(doctorPatientModel)
-      patientsRepository.findById = jest.fn().mockResolvedValue(patientModel)
+      patientsRepository.findById = jest.fn().mockResolvedValue(patientMedicalRecordModel)
 
       const pdf = await service.execute(patientId, userId)
 

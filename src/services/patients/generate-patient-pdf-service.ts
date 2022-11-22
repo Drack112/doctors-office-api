@@ -2,6 +2,8 @@ import { RequestError } from '@/errors'
 import { PDFProvider } from '@/infra/pdf'
 import { DoctorsPatientsRepository, DoctorsRepository, PatientsRepository } from '@/infra/repositories'
 
+import { formatDate } from '@/utils'
+
 export class GeneratePatientsPDFService {
   constructor (
     private readonly patientsRepository: PatientsRepository,
@@ -16,6 +18,7 @@ export class GeneratePatientsPDFService {
     const doctor = await this.doctorsRepository.findByUserId(userId)
     const doctorsPatient = await this.doctorsPatientsRepository.findByPacientAndDoctor(patientId, doctor!.id)
     if (!doctorsPatient) throw new RequestError('Patient never have consulted with this doctor.')
-    return await this.pdfProvider.generate(patient)
+    const patientData = { ...patient, date: formatDate(patient.medicalRecord.date) }
+    return await this.pdfProvider.generate(patientData)
   }
 }

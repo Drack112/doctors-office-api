@@ -23,3 +23,10 @@ export const patientModel: PatientModel = {
   updatedAt: null,
   ...mockPatient
 }
+
+export const patientMedicalRecordModel = {
+  ...patientModel,
+  medicalRecord: {
+    date: new Date('2022-09-01T00:00:00.000Z')
+  }
+}
