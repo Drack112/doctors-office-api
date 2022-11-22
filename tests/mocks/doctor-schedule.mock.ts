@@ -7,8 +7,7 @@ export const mockDoctorSchedule: DoctorScheduleDTO = {
   schedules: [
     { date: '22/10/2022', time: '15:00' },
     { date: '22/10/2022', time: '15:00' }
-  ],
-  status: StatusEnum.available
+  ]
 }
 
 export const mockDoctorSchedulesByDoctorId = [
