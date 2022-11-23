@@ -58,11 +58,7 @@ export class addProfilesPermissionsSeeder1667750175447 implements MigrationInter
           actions: [false, false, false, false]
         },
         {
-          endpoint: '/schedules/:doctorId',
-          actions: [false, false, false, false]
-        },
-        {
-          endpoint: '/doctors-schedules',
+          endpoint: '/doctors/schedules/:doctorId?',
           actions: [false, false, false, false]
         },
         {
@@ -139,7 +135,7 @@ export class addProfilesPermissionsSeeder1667750175447 implements MigrationInter
           actions: [true, true, true, true]
         },
         {
-          endpoint: '/schedules/:doctorId',
+          endpoint: '/doctors/schedules/:doctorId?',
           actions: [false, false, false, false]
         },
         {
@@ -220,7 +216,7 @@ export class addProfilesPermissionsSeeder1667750175447 implements MigrationInter
           actions: [false, false, false, false]
         },
         {
-          endpoint: '/schedules/:doctorId',
+          endpoint: '/doctors/schedules/:doctorId?',
           actions: [true, true, true, true]
         },
         {

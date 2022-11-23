@@ -18,10 +18,6 @@ export class createModulesTable1664235038742 implements MigrationInterface {
             type: 'varchar'
           },
           {
-            name: 'description',
-            type: 'varchar'
-          },
-          {
             name: 'endpoint',
             type: 'varchar'
           },

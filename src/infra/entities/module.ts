@@ -8,8 +8,5 @@ export class ModuleEntity extends BaseModel {
   name!: string
 
   @Column()
-  description!: string
-
-  @Column()
   endpoint!: string
 }
