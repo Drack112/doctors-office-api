@@ -1,4 +1,4 @@
-import { ClinicEntity } from '@/infra/entities'
+import { ClinicEntity } from './clinic'
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm'
 
 @Entity('users_clinics')

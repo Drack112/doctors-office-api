@@ -1,6 +1,7 @@
 import { BaseModel } from './base-model'
+import { MedicalRecordEntity } from './medical-record'
+
 import { Column, Entity, JoinColumn, OneToOne } from 'typeorm'
-import { MedicalRecordEntity } from '@/infra/entities/medical-record'
 
 @Entity('patients')
 export class PatientEntity extends BaseModel {

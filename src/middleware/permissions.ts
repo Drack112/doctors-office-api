@@ -20,11 +20,11 @@ export const accessProfilePermission = () => {
     const user = await getUser(userId)
     const modules = await getModules(modulesIds)
     const moduleExists = modules?.find(module => module.endpoint === fullEndpoint)
-    if (!moduleExists) return response.status(401).json({ message: 'Module not found.' })
+    if (!moduleExists) return response.status(401).json({ message: 'Módulo não encontrado.' })
     if (user) {
       const hasPermission = checkPermission(user.profile.profilePermissions, relatedAction, moduleExists)
       if (hasPermission) return next()
-      response.status(401).json({ message: 'Access denied.' })
+      response.status(401).json({ message: 'Acesso negado.' })
     }
   }
 }

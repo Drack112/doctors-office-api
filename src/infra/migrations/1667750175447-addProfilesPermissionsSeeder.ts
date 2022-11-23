@@ -54,8 +54,12 @@ export class addProfilesPermissionsSeeder1667750175447 implements MigrationInter
           actions: [false, false, false, false]
         },
         {
-          endpoint: '/doctors/schedules/:doctorId',
-          actions: [true, true, true, true]
+          endpoint: '/doctors/schedules',
+          actions: [false, false, false, false]
+        },
+        {
+          endpoint: '/schedules/:doctorId',
+          actions: [false, false, false, false]
         },
         {
           endpoint: '/doctors-schedules',
@@ -131,8 +135,12 @@ export class addProfilesPermissionsSeeder1667750175447 implements MigrationInter
           actions: [false, false, false, false]
         },
         {
-          endpoint: '/doctors/schedules/:doctorId',
+          endpoint: '/doctors/schedules',
           actions: [true, true, true, true]
+        },
+        {
+          endpoint: '/schedules/:doctorId',
+          actions: [false, false, false, false]
         },
         {
           endpoint: '/doctors-schedules',
@@ -208,12 +216,16 @@ export class addProfilesPermissionsSeeder1667750175447 implements MigrationInter
           actions: [true, true, true, true]
         },
         {
-          endpoint: '/doctors/schedules/:doctorId',
+          endpoint: '/doctors/schedules',
+          actions: [false, false, false, false]
+        },
+        {
+          endpoint: '/schedules/:doctorId',
           actions: [true, true, true, true]
         },
         {
           endpoint: '/doctors-schedules',
-          actions: [true, true, true, true]
+          actions: [false, false, false, false]
         },
         {
           endpoint: '/doctors-schedules/:id',
@@ -256,10 +268,10 @@ export class addProfilesPermissionsSeeder1667750175447 implements MigrationInter
   }
 
   private async insertPermissions (queryRunner: QueryRunner): Promise<void> {
-    for (let i = 0; i < this.data.length; i++) {
-      const { permissions } = this.data[i]
+    for (const item of this.data) {
+      const { permissions } = item
       for (const permission of permissions) {
-        const profileId = await this.getProfileByName(queryRunner, this.data[i].profile)
+        const profileId = await this.getProfileByName(queryRunner, item.profile)
         const moduleId = await this.getModuleByEndpoint(queryRunner, permission.endpoint)
         const [create, read, update, exclude] = permission.actions
         await queryRunner.query(`
