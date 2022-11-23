@@ -12,9 +12,11 @@ export const setupRoutes = (app: Express): void => {
     .map(async file => (await import(`../routes/${file}`)).default(router))
 
   const mailImagesDir = resolve(__dirname, '../../infra/mail/views/reset-password/images')
+  const imagesDir = resolve(__dirname, '../../../uploads')
 
   app.use(cors())
   app.use(json())
   app.use('/images', expressStatic(mailImagesDir))
+  app.use('/uploads', expressStatic(imagesDir))
   app.use(router)
 }
