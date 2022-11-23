@@ -74,6 +74,10 @@ export class addProfilesPermissionsSeeder1667750175447 implements MigrationInter
           actions: [false, false, false, false]
         },
         {
+          endpoint: '/medical-records-images/:medicalRecordId',
+          actions: [false, false, false, false]
+        },
+        {
           endpoint: '/dashboard',
           actions: [true, true, true, true]
         },
@@ -147,6 +151,10 @@ export class addProfilesPermissionsSeeder1667750175447 implements MigrationInter
           actions: [true, true, true, true]
         },
         {
+          endpoint: '/medical-records-images/:medicalRecordId',
+          actions: [true, true, true, true]
+        },
+        {
           endpoint: '/dashboard',
           actions: [false, false, false, false]
         },
@@ -217,6 +225,10 @@ export class addProfilesPermissionsSeeder1667750175447 implements MigrationInter
         },
         {
           endpoint: '/medical-records-images',
+          actions: [false, false, false, false]
+        },
+        {
+          endpoint: '/medical-records-images/:medicalRecordId',
           actions: [false, false, false, false]
         },
         {

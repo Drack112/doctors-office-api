@@ -1,4 +1,4 @@
-import { CreateMedicalRecordsImagesControllerFactory } from '@/main/factories/controllers/medical-records-images'
+import { CreateMedicalRecordsImagesControllerFactory, GetMedicalRecordsImagesByMedicalRecordIdControllerFactory } from '@/main/factories/controllers/medical-records-images'
 import { accessProfilePermission, ensuredAuthenticated } from '@/middleware'
 import uploadConfig from '@/main/config/upload'
 
@@ -7,6 +7,7 @@ import multer from 'multer'
 
 const upload = multer(uploadConfig.multer)
 const createMedicalRecordsImagesControllerFactory = CreateMedicalRecordsImagesControllerFactory()
+const getMedicalRecordsImagesByMedicalRecordIdControllerFactory = GetMedicalRecordsImagesByMedicalRecordIdControllerFactory()
 
 export default (router: Router): void => {
   router.post('/medical-records-images',
@@ -14,4 +15,5 @@ export default (router: Router): void => {
     ensuredAuthenticated(),
     accessProfilePermission(),
     async (req, res) => createMedicalRecordsImagesControllerFactory.handle(req, res))
+  router.get('/medical-records-images/:medicalRecordId', ensuredAuthenticated(), accessProfilePermission(), async (req, res) => getMedicalRecordsImagesByMedicalRecordIdControllerFactory.handle(req, res))
 }
