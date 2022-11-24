@@ -1,1 +1,1 @@
-export * from './pdf-provider'
+export * from './pdf'
