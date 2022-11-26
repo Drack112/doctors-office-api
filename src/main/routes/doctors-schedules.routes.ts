@@ -1,5 +1,5 @@
 import { CreateDoctorsSchedulesControllerFactory, DeleteDoctorsSchedulesControllerFactory } from '@/main/factories/controllers/doctors-schedules'
-import { ensuredAuthenticated, accessProfilePermission } from '@/middleware'
+import { ensuredAuthenticated, accessProfilePermission, clinicMiddleware } from '@/middleware'
 
 import { Router } from 'express'
 
@@ -7,6 +7,6 @@ const createDoctorsSchedulesControllerFactory = CreateDoctorsSchedulesController
 const deleteDoctorsSchedulesControllerFactory = DeleteDoctorsSchedulesControllerFactory()
 
 export default (router: Router): void => {
-  router.post('/doctors-schedules', ensuredAuthenticated(), accessProfilePermission(), async (req, res) => createDoctorsSchedulesControllerFactory.handle(req, res))
-  router.delete('/doctors-schedules/:id', ensuredAuthenticated(), accessProfilePermission(), async (req, res) => deleteDoctorsSchedulesControllerFactory.handle(req, res))
+  router.post('/doctors-schedules', ensuredAuthenticated(), clinicMiddleware(), accessProfilePermission(), async (req, res) => createDoctorsSchedulesControllerFactory.handle(req, res))
+  router.delete('/doctors-schedules/:id', ensuredAuthenticated(), clinicMiddleware(), accessProfilePermission(), async (req, res) => deleteDoctorsSchedulesControllerFactory.handle(req, res))
 }

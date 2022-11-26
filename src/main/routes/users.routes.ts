@@ -8,7 +8,7 @@ import {
   SendPasswordRecoveryTokenControllerFactory,
   ResetUsersPasswordControllerFactory
 } from '@/main/factories/controllers/users'
-import { ensuredAuthenticated, accessProfilePermission } from '@/middleware'
+import { ensuredAuthenticated, accessProfilePermission, clinicMiddleware } from '@/middleware'
 
 import { Router } from 'express'
 
@@ -26,8 +26,8 @@ export default (router: Router): void => {
   router.post('/reset-password', async (req, res) => resetUsersPasswordControllerFactory.handle(req, res))
   router.post('/users', async (req, res) => createUsersControllerFactory.handle(req, res))
   router.patch('/users/update-password', async (req, res) => updateUsersPasswordControllerFactory.handle(req, res))
-  router.get('/users', ensuredAuthenticated(), accessProfilePermission(), async (req, res) => getUsersControllerFactory.handle(req, res))
-  router.get('/users/:id', ensuredAuthenticated(), accessProfilePermission(), async (req, res) => getUsersByIdControllerFactory.handle(req, res))
-  router.patch('/users/:id', ensuredAuthenticated(), accessProfilePermission(), async (req, res) => updateUsersControllerFactory.handle(req, res))
-  router.delete('/users/:id', ensuredAuthenticated(), accessProfilePermission(), async (req, res) => deleteUsersControllerFactory.handle(req, res))
+  router.get('/users', ensuredAuthenticated(), clinicMiddleware(), accessProfilePermission(), async (req, res) => getUsersControllerFactory.handle(req, res))
+  router.get('/users/:id', ensuredAuthenticated(), clinicMiddleware(), accessProfilePermission(), async (req, res) => getUsersByIdControllerFactory.handle(req, res))
+  router.patch('/users/:id', ensuredAuthenticated(), clinicMiddleware(), accessProfilePermission(), async (req, res) => updateUsersControllerFactory.handle(req, res))
+  router.delete('/users/:id', ensuredAuthenticated(), clinicMiddleware(), accessProfilePermission(), async (req, res) => deleteUsersControllerFactory.handle(req, res))
 }
