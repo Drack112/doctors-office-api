@@ -88,6 +88,14 @@ export class addProfilesPermissionsSeeder1667750175447 implements MigrationInter
         {
           endpoint: '/profiles-permissions',
           actions: [true, true, true, true]
+        },
+        {
+          endpoint: '/secretaries-by-clinic/:clinicId',
+          actions: [true, true, true, true]
+        },
+        {
+          endpoint: '/doctors-by-clinic/:clinicId',
+          actions: [true, true, true, true]
         }
       ]
     },
@@ -169,6 +177,14 @@ export class addProfilesPermissionsSeeder1667750175447 implements MigrationInter
         {
           endpoint: '/profiles-permissions',
           actions: [false, false, false, false]
+        },
+        {
+          endpoint: '/secretaries-by-clinic/:clinicId',
+          actions: [false, false, false, false]
+        },
+        {
+          endpoint: '/doctors-by-clinic/:clinicId',
+          actions: [false, false, false, false]
         }
       ]
     },
@@ -249,6 +265,14 @@ export class addProfilesPermissionsSeeder1667750175447 implements MigrationInter
         },
         {
           endpoint: '/profiles-permissions',
+          actions: [false, false, false, false]
+        },
+        {
+          endpoint: '/secretaries-by-clinic/:clinicId',
+          actions: [false, false, false, false]
+        },
+        {
+          endpoint: '/doctors-by-clinic/:clinicId',
           actions: [false, false, false, false]
         }
       ]

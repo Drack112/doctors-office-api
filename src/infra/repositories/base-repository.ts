@@ -40,4 +40,21 @@ export class BaseRepository<Entity extends ObjectLiteral> {
   async count (userType: string): Promise<number> {
     return await this.repository.count({ where: { userType } } as any)
   }
+
+  async getUsersByClinic (clinicId: string, table: string): Promise<any> {
+    return await this.repository.query(`
+      SELECT 
+        * 
+      FROM 
+        users_clinics uc
+          JOIN 
+        users u on u.id = uc.user_id
+          JOIN 
+        clinics c on c.id = uc.clinic_id
+          JOIN 
+        ${table} t on t.user_id = u.id
+      WHERE 
+        c.id = '${clinicId}'
+    `)
+  }
 }

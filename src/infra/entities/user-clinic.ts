@@ -1,4 +1,5 @@
-import { ClinicEntity } from './clinic'
+import { UserEntity, ClinicEntity } from '@/infra/entities'
+
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm'
 
 @Entity('users_clinics')
@@ -17,4 +18,10 @@ export class UserClinicEntity {
     name: 'clinic_id'
   })
   clinic!: ClinicEntity
+
+  @ManyToOne(() => ClinicEntity)
+  @JoinColumn({
+    name: 'clinic_id'
+  })
+  user!: UserEntity
 }
