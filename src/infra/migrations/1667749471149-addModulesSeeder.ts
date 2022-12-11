@@ -25,7 +25,7 @@ export class addModulesSeeder1667749471149 implements MigrationInterface {
         ('${randomUUID()}', 'Dashboard', '/dashboard', CURRENT_TIMESTAMP, null),
         ('${randomUUID()}', 'Profiles', '/profiles', CURRENT_TIMESTAMP, null),
         ('${randomUUID()}', 'Profiles Permissions', '/profiles-permissions', CURRENT_TIMESTAMP, null),
-        ('${randomUUID()}', 'Secretaries by clinic', '/secretaries-by-clinic/:clinicId', CURRENT_TIMESTAMP, null)
+        ('${randomUUID()}', 'Secretaries by clinic', '/secretaries-by-clinic/:clinicId', CURRENT_TIMESTAMP, null),
         ('${randomUUID()}', 'Doctors by clinic', '/doctors-by-clinic/:clinicId', CURRENT_TIMESTAMP, null)
     `)
   }
