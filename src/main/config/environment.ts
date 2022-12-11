@@ -1,11 +1,13 @@
 import 'dotenv/config'
 
 const nodeEnv = process.env.NODE_ENV
+const port = process.env.PORT
 export const dir = nodeEnv === 'dev' ? 'src' : 'dist'
-const imagesURL = nodeEnv === 'dev' ? 'http://localhost:3333/images' : 'https://link-prod.com/images'
+const imagesURL = nodeEnv === 'dev' ? `http://localhost:${port}/images` : 'https://link-prod.com/images'
 const apiBaseUrl = process.env.API_BASE_URL
 
 export const environment = {
+  port: process.env.PORT ?? 3000,
   jwt: {
     secret: process.env.JWT_SECRET ?? 'some-secret',
     refreshSecretToken: process.env.JWT_SECRET_REFRESH_TOKEN ?? 'some-token',
@@ -16,11 +18,11 @@ export const environment = {
     salt: 10
   },
   mysql: {
-    host: 'localhost',
+    host: 'mysql',
     port: 3306,
-    user: process.env.MYSQL_USER ?? 'user',
-    password: process.env.MYSQL_PASSWORD ?? 'password',
-    database: process.env.MYSQL_DATABASE ?? 'some-db'
+    user: 'root',
+    password: process.env.MYSQL_ROOT_PASSWORD ?? 'root123',
+    database: process.env.MYSQL_DATABASE ?? 'doctors-office-db'
   },
   uploadImage: {
     local: {

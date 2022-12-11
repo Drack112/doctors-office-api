@@ -1,10 +1,28 @@
 version: "3"
 
 services:
+  api:
+    container_name: doctors-office-api-container
+    entrypoint: dockerize -wait tcp://mysql:3306 -timeout 40s .docker/entrypoint.sh
+    build:
+      context: .
+      target: dev
+    volumes:
+      - .:/home/app
+      - ./node_modules:/home/app/node_modules
+    env_file:
+      - .env
+    depends_on:
+      - mysql
+    ports:
+      - 3000:3000
+    networks:
+      - doctors-office-api-network
+
   mysql:
+    container_name: doctors-office-db-container
     # uncomment `platform` line to run on macOS M1
     platform: linux/x86_64
-    container_name: mysql-container
     image: mysql:8.0-debian
     env_file:
       - .env
@@ -12,6 +30,13 @@ services:
       - 3306:3306
     volumes:
       - mysql_data:/var/lib/mysql
+    networks:
+      - doctors-office-api-network
 
 volumes:
   mysql_data:
+    driver: local
+
+networks:
+  doctors-office-api-network:
+    driver: bridge

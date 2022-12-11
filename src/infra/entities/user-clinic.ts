@@ -1,4 +1,5 @@
-import { UserEntity, ClinicEntity } from '@/infra/entities'
+import { UserEntity } from '../entities/user'
+import { ClinicEntity } from '../entities/clinic'
 
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm'
 
