@@ -1,9 +1,9 @@
-FROM node:16-bullseye-slim AS dev
+FROM node:16-bullseye-slim AS prod
 
 ENV DOCKERIZE_VERSION v0.6.1
-ENV NODE_ENV "dev"
+ENV NODE_ENV "prod"
 
-RUN apt update && apt install -y wget bash gnupg
+RUN apt update && apt install -y wget gnupg
 
 RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
   && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
@@ -20,13 +20,13 @@ WORKDIR /home/app
 
 COPY package*.json /home/app/
 
-RUN npm install
+RUN npm ci --ommit=dev
 
-COPY . /home/app/
+COPY . .
 
 RUN npm run build
 
-RUN chmod +x /home/app/.docker/entrypoint.sh
-RUN chmod +x /home/app/scripts/init.sh
+RUN chmod +x /home/app/.docker/entrypoint-prod.sh
+RUN chmod +x /home/app/scripts/init-prod.sh
 
-ENTRYPOINT [ "./scripts/init.sh" ]
+ENTRYPOINT [ "./scripts/init-prod.sh" ]
